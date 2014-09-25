@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    nav.navbar.navbar-inverse(role="navigation")
+      .container.container-fluid
+        .navbar-header
+          a.navbar-brand(href="") Let's Go
+        .collapse.navbar-collapse#bs-example-navbar-collapse-1
+          ul.nav.navbar-nav
+            li(class=active.home? 'active': '')
+              a(href="") 主页
+            li(class=active.list? 'active': '')
+              a(href="list") 商品列表
+          ul.nav.navbar-nav.pull-right
+            li(class=active.cart? 'active': '')
+              a(href="cart")
+                span.glyphicon.glyphicon-shopping-cart
+                  | 购物车(
+                  span 0
+                  | )
+
+    block content
