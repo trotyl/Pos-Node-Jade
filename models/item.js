@@ -71,7 +71,6 @@ Item.prototype.getPromotion = function (promotions) {
 
 Item.prototype.addCount = function() {
     this.count++;
-    this.store();
 };
 
 Item.prototype.minusCount = function () {
@@ -79,7 +78,6 @@ Item.prototype.minusCount = function () {
         return;
     }
     this.count--;
-    this.store();
 };
 
 Item.prototype.sumDisplay = function () {
