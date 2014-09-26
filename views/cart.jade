@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .container.text-center
+    .panel.panel-default
+      .panel-heading
+        h4.side-space.text-left 购物清单
+      .panel-body
+        table#bought-table.table.table-bordered
+          tr
+            th 分类
+            th 名称
+            th 单价(元)
+            th 单位
+            th 数量
+            th 小计
+          each item in list
+            tr
+              td= items.type
+              td= items.name
+              td= items.price
+              td= items.unit
+              td
+                .btn-group
+                  button.btn.btn-default -
+                  button.btn.btn-default.item-count(disabled="disabled")= items.count
+                  button.btn.btn-default +
+              td= items.sumDisplay()
+      .side-space.text-right
+        p
+          | 总计：
+          span= total.toFixed(2) + '元'
+        a.btn.btn-primary.vertical-space(href="payment") 付款
