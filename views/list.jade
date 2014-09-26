@@ -7,7 +7,7 @@ block content
         h3 商品列表
       .panel-body
         if list && list.length != 0
-          table#item-table.table.table-bordered
+          table#item-list-table.table.table-bordered
             tr
               th 分类
               th 名称
@@ -22,3 +22,4 @@ block content
                 td= item.unit
                 td
                   button.btn.btn-primary.btm-sm 加入购物车
+
