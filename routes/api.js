@@ -9,6 +9,17 @@ router.get('/', function(req, res) {
   res.send('respond with a resource');
 });
 
+router.get('/cart_counter', function (req, res) {
+    Order.all(function (err, list) {
+        if (err) {
+            console.log(err);
+            //res.send(0);
+        }
+        var cartStats = Order.getCartStats(list);
+        res.json(cartStats.count);
+    });
+});
+
 router.post('/add_item', function (req, res) {
   var name = req.body.name;
   Order.getItem(name, function (err, result) {
