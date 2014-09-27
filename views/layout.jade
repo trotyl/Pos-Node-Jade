@@ -8,11 +8,11 @@ html
     nav.navbar.navbar-inverse(role="navigation")
       .container.container-fluid
         .navbar-header
-          a.navbar-brand(href="") Let's Go
+          a.navbar-brand(href="..") Let's Go
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
           ul.nav.navbar-nav
             li(class=active.home? 'active': '')
-              a(href="") 主页
+              a(href="..") 主页
             li(class=active.list? 'active': '')
               a(href="list") 商品列表
           ul.nav.navbar-nav.pull-right
@@ -20,10 +20,10 @@ html
               a(href="cart")
                 span.glyphicon.glyphicon-shopping-cart
                   | 购物车(
-                  span 0
+                  span#cart_counter 0
                   | )
 
     block content
-    script(type='text/javascript', src='/javascripts/jquery.js')
-    script(type='text/javascript', src='/javascripts/bootstrap.js')
+    script(type='text/javascript', src='/jquery/dist/jquery.min.js')
+    script(type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js')
     script(type='text/javascript', src='/javascripts/main.js')

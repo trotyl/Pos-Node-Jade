@@ -3,6 +3,7 @@ var router = express.Router();
 var fixtures = require('../models/fixtures');
 
 /* GET home page. */
+
 router.get('/', function(req, res) {
   res.render('index', { title: '首页' , active: {home: true}});
 });

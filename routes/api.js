@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Order = require('../models/order');
+var fixtures = require('../models/fixtures');
+var _ = require('lodash');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
