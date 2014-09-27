@@ -6,7 +6,6 @@ $(document).ready(function () {
             }
             else {
                 $('#cart_counter').text(data);
-                console.log(data);
             }
         });
 
@@ -23,6 +22,26 @@ $(document).ready(function () {
             else {
                 var counter = $('#cart_counter');
                 counter.text(parseInt(counter.text()) + 1);
+            }
+        });
+    });
+
+    $('#bought-list-table').on('click', 'button', function () {
+        var item_name = $(this).closest('tr').children().first().next().text();
+        var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
+        $.post('/api/' + operation + '_item', {name: item_name}, function (data, status) {
+            if(!data || data.err) {
+                alert('数量变更失败！');
+                console.log(data);
+            }
+            else {
+                var counter = $('#cart_counter');
+                if(operation == '+') {
+                    counter.text(parseInt(counter.text()) + 1);
+                }
+                else {
+                    counter.text(parseInt(counter.text()) - 1);
+                }
             }
         });
     });
