@@ -82,4 +82,15 @@ router.post('/sum_display', function (req, res) {
     });
 });
 
+router.post('/clear', function (req, res) {
+    Order.clear(function (err) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(true);
+        }
+    });
+});
+
 module.exports = router;

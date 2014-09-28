@@ -52,4 +52,12 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#pay').on('click', function () {
+        $.post('api/clear', function (data, status) {
+            if(data) {
+                location.assign('/list');
+            }
+        });
+    });
 });
