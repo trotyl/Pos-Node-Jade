@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    .container.text-center
+        .panel.panel-default
+            .panel-heading
+                h4.side-space.text-left 购物清单
+            .panel-body
+                p#dateTime.text-left
+                table#bought-table.table.table-bordered
+                    tr
+                        th 分类
+                        th 名称
+                        th 单价(元)
+                        th 单位
+                        th 数量
+                        th 小计
+                    each item in bought_items
+                        tr
+                            td= item.type
+                            td= item.name
+                            td= item.price
+                            td= item.unit
+                            td= item.count
+                            td= item.sumDisplay()
+            .panel-heading
+                h4.side-space.text-left 赠送商品
+            .panel-body
+                table#present-table.table.table-bordered
+                    tr
+                        th 分类
+                        th 名称
+                        th 数量
+                    each item in free_items
+                        tr
+                            td= item.type
+                            td= item.name
+                            td= item.free()
+            .side-space.text-right
+                p
+                    | 总计：
+                    span= total.toFixed(2)
+                    | 元
+                p
+                    | 节省：
+                    span= saving.toFixed(2)
+                    | 元
+                button#pay.btn.btn-primary.vertical-space 付款

@@ -28,7 +28,7 @@ router.get('/cart', function(req, res) {
 });
 
 router.get('/payment', function(req, res) {
-    res.render('payment', { title: '付款页' , active: {}});
+    res.render('payment', { title: '付款页' , active: {}, bought_items: [], free_items: [], total: 0, saving: 0});
 });
 
 module.exports = router;
