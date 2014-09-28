@@ -42,13 +42,18 @@ $(document).ready(function () {
                     counter.text(parseInt(counter.text()) + 1);
                     number.text(parseInt(number.text()) + 1);
                 }
-                else {
+                else if(parseInt(number.text()) > 0){
+
                     counter.text(parseInt(counter.text()) - 1);
                     number.text(parseInt(number.text()) - 1);
                 }
                 $.post('/api/sum_display', { name: item_name }, function (data, status) {
                     $(self).closest('tr').children().last().text(data);
                 });
+
+                if(parseInt(counter.text()) == 0) {
+                    location.assign('/list');
+                }
             }
         });
     });
