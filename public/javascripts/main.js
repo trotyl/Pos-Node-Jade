@@ -27,7 +27,8 @@ $(document).ready(function () {
     });
 
     $('#bought-list-table').on('click', 'button', function () {
-        var item_name = $(this).closest('tr').children().first().next().text();
+        var self = this;
+        var item_name = $(self).closest('tr').children().first().next().text();
         var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
         $.post('/api/' + operation + '_item', {name: item_name}, function (data, status) {
             if(!data || data.err) {
@@ -36,16 +37,14 @@ $(document).ready(function () {
             }
             else {
                 var counter = $('#cart_counter');
-                var number;
+                var number = $(self).closest('.btn-group').find('.item-count');
                 if(operation == 'add') {
                     counter.text(parseInt(counter.text()) + 1);
-                    number = $(this).prev();
-                    number.val(number.val() + 1);
+                    number.text(parseInt(number.text()) + 1);
                 }
                 else {
                     counter.text(parseInt(counter.text()) - 1);
-                    number = $(this).next();
-                    number.val(number.val() - 1);
+                    number.text(parseInt(number.text()) - 1);
                 }
             }
         });
