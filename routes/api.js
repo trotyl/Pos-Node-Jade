@@ -68,4 +68,18 @@ router.post('/minus_item', function (req, res) {
     });
 });
 
+router.post('/sum_display', function (req, res) {
+    var name = req.body.name;
+    Order.getItem(name, function (err, result) {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            if (result) {
+                res.send(result.sumDisplay());
+            }
+        }
+    });
+});
+
 module.exports = router;

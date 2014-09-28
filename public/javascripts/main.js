@@ -30,7 +30,7 @@ $(document).ready(function () {
         var self = this;
         var item_name = $(self).closest('tr').children().first().next().text();
         var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
-        $.post('/api/' + operation + '_item', {name: item_name}, function (data, status) {
+        $.post('/api/' + operation + '_item', { name: item_name }, function (data, status) {
             if(!data || data.err) {
                 alert('数量变更失败！');
                 console.log(data);
@@ -46,6 +46,9 @@ $(document).ready(function () {
                     counter.text(parseInt(counter.text()) - 1);
                     number.text(parseInt(number.text()) - 1);
                 }
+                $.post('/api/sum_display', { name: item_name }, function (data, status) {
+                    $(self).closest('tr').children().last().text(data);
+                });
             }
         });
     });
