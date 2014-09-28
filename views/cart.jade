@@ -14,18 +14,18 @@ block content
             th 单位
             th 数量
             th 小计
-          each item in list
+          each item in items
             tr
-              td= items.type
-              td= items.name
-              td= items.price
-              td= items.unit
+              td= item.type
+              td= item.name
+              td= item.price
+              td= item.unit
               td
                 .btn-group
                   button.btn.btn-default -
-                  button.btn.btn-default.item-count(disabled="disabled")= items.count
+                  button.btn.btn-default.item-count(disabled="disabled")= item.count
                   button.btn.btn-default +
-              td= items.sumDisplay()
+              td= item.sumDisplay()
       .side-space.text-right
         p
           | 总计：

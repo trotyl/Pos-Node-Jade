@@ -36,11 +36,16 @@ $(document).ready(function () {
             }
             else {
                 var counter = $('#cart_counter');
-                if(operation == '+') {
+                var number;
+                if(operation == 'add') {
                     counter.text(parseInt(counter.text()) + 1);
+                    number = $(this).prev();
+                    number.val(number.val() + 1);
                 }
                 else {
                     counter.text(parseInt(counter.text()) - 1);
+                    number = $(this).next();
+                    number.val(number.val() - 1);
                 }
             }
         });

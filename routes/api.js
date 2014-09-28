@@ -56,19 +56,11 @@ router.post('/minus_item', function (req, res) {
         }
         else {
             if (result) {
-                result.addCount();
+                result.minusCount();
                 result.store(function (err) {
                     if(err) {
                         res.send(err);
                     }
-                    res.send(true);
-                });
-            }
-            else {
-                result = _(fixtures.loadAllItems()).find({name: name});
-                result.minusCount();
-                result.getPromotion(fixtures.loadPromotions());
-                result.join(function () {
                     res.send(true);
                 });
             }
