@@ -28,7 +28,24 @@ router.get('/cart', function(req, res) {
 });
 
 router.get('/payment', function(req, res) {
-    res.render('payment', { title: '付款页' , active: {}, bought_items: [], free_items: [], total: 0, saving: 0});
+    Order.all(function (err, list) {
+        if (err) {
+            console.log(err);
+        }
+        var cartStats = Order.getCartStats(list);
+        var bought_items = _(list).filter(function (record) {
+            return record.count > 0;
+        }).value();
+        var free_items = _(bought_items).filter(function (record) {
+            return record.promotion && record.free() > 0;
+        }).value();
+        if (cartStats.count <= 0) {
+            return res.redirect('/list');
+        }
+        res.render('payment', { title: '付款页', active: {}, bought_items: bought_items, free_items: free_items,
+            total: cartStats.total, saving: cartStats.saving
+        });
+    });
 });
 
 module.exports = router;
