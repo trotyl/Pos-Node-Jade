@@ -28,6 +28,22 @@ $(document).ready(function () {
             $(this).closest('tr').remove();
             $.post('/api/delete', {name: item_name});
         }
+    });
+
+    $('.form-control').on('change', function () {
+        var complete = true;
+        $('.form-control').each(function () {
+            if(!$(this).val()) {
+                complete = false;
+                console.log(complete);
+            }
+        });
+        if(complete) {
+            $('#item-add').removeClass('disabled');
+        }
+        else {
+            $('#item-add').addClass('disabled');
+        }
     })
 });
 
