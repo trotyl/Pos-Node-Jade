@@ -76,4 +76,25 @@ Storage.getItem = function (name, callback) {
     });
 };
 
+Storage.removeItem = function (name, callback) {
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);
+        }
+        db.collection('storage', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.remove({name: name}, function (err) {
+                mongodb.close();
+                if(err) {
+                    return callback(err);
+                }
+                callback(null);
+            });
+        });
+    });
+};
+
 module.exports = Storage;
