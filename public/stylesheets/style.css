@@ -42,6 +42,11 @@ td {
     margin-right: 20px;
 }
 
+.btn-group > input {
+    padding: 0;
+    width: 36px;
+}
+
 /* Space out content a bit */
 body {
     padding-top: 0;

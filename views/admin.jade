@@ -1,7 +1,7 @@
 extends background
 
 block content
-    .panel
+    .panel.panel-default
         .panel-heading
             p 商品信息管理
             button.btn.btn-primary 添加商品
@@ -19,7 +19,11 @@ block content
                     tr
                         td= index + 1
                         td= item.name
-                        td= item.count
+                        td
+                            .btn-group
+                                button.btn.btn-default -
+                                input.btn.btn-default.item-count(type='text')= item.count
+                                button.btn.btn-default +
                         td= item.price
                         td= item.unit
                         td= item.releaseTime
