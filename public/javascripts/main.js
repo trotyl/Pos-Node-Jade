@@ -9,48 +9,31 @@ $(document).ready(function () {
 
     $('#item-list-table').on('click', 'button', function () {
         var item_name = $(this).closest('tr').children().first().next().text();
-        $.post('/api/add_item', {name: item_name}, function (data, status) {
-            if(!data || data.err) {
-                alert('加入购物车失败！');
-                console.log(data);
-            }
-            else {
-                var counter = $('#cart_counter');
-                counter.text(parseInt(counter.text()) + 1);
-            }
-        });
+        var counter = $('#cart_counter');
+        counter.text(parseInt(counter.text()) + 1);
+        $.post('/api/add_item', {name: item_name});
     });
 
     $('#bought-list-table').on('click', 'button', function () {
+        var item_name = $(this).closest('tr').children().first().next().text();
+        var counter = $('#cart_counter');
+        var number = $(this).closest('.btn-group').find('.item-count');
+        if($(this).text() == '+') {
+            counter.text(parseInt(counter.text()) + 1);
+            number.text(parseInt(number.text()) + 1);
+        }
+        else if(parseInt(number.text()) > 0){
+            counter.text(parseInt(counter.text()) - 1);
+            number.text(parseInt(number.text()) - 1);
+        }
+        
         var self = this;
-        var item_name = $(self).closest('tr').children().first().next().text();
-        var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
-        $.post('/api/' + operation + '_item', { name: item_name }, function (data, status) {
-            if(!data || data.err) {
-                alert('数量变更失败！');
-                console.log(data);
-            }
-            else {
-                var counter = $('#cart_counter');
-                var number = $(self).closest('.btn-group').find('.item-count');
-                if(operation == 'add') {
-                    counter.text(parseInt(counter.text()) + 1);
-                    number.text(parseInt(number.text()) + 1);
-                }
-                else if(parseInt(number.text()) > 0){
-
-                    counter.text(parseInt(counter.text()) - 1);
-                    number.text(parseInt(number.text()) - 1);
-                }
-                $.post('/api/sum_display', { name: item_name }, function (data, status) {
-                    $(self).closest('tr').children().last().text(data);
-                });
-
-                if(parseInt(counter.text()) == 0) {
-                    location.assign('/list');
-                }
-            }
+        $.post('/api/change_count', { name: item_name, count: number.text()}, function (data, status) {
+            $(self).closest('tr').children().last().text(data);
         });
+        if(parseInt(counter.text()) == 0) {
+            location.assign('/list');
+        }
     });
 
     $('#pay').on('click', function () {

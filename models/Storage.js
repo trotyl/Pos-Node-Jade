@@ -50,3 +50,5 @@ Storage.add = function (item) {
         });
     });
 };
+
+module.exports = Storage;
