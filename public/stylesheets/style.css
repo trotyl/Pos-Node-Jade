@@ -25,6 +25,19 @@ th {
     border-radius: 0;
 }
 
+.master {
+    margin-left: 200px;
+    margin-right: 20px;
+}
+
+.sidebar {
+    position: fixed;
+    width: 160px;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 /* Space out content a bit */
 body {
     padding-top: 0;

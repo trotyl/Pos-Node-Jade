@@ -1,3 +1,28 @@
-//
-   Created by Trotyl on 14-9-29.
+extends background
 
+block content
+    .panel
+        .panel-heading
+            p 商品信息管理
+            button.btn.btn-primary 添加商品
+        .panel-body
+            table#item-manage-list.table
+                tr
+                    th 分类
+                    th 名称
+                    th 单价(元)
+                    th 单位
+                    th 数量
+                    th 小计
+                each item in items
+                    tr
+                        td= item.type
+                        td= item.name
+                        td= item.price
+                        td= item.unit
+                        td
+                            .btn-group
+                                button.btn.btn-default -
+                                button.btn.btn-default.item-count(disabled="disabled")= item.count
+                                button.btn.btn-default +
+                        td= item.sumDisplay()
