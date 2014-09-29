@@ -35,7 +35,6 @@ $(document).ready(function () {
         $('.form-control').each(function () {
             if(!$(this).val()) {
                 complete = false;
-                console.log(complete);
             }
         });
         if(complete) {
@@ -43,6 +42,9 @@ $(document).ready(function () {
         }
         else {
             $('#item-add').addClass('disabled');
+        }
+        if($(this).attr('type') == 'number' && $(this).val() < 0) {
+            $(this).val(0);
         }
     })
 });
