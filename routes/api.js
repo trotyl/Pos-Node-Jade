@@ -82,7 +82,7 @@ router.post('/alter_count', function (req, res) {
     })
 });
 
-router.post('/delete', function (req, res) {
+router.post('/delete_item', function (req, res) {
     var name = req.body.name;
     Storage.removeItem(name, function (err, result) {
         if(err) {

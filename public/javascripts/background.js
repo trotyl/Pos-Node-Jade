@@ -26,7 +26,7 @@ $(document).ready(function () {
         var item_name = $(this).closest('tr').children().first().next().text();
         if(confirm('确定要删除商品 "' + item_name + '" 吗?')) {
             $(this).closest('tr').remove();
-            $.post('/api/delete', {name: item_name});
+            $.post('/api/delete_item', {name: item_name});
         }
     });
 
@@ -46,6 +46,15 @@ $(document).ready(function () {
         if($(this).attr('type') == 'number' && $(this).val() < 0) {
             $(this).val(0);
         }
+    });
+
+    $('#item-add').on('click', function () {
+        var name = $('#inputName').val();
+        var count = $('#inputCount').val();
+        var price = $('#inputPrice').val();
+        var unit = $('#inputUnit').val();
+        var attributes = JSON.parse(localStorage.getItem('attributes')) || {};
+        $.post('/api/new_item', { name: name, count: count, price: price, unit: unit, attributes: attributes});
     })
 });
 
