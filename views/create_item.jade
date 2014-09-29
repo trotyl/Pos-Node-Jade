@@ -1,3 +1,29 @@
 extends background
 
 block content
+    .panel.panel-default
+        .panel-body
+            .btn-list
+                button.btn.btn-default 保存商品
+                button.btn.btn-default 添加属性
+                button.btn.btn-default 删除属性
+                button.btn.btn-default 取消
+            .container
+                form.form.form-horizontal(role="form")
+                    .form-group
+                        label.col-sm-2.control-label(for="inputName") 商品名称
+                        .col-sm-2
+                            input#inputName.form-control(type="text", placeholder="请输入商品名称")
+                    .form-group
+                        label.col-sm-2.control-label(for="inputCount") 商品数量
+                        .col-sm-2
+                            input#inputCount.form-control(type="number", placeholder="请输入商品数量")
+                    .form-group
+                        label.col-sm-2.control-label(for="inputPrice") 单价（元）
+                        .col-sm-2
+                            input#inputPrice.form-control(type="number", placeholder="请输入单价")
+                    .form-group
+                        label.col-sm-2.control-label(for="inputUnit") 单位
+                        .col-sm-2
+                            input#inputUnit.form-control(type="text", placeholder="请输入单位")
+

@@ -47,6 +47,15 @@ td {
     width: 36px;
 }
 
+.btn-list {
+    margin: 20px;
+    text-align: center;
+}
+
+.btn-list > button {
+    margin-right: 10px;
+}
+
 /* Space out content a bit */
 body {
     padding-top: 0;

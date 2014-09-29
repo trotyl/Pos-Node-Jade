@@ -6,7 +6,7 @@ router.get('/', function(req, res) {
     res.render('admin', { title:'商品信息管理', items: fixtures.loadAllItems()});
 });
 
-router.get('/item/new', function (req, res) {
+router.get('/new_item', function (req, res) {
     res.render('create_item', { title: '添加商品'});
 });
 
