@@ -43,8 +43,11 @@ $(document).ready(function () {
         else {
             $('#item-add').addClass('disabled');
         }
-        if($(this).attr('type') == 'number' && $(this).val() < 0) {
-            $(this).val(0);
+        if($(this).attr('type') == 'number') {
+            $(this).val(parseInt($(this).val()));
+            if($(this).val() < 0) {
+                $(this).val(0);
+            }
         }
     });
 
