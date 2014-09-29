@@ -20,6 +20,14 @@ $(document).ready(function () {
         var item_name = $(this).closest('tr').children().first().next().text();
         var count = parseInt($(this).val());
         $.post('/api/alter_count', { name: item_name, count: count });
+    });
+
+    $('.item-delete').on('click', function () {
+        var item_name = $(this).closest('tr').children().first().next().text();
+        if(confirm('确定要删除商品 "' + item_name + '" 吗?')) {
+            $(this).closest('tr').remove();
+            $.post('/api/delete', {name: item_name});
+        }
     })
 });
 
