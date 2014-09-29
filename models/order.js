@@ -10,7 +10,7 @@ Order.all = function (callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('items', function (err, collection) {
+        db.collection('cart', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -35,7 +35,7 @@ Order.getItem = function (name, callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('items', function (err, collection) {
+        db.collection('cart', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -57,7 +57,7 @@ Order.clear = function (callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('items', function (err, collection) {
+        db.collection('cart', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -81,16 +81,6 @@ Order.getCartStats = function (list) {
         saving += item.saving();
     });
     return { count: count, total: total, saving: saving };
-};
-
-Order.getPromotion = function () {
-    var promotions = loadPromotions();
-    _(two_with_one_list).each(function (barcode) {
-        var item = items[barcode];
-        if(item && !item.promotion) {
-            item.getPromotion();
-        }
-    }, this);
 };
 
 module.exports = Order;

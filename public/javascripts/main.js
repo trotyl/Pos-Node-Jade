@@ -1,12 +1,7 @@
 $(document).ready(function () {
     function getCounter () {
         $.get('/api/cart_counter', function (data, status) {
-            if(!data || data.err) {
-                console.log(data);
-            }
-            else {
-                $('#cart_counter').text(data);
-            }
+            $('#cart_counter').text(data);
         });
 
     }

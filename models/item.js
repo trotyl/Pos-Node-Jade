@@ -19,7 +19,7 @@ Item.prototype.store = function (callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('items', function (err, collection) {
+        db.collection('cart', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -43,7 +43,7 @@ Item.prototype.join = function (callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('items', function (err, collection) {
+        db.collection('cart', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);

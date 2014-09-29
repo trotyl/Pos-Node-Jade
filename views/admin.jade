@@ -8,21 +8,21 @@ block content
         .panel-body
             table#item-manage-list.table
                 tr
-                    th 分类
-                    th 名称
+                    th 序号
+                    th 商品名称
+                    th 商品数量
                     th 单价(元)
                     th 单位
-                    th 数量
-                    th 小计
-                each item in items
+                    th 发布时间
+                    th 操作
+                each item, index in items
                     tr
-                        td= item.type
+                        td= index + 1
                         td= item.name
+                        td= item.count
                         td= item.price
                         td= item.unit
+                        td= item.releaseTime
                         td
-                            .btn-group
-                                button.btn.btn-default -
-                                button.btn.btn-default.item-count(disabled="disabled")= item.count
-                                button.btn.btn-default +
-                        td= item.sumDisplay()
+                            a 详情
+                            a  删除

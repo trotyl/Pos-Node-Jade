@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var fixtures = require('../models/fixtures');
 
-/* GET users listing. */
 router.get('/', function(req, res) {
-    res.render('admin', {items: []});
+    res.render('admin', { items: fixtures.loadAllItems()});
 });
 
 module.exports = router;
