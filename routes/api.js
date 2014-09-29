@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Item = require('../models/item');
 var Order = require('../models/order');
 var Storage = require('../models/storage');
 var fixtures = require('../models/fixtures');
@@ -91,6 +92,20 @@ router.post('/delete_item', function (req, res) {
         }
         res.send(true);
     })
+});
+
+router.post('/create_item', function (req, res) {
+    var name = req.body.name;
+    var count = req.body.count;
+    var price = req.body.price;
+    var unit = req.body.unit;
+    var attributes = req.body.attributes;
+    var item = new Item('', name, unit, price, '', count);
+    item.attributes = attributes;
+    item.createdAt = new Date();
+    Storage.add(item, function () {
+        res.send(true);
+    });
 });
 
 module.exports = router;

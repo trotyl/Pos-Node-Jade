@@ -31,7 +31,7 @@ Storage.all = function () {
     });
 };
 
-Storage.add = function (item) {
+Storage.add = function (item, callback) {
     mongodb.open(function (err, db) {
         if (err) {
             return callback(err);

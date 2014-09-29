@@ -53,8 +53,8 @@ $(document).ready(function () {
         var count = $('#inputCount').val();
         var price = $('#inputPrice').val();
         var unit = $('#inputUnit').val();
-        var attributes = JSON.parse(localStorage.getItem('attributes')) || {};
-        $.post('/api/new_item', { name: name, count: count, price: price, unit: unit, attributes: attributes});
+        var attributes = localStorage.getItem('attributes') || '';
+        $.post('/api/create_item', { name: name, count: count, price: price, unit: unit, attributes: attributes});
     })
 });
 
