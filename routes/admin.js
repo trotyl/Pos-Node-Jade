@@ -3,9 +3,11 @@ var router = express.Router();
 var fixtures = require('../models/fixtures');
 
 router.get('/', function(req, res) {
-    res.render('admin', { items: fixtures.loadAllItems()});
+    res.render('admin', { title:'商品信息管理', items: fixtures.loadAllItems()});
 });
 
-
+router.get('/item/new', function (req, res) {
+    res.render('create_item', { title: '添加商品'});
+});
 
 module.exports = router;

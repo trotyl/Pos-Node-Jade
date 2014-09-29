@@ -26,7 +26,7 @@ $(document).ready(function () {
             counter.text(parseInt(counter.text()) - 1);
             number.text(parseInt(number.text()) - 1);
         }
-        
+
         var self = this;
         $.post('/api/change_count', { name: item_name, count: number.text()}, function (data, status) {
             $(self).closest('tr').children().last().text(data);

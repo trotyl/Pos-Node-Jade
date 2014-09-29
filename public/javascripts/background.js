@@ -16,7 +16,7 @@ $(document).ready(function () {
         $.post('/api/alter_count', { name: item_name, count: count });
     });
 
-    $('.item-count').on('click', function () {
+    $('.item-count').on('change', function () {
         var item_name = $(this).closest('tr').children().first().next().text();
         var count = parseInt($(this).val());
         $.post('/api/alter_count', { name: item_name, count: count });

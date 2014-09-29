@@ -1,3 +1,6 @@
+var _ = require('lodash');
+var mongodb = require('./db');
+var Item = require('./item');
 
 function Storage () {
 
@@ -33,7 +36,7 @@ Storage.add = function (item) {
         if (err) {
             return callback(err);
         }
-        db.collection('cart', function (err, collection) {
+        db.collection('storage', function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -46,6 +49,28 @@ Storage.add = function (item) {
                     return callback(err);
                 }
                 callback();
+            });
+        });
+    });
+};
+
+Storage.getItem = function (name, callback) {
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);
+        }
+        db.collection('storage', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.findOne({name: name}, function (err, stat) {
+                mongodb.close();
+                if(err) {
+                    return callback(err);
+                }
+                var item = !stat? stat: new Item(stat.barcode, stat.name, stat.unit, stat.price, stat.type, stat.count, stat.promotion);
+                callback(null, item);
             });
         });
     });
