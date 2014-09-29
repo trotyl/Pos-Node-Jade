@@ -3,6 +3,7 @@ var router = express.Router();
 var fixtures = require('../models/fixtures');
 var Order = require('../models/order');
 var _ = require('lodash');
+var moment = require('moment');
 
 /* GET home page. */
 
@@ -43,7 +44,7 @@ router.get('/payment', function(req, res) {
             return res.redirect('/list');
         }
         res.render('payment', { title: '付款页', active: {}, bought_items: bought_items, free_items: free_items,
-            total: cartStats.total, saving: cartStats.saving
+            total: cartStats.total, saving: cartStats.saving, time: moment().format('YYYY年MM月DD日 HH:mm:ss')
         });
     });
 });
