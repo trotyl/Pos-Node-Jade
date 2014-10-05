@@ -1,15 +1,15 @@
 $(document).ready(function () {
     var view = $('body').data('view');
     var doIt = {
-        index: itemManageViewInitiate,
-        create: addItemViewInitiate,
-        attribute: addAttributeViewInitiate,
-        remove: removeAttributeViewInitiate
+        index: itemManageController,
+        create: addItemController,
+        attribute: addAttributeController,
+        remove: removeAttributeController
     };
     doIt[view]();
 });
 
-function itemManageListenerInitiate () {
+function itemManageListener () {
     function alterItemCount (count, operation) {
         count = (operation == 'add'? count + 1: count - 1);
         count = (count >= 0? count: 0);
@@ -41,7 +41,7 @@ function itemManageListenerInitiate () {
     });
 }
 
-function addItemListenerInitiate () {
+function addItemListener () {
     $('.form-control').on('change', function () {
         checkAddItemForm();
     });
@@ -65,7 +65,7 @@ function addItemListenerInitiate () {
     });
 }
 
-function addAttributeListenerInitiate () {
+function addAttributeListener () {
     $('.form-control').on('change', function () {
         checkAddAttributeForm();
     });
@@ -77,21 +77,21 @@ function addAttributeListenerInitiate () {
     })
 }
 
-function removeAttributeListenerInitiate () {
+function removeAttributeListener () {
     $('.attr-delete').on('click', function () {
         if(confirm('确定删除该属性？')) {
             var key = $(this).closest('tr').find('.attr-name').text();
             removeAttribute(key);
-            removeAttributeViewInitiate();
+            removeAttributeController();
         }
     })
 }
 
-function itemManageViewInitiate () {
-    itemManageListenerInitiate();
+function itemManageController () {
+    itemManageListener();
 }
 
-function addItemViewInitiate () {
+function addItemController () {
     var item = readItemInfo();
     if(item) {
         $('#input-name').val(item.name);
@@ -100,15 +100,15 @@ function addItemViewInitiate () {
         $('#input-unit').val(item.unit);
     }
     checkAddItemForm();
-    addItemListenerInitiate();
+    addItemListener();
 }
 
-function addAttributeViewInitiate () {
+function addAttributeController () {
     checkAddAttributeForm();
-    addAttributeListenerInitiate();
+    addAttributeListener();
 }
 
-function removeAttributeViewInitiate () {
+function removeAttributeController () {
     var item = readItemInfo();
     var attrs = readAttrInfo();
     $('#item-name').text(item.name);
@@ -117,7 +117,7 @@ function removeAttributeViewInitiate () {
         var attr = attrFormer(key, val);
         $('#attrs-list').append(attr);
     });
-    removeAttributeListenerInitiate();
+    removeAttributeListener();
 }
 
 function saveItemInfo () {
