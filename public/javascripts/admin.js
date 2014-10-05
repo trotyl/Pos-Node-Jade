@@ -78,7 +78,11 @@ function addAttributeListenerInitiate () {
 }
 
 function removeAttributeListenerInitiate () {
-
+    $('.attr-delete').on('click', function () {
+        var key = $(this).closest('tr').find('.attr-name').text();
+        removeAttribute(key);
+        removeAttributeViewInitiate();
+    })
 }
 
 function itemManageViewInitiate () {
@@ -106,6 +110,7 @@ function removeAttributeViewInitiate () {
     var item = readItemInfo();
     var attrs = readAttrInfo();
     $('#item-name').text(item.name);
+    $('.attr').remove();
     _(attrs).each(function (val, key) {
         var attr = attrFormer(key, val);
         $('#attrs-list').append(attr);
@@ -118,8 +123,8 @@ function saveItemInfo () {
     localStorage.setItem('new_item', JSON.stringify(item));
 }
 
-function saveAttrInfo () {
-    var attrs = getAttrInfo();
+function saveAttrInfo (attrs) {
+    attrs = attrs || getAttrInfo();
     localStorage.setItem('new_attrs', JSON.stringify(attrs));
 }
 
@@ -156,6 +161,12 @@ function getItemAttributes (item) {
     item = item || {};
     item.attrs = readAttrInfo() || {};
     return item;
+}
+
+function removeAttribute (key) {
+    var attrs = readAttrInfo();
+    delete attrs[key];
+    saveAttrInfo(attrs);
 }
 
 function checkAddItemForm () {
