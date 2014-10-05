@@ -1,7 +1,11 @@
 $(document).ready(function () {
-    itemManageViewInitiate();
-    addItemViewInitiate();
-    addAttributeViewInitiate();
+    var view = $('body').data('view');
+    var doIt = {
+        index: itemManageViewInitiate,
+        create: addItemViewInitiate,
+        attribute: addAttributeViewInitiate
+    };
+    doIt[view]();
 });
 
 function itemManageListenerInitiate () {
@@ -31,7 +35,7 @@ function itemManageListenerInitiate () {
         var item_name = $(this).closest('tr').children().first().next().text();
         if(confirm('确定要删除商品 "' + item_name + '" 吗?')) {
             $(this).closest('tr').remove();
-            $.post('/api/delete_item', {name: item_name});
+            $.post('/api/item/delete', {name: item_name});
         }
     });
 }
@@ -45,7 +49,7 @@ function addItemListenerInitiate () {
         var item = getItemInfo();
         getItemAttributes(item);
         removeItemInfo();
-        $.post('/api/create_item', item);
+        $.post('/api/item/create', item);
     });
 
     $('#attribute-add').on('click', function () {
@@ -58,6 +62,12 @@ function addAttributeListenerInitiate () {
     $('.form-control').on('change', function () {
         checkAddAttributeForm();
     });
+
+    $('.attr-save').on('click', function () {
+        saveAttrInfo();
+        alert('添加属性成功！');
+        location.assign('/create');
+    })
 }
 
 function itemManageViewInitiate () {
@@ -67,16 +77,17 @@ function itemManageViewInitiate () {
 function addItemViewInitiate () {
     var item = readItemInfo();
     if(item) {
-        $('#inputName').val(item.name);
-        $('#inputCount').val(item.count);
-        $('#inputPrice').val(item.price);
-        $('#inputUnit').val(item.unit);
+        $('#input-name').val(item.name);
+        $('#input-count').val(item.count);
+        $('#input-price').val(item.price);
+        $('#input-unit').val(item.unit);
     }
     checkAddItemForm();
     addItemListenerInitiate();
 }
 
 function addAttributeViewInitiate () {
+    checkAddAttributeForm();
     addAttributeListenerInitiate();
 }
 
@@ -85,26 +96,43 @@ function saveItemInfo () {
     localStorage.setItem('new_item', JSON.stringify(item));
 }
 
+function saveAttrInfo () {
+    var attrs = getAttrInfo();
+    localStorage.setItem('new_attrs', JSON.stringify(attrs));
+}
+
 function readItemInfo () {
     return JSON.parse(localStorage.getItem('new_item'));
 }
 
+function readAttrInfo () {
+    return JSON.parse(localStorage.getItem('new_attrs'));
+}
+
 function removeItemInfo () {
     localStorage.removeItem('new_item');
+    localStorage.removeItem('new_attrs');
 }
 
 function getItemInfo (item) {
     item = item || {};
-    item.name = $('#inputName').val();
-    item.count = $('#inputCount').val();
-    item.price = $('#inputPrice').val();
-    item.unit = $('#inputUnit').val();
+    item.name = $('#input-name').val();
+    item.count = $('#input-count').val();
+    item.price = $('#input-price').val();
+    item.unit = $('#input-unit').val();
     return item;
+}
+
+function getAttrInfo () {
+    var attr = readAttrInfo() || {};
+    attr.name = $('#attr-name').val();
+    attr.val = $('#attr-val').val();
+    return attr;
 }
 
 function getItemAttributes (item) {
     item = item || {};
-    item.attrs = localStorage.getItem('attrs') || '';
+    item.attrs = readAttrInfo() || {};
     return item;
 }
 
