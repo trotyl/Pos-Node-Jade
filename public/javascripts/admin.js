@@ -50,6 +50,7 @@ function addItemListenerInitiate () {
         getItemAttributes(item);
         removeItemInfo();
         $.post('/api/item/create', item);
+        location.assign('/admin')
     });
 
     $('#attribute-add').on('click', function () {
@@ -63,10 +64,10 @@ function addAttributeListenerInitiate () {
         checkAddAttributeForm();
     });
 
-    $('.attr-save').on('click', function () {
+    $('#attr-save').on('click', function () {
         saveAttrInfo();
-        alert('添加属性成功！');
-        location.assign('/create');
+        alert('保存成功！');
+        location.assign('/admin/create');
     })
 }
 
@@ -125,8 +126,8 @@ function getItemInfo (item) {
 
 function getAttrInfo () {
     var attr = readAttrInfo() || {};
-    attr.name = $('#attr-name').val();
-    attr.val = $('#attr-val').val();
+    var name = $('#attr-name').val();
+    attr[name] = $('#attr-val').val();
     return attr;
 }
 
@@ -165,9 +166,9 @@ function checkAddAttributeForm () {
         }
     });
     if(complete) {
-        $('#item-save').removeClass('disabled');
+        $('#attr-save').removeClass('disabled');
     }
     else {
-        $('#item-save').addClass('disabled');
+        $('#attr-save').addClass('disabled');
     }
 }
