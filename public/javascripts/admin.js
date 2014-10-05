@@ -1,7 +1,7 @@
 $(document).ready(function () {
     itemManageViewInitiate();
     addItemViewInitiate();
-
+    addAttributeViewInitiate();
 });
 
 function itemManageListenerInitiate () {
@@ -38,29 +38,13 @@ function itemManageListenerInitiate () {
 
 function addItemListenerInitiate () {
     $('.form-control').on('change', function () {
-        var complete = true;
-        $('.form-control').each(function () {
-            if(!$(this).val()) {
-                complete = false;
-            }
-        });
-        if(complete) {
-            $('#item-add').removeClass('disabled');
-        }
-        else {
-            $('#item-add').addClass('disabled');
-        }
-        if($(this).attr('type') == 'number') {
-            $(this).val(parseInt($(this).val()));
-            if($(this).val() < 0) {
-                $(this).val(0);
-            }
-        }
+        checkAddItemForm();
     });
 
     $('#item-save').on('click', function () {
         var item = getItemInfo();
         getItemAttributes(item);
+        removeItemInfo();
         $.post('/api/create_item', item);
     });
 
@@ -70,17 +54,43 @@ function addItemListenerInitiate () {
     })
 }
 
+function addAttributeListenerInitiate () {
+    $('.form-control').on('change', function () {
+        checkAddAttributeForm();
+    });
+}
+
 function itemManageViewInitiate () {
     itemManageListenerInitiate();
 }
 
 function addItemViewInitiate () {
+    var item = readItemInfo();
+    if(item) {
+        $('#inputName').val(item.name);
+        $('#inputCount').val(item.count);
+        $('#inputPrice').val(item.price);
+        $('#inputUnit').val(item.unit);
+    }
+    checkAddItemForm();
     addItemListenerInitiate();
+}
+
+function addAttributeViewInitiate () {
+    addAttributeListenerInitiate();
 }
 
 function saveItemInfo () {
     var item = getItemInfo();
-    localStorage.setItem('new_item', item);
+    localStorage.setItem('new_item', JSON.stringify(item));
+}
+
+function readItemInfo () {
+    return JSON.parse(localStorage.getItem('new_item'));
+}
+
+function removeItemInfo () {
+    localStorage.removeItem('new_item');
 }
 
 function getItemInfo (item) {
@@ -96,4 +106,40 @@ function getItemAttributes (item) {
     item = item || {};
     item.attrs = localStorage.getItem('attrs') || '';
     return item;
+}
+
+function checkAddItemForm () {
+    var complete = true;
+    $('.form-control').each(function () {
+        if(!$(this).val()) {
+            complete = false;
+        }
+    });
+    if(complete) {
+        $('#item-save').removeClass('disabled');
+    }
+    else {
+        $('#item-save').addClass('disabled');
+    }
+    if($(this).attr('type') == 'number') {
+        $(this).val(parseInt($(this).val()));
+        if($(this).val() < 0) {
+            $(this).val(0);
+        }
+    }
+}
+
+function checkAddAttributeForm () {
+    var complete = true;
+    $('.form-control').each(function () {
+        if(!$(this).val()) {
+            complete = false;
+        }
+    });
+    if(complete) {
+        $('#item-save').removeClass('disabled');
+    }
+    else {
+        $('#item-save').addClass('disabled');
+    }
 }
