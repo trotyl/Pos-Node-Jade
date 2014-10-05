@@ -48,7 +48,7 @@ router.post('/change_count', function (req, res) {
     Order.getItem(name, function (err, result) {
         if (err) {
             console.log(err);
-            res.end();
+            res.send(err);
         }
         if (result) {
             result.count = parseInt(count);
@@ -73,7 +73,7 @@ router.post('/alter_count', function (req, res) {
     Storage.getItem(name, function (err, result) {
         if(err) {
             console.log(err);
-            res.end();
+            res.send(err);
         }
         if(result) {
             result.count = parseInt(count);
@@ -87,7 +87,7 @@ router.post('/delete_item', function (req, res) {
     Storage.removeItem(name, function (err, result) {
         if(err) {
             console.log(err);
-            res.end();
+            res.send(err);
         }
         res.send(true);
     })

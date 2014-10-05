@@ -1,6 +1,42 @@
 $(document).ready(function () {
     itemManageViewInitiate();
+    addItemViewInitiate();
 
+});
+
+function itemManageListenerInitiate () {
+    function alterItemCount (count, operation) {
+        count = (operation == 'add'? count + 1: count - 1);
+        count = (count >= 0? count: 0);
+        return count;
+    }
+
+    $('#item-manage-list').on('click', 'button', function () {
+        var item_name = $(this).closest('tr').find('.item-name').text();
+        var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
+        var number = $(this).closest('td').find('.number');
+        var count = parseInt(number.val());
+        count = alterItemCount(count, operation);
+        number.val(count);
+        $.post('/api/alter_count', { name: item_name, count: count }, function () {});
+    });
+
+    $('.item-count').on('change', function () {
+        var item_name = $(this).closest('tr').find('.item-name');
+        var count = parseInt($(this).val());
+        $.post('/api/alter_count', { name: item_name, count: count });
+    });
+
+    $('.item-delete').on('click', function () {
+        var item_name = $(this).closest('tr').children().first().next().text();
+        if(confirm('确定要删除商品 "' + item_name + '" 吗?')) {
+            $(this).closest('tr').remove();
+            $.post('/api/delete_item', {name: item_name});
+        }
+    });
+}
+
+function addItemListenerInitiate () {
     $('.form-control').on('change', function () {
         var complete = true;
         $('.form-control').each(function () {
@@ -32,42 +68,14 @@ $(document).ready(function () {
         saveItemInfo();
         location.assign('attribute');
     })
-});
-
-function itemManageListenerInitiate () {
-    function alterItemCount (count, operation) {
-        count = (operation == 'add'? count + 1: count - 1);
-        count = (count >= 0? count: 0);
-        return count;
-    }
-
-    $('#item-manage-list').on('click', 'button', function () {
-        var item_name = $(this).closest('tr').children().first().next().text();
-        var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
-        var number = $(this).closest('.btn-group').find('.item-count');
-        var count = parseInt(number.val());
-        count = alterItemCount(count, operation);
-        number.text(count);
-        $.post('/api/alter_count', { name: item_name, count: count });
-    });
-
-    $('.item-count').on('change', function () {
-        var item_name = $(this).closest('tr').children().first().next().text();
-        var count = parseInt($(this).val());
-        $.post('/api/alter_count', { name: item_name, count: count });
-    });
-
-    $('.item-delete').on('click', function () {
-        var item_name = $(this).closest('tr').children().first().next().text();
-        if(confirm('确定要删除商品 "' + item_name + '" 吗?')) {
-            $(this).closest('tr').remove();
-            $.post('/api/delete_item', {name: item_name});
-        }
-    });
 }
 
 function itemManageViewInitiate () {
     itemManageListenerInitiate();
+}
+
+function addItemViewInitiate () {
+    addItemListenerInitiate();
 }
 
 function saveItemInfo () {

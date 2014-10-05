@@ -16,17 +16,17 @@ block content
                     th 发布时间
                     th 操作
                 each item, index in items
-                    tr
-                        td= index + 1
-                        td= item.name
-                        td
+                    tr.list-item
+                        td.item-index= index + 1
+                        td.item-name= item.name
+                        td.item-count
                             .btn-group
                                 button.btn.btn-default -
-                                input.btn.btn-default.item-count(type='text', value=item.count)
+                                input.btn.btn-default.number(type='text', value=item.count)
                                 button.btn.btn-default +
-                        td= item.price
-                        td= item.unit
-                        td= item.createdAt
-                        td
-                            a 详情
+                        td.item-price= item.price
+                        td.item-unit= item.unit
+                        td.item-created-at= item.createdAt
+                        td.item-operation
+                            a.item-detail 详情
                             a.item-delete  删除
