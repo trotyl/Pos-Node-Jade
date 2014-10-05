@@ -3,7 +3,8 @@ $(document).ready(function () {
     var doIt = {
         index: itemManageViewInitiate,
         create: addItemViewInitiate,
-        attribute: addAttributeViewInitiate
+        attribute: addAttributeViewInitiate,
+        remove: removeAttributeViewInitiate
     };
     doIt[view]();
 });
@@ -76,6 +77,10 @@ function addAttributeListenerInitiate () {
     })
 }
 
+function removeAttributeListenerInitiate () {
+
+}
+
 function itemManageViewInitiate () {
     itemManageListenerInitiate();
 }
@@ -95,6 +100,17 @@ function addItemViewInitiate () {
 function addAttributeViewInitiate () {
     checkAddAttributeForm();
     addAttributeListenerInitiate();
+}
+
+function removeAttributeViewInitiate () {
+    var item = readItemInfo();
+    var attrs = readAttrInfo();
+    $('#item-name').text(item.name);
+    _(attrs).each(function (val, key) {
+        var attr = attrFormer(key, val);
+        $('#attrs-list').append(attr);
+    });
+    removeAttributeListenerInitiate();
 }
 
 function saveItemInfo () {
@@ -176,4 +192,14 @@ function checkAddAttributeForm () {
     else {
         $('#attr-save').addClass('disabled');
     }
+}
+
+function attrFormer (name, val) {
+    var attrLine = '<tr class="attr"><td class="attr-name"></td><td class="attr-val"></td><td class="attr-operation"></td></tr>';
+    var removeAnchor = '<a class="attr-delete">删除</a>';
+    var attrDom = $(attrLine);
+    attrDom.find('.attr-name').text(name);
+    attrDom.find('.attr-val').text(val);
+    attrDom.find('.attr-operation').html(removeAnchor);
+    return attrDom;
 }
