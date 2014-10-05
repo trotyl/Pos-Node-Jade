@@ -63,7 +63,7 @@ Item.prototype.join = function (callback) {
 
 Item.prototype.getPromotion = function (promotions) {
     var self = this;
-    var list = _(promotions).findWhere({type: 'BUY_TWO_GET_ONE_FREE'}).barcodes;
+    var list = _(promotions).find({type: 'BUY_TWO_GET_ONE_FREE'}).barcodes;
     if(_(list).contains(self.barcode)) {
         this.promotion = true;
     }

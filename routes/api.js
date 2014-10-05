@@ -15,7 +15,6 @@ router.get('/cart_counter', function (req, res) {
     Order.all(function (err, list) {
         if (err) {
             console.log(err);
-            res.end();
         }
         var cartStats = Order.getCartStats(list);
         res.json(cartStats.count);
