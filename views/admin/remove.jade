@@ -1,0 +1,24 @@
+extends layout
+block content
+    .panel.panel-default
+        .panel-body
+            ol.breadcrumb
+                li
+                    a(href="/admin") 商品信息管理
+                li
+                    a#item-name(href="/admin/create")
+                li.active 删除属性
+
+            table#item-manage-list.table
+                tr
+                    th 属性名称
+                    th 属性值
+                    th 操作
+
+                //each attr, index in item.attrs
+                //    tr.list-item
+                //        td.attr-name= index
+                //        td.attr-val= attr
+                //        td.attr-operation
+                //            a.attr-delete  删除
+

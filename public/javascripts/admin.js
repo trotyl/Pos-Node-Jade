@@ -56,7 +56,12 @@ function addItemListenerInitiate () {
     $('#attribute-add').on('click', function () {
         saveItemInfo();
         location.assign('attribute');
-    })
+    });
+
+    $('#attribute-remove').on('click', function () {
+        saveItemInfo();
+        location.assign('remove');
+    });
 }
 
 function addAttributeListenerInitiate () {
