@@ -111,12 +111,15 @@ function addAttributeController () {
 function removeAttributeController () {
     var item = readItemInfo();
     var attrs = readAttrInfo();
-    $('#item-name').text(item.name);
     $('.attr').remove();
-    _(attrs).each(function (val, key) {
-        var attr = attrFormer(key, val);
-        $('#attrs-list').append(attr);
-    });
+    _.chain(attrs)
+        .sortBy(function (attr) {
+            return -attr.time;
+        })
+        .each(function (val) {
+            var attr = attrFormer(val.name, val.val);
+            $('#attrs-list').append(attr);
+        });
     removeAttributeListener();
 }
 
@@ -155,7 +158,7 @@ function getItemInfo (item) {
 function getAttrInfo () {
     var attr = readAttrInfo() || {};
     var name = $('#attr-name').val();
-    attr[name] = $('#attr-val').val();
+    attr[name] = {time: (new Date()).valueOf(), name: name, val: $('#attr-val').val()};
     return attr;
 }
 
