@@ -4,8 +4,7 @@ function CartController () {
 }
 
 function CartInitialize () {
-    console.log(Cart.all());
-    $('#view').load('api/cart', {cart: Cart.all()});
+    $('#view').load('api/cart', {cart: JSON.stringify(Cart.all())});
 }
 
 function CartListener () {
