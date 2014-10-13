@@ -44,8 +44,8 @@ Storage.removeItem = function (name, callback) {
     });
 };
 
-Storage.renderItems = function (cart, callback) {
-    Item.find({ name: { $in: cart }}).execQ().then(function (result) {
+Storage.renderItems = function (list, callback) {
+    Item.find({ name: { $in: list }}).execQ().then(function (result) {
         callback(null, result);
     }).catch(function (err) {
         console.log(err);

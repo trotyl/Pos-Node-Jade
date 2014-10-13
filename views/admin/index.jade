@@ -5,28 +5,5 @@ block content
         .panel-heading
             p 商品信息管理
             a.btn.btn-primary(href='admin/create') 添加商品
-        .panel-body
-            table#item-manage-list.table
-                tr
-                    th 序号
-                    th 商品名称
-                    th 商品数量
-                    th 单价(元)
-                    th 单位
-                    th 发布时间
-                    th 操作
-                each item, index in items
-                    tr.list-item
-                        td.item-index= index + 1
-                        td.item-name= item.name
-                        td.item-count
-                            .btn-group
-                                button.btn.btn-default -
-                                input.btn.btn-default.number(type='text', value=item.count)
-                                button.btn.btn-default +
-                        td.item-price= item.price
-                        td.item-unit= item.unit
-                        td.item-created-at= item.createdAt
-                        td.item-operation
-                            a.item-detail 详情
-                            a.item-delete  删除
+        #content.panel-body
+

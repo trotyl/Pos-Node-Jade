@@ -1,28 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/delete', function (req, res) {
-    var name = req.body.name;
-    Storage.removeItem(name, function (err, result) {
-        if(err) {
-            console.log(err);
-            res.send(err);
-        }
-        res.send(true);
-    })
+router.all('/', function (req, res) {
+    Storage.allItems(function (result) {
+        res.render('admin/list', { items: result });
+    });
 });
 
-router.post('/create', function (req, res) {
+router.all('/delete', function (req, res) {
     var name = req.body.name;
-    var count = req.body.count;
-    var price = req.body.price;
-    var unit = req.body.unit;
-    var attributes = req.body.attributes;
-    var item = new Item('', name, unit, price, '', count);
-    item.attributes = attributes;
-    item.createdAt = new Date();
-    Storage.add(item, function () {
-        res.send(true);
+    Storage.removeItem(name, function () {
+        res.send('');
+    });
+});
+
+router.all('/create', function (req, res) {
+    var params = {
+        name: req.param('name'),
+        amount: req.param('amount'),
+        price: req.param('price'),
+        unit: req.param('unit'),
+        attrs: req.param('attributes')
+    };
+    Storage.addItem(params, function () {
+        res.send('');
     });
 });
 

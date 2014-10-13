@@ -4,7 +4,7 @@ var fixtures = require('../models/fixtures');
 var Order = require('../models/order');
 
 router.get('/', function(req, res) {
-    res.render('admin', { title:'商品信息管理', view: 'index', items: fixtures.loadAllItems()});
+    res.render('admin', { title:'商品信息管理', view: 'index'});
 });
 
 router.get('/create', function (req, res) {
