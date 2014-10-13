@@ -25,8 +25,18 @@ html
                   span#cart_counter 0
                   | )
 
-    block content
+    #view(data-view= view)
+      block content
+
     script(type='text/javascript', src='/jquery/dist/jquery.min.js')
     script(type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js')
     script(type='text/javascript', src='/lodash/dist/lodash.min.js')
+
+    script(type='text/javascript', src='/javascripts/model/Cart.js')
+
+    script(type='text/javascript', src='/javascripts/controller/HomeController.js')
+    script(type='text/javascript', src='/javascripts/controller/ListController.js')
+    script(type='text/javascript', src='/javascripts/controller/CartController.js')
+    script(type='text/javascript', src='/javascripts/controller/PaymentController.js')
+
     script(type='text/javascript', src='/javascripts/main.js')
