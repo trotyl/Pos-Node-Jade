@@ -1,18 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Item = require('../../models/item');
-var Storage = require('../../models/storage');
-var _ = require('lodash');
-var cart = require('./cart');
 
-router.use('/cart', cart);
-
-/* GET users listing. */
-router.all('/', function(req, res) {
-    res.send('respond with a resource');
-});
-
-router.post('/item/delete', function (req, res) {
+router.post('/delete', function (req, res) {
     var name = req.body.name;
     Storage.removeItem(name, function (err, result) {
         if(err) {
@@ -23,7 +12,7 @@ router.post('/item/delete', function (req, res) {
     })
 });
 
-router.post('/item/create', function (req, res) {
+router.post('/create', function (req, res) {
     var name = req.body.name;
     var count = req.body.count;
     var price = req.body.price;

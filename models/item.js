@@ -8,7 +8,8 @@ var itemSchema = mongoose.Schema({
     price: Number,
     type: String,
     amount: Number,
-    promotion: Boolean
+    promotion: Boolean,
+    attrs: Array
 });
 
 var Item = mongoose.model('item', itemSchema);

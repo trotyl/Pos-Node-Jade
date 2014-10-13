@@ -6,94 +6,50 @@ function Storage () {
 
 }
 
-Storage.all = function () {
-    mongodb.open(function (err, db) {
-        if (err) {
-            return callback(err);
-        }
-        db.collection('storage', function (err, collection) {
-            if (err) {
-                mongodb.close();
-                return callback(err);
-            }
-            collection.find({}).toArray(function (err, result) {
-                mongodb.close();
-                if(err) {
-                    return callback(err);
-                }
-                var list = _(result).map(function (stat) {
-                    return new Item(stat.barcode, stat.name, stat.unit, stat.price, stat.type, stat.count, stat.promotion);
-                }).value();
-                callback(null, list);
-                mongodb.close();
-            });
-        });
+Storage.allItems = function (callback) {
+    return Item.find().execQ().then(function(result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
     });
 };
 
-Storage.add = function (item, callback) {
-    mongodb.open(function (err, db) {
-        if (err) {
-            return callback(err);
-        }
-        db.collection('storage', function (err, collection) {
-            if (err) {
-                mongodb.close();
-                return callback(err);
-            }
-            collection.insert(item, {
-                safe: true
-            }, function (err) {
-                mongodb.close();
-                if(err) {
-                    return callback(err);
-                }
-                callback();
-            });
-        });
+Storage.addItem = function (params, callback) {
+    var item = new Item({
+        name: params.name,
+        amount: params.amount,
+        price: params.price,
+        unit: params.unit,
+        attrs: params.attrs
     });
+    item.save();
 };
 
 Storage.getItem = function (name, callback) {
-    mongodb.open(function (err, db) {
-        if (err) {
-            return callback(err);
-        }
-        db.collection('storage', function (err, collection) {
-            if (err) {
-                mongodb.close();
-                return callback(err);
-            }
-            collection.findOne({name: name}, function (err, stat) {
-                mongodb.close();
-                if(err) {
-                    return callback(err);
-                }
-                var item = !stat? stat: new Item(stat.barcode, stat.name, stat.unit, stat.price, stat.type, stat.count, stat.promotion);
-                callback(null, item);
-            });
-        });
+    Item.findOne({ name: name }).execQ().then(function (result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
     });
 };
 
 Storage.removeItem = function (name, callback) {
-    mongodb.open(function (err, db) {
-        if (err) {
-            return callback(err);
-        }
-        db.collection('storage', function (err, collection) {
-            if (err) {
-                mongodb.close();
-                return callback(err);
-            }
-            collection.remove({name: name}, function (err) {
-                mongodb.close();
-                if(err) {
-                    return callback(err);
-                }
-                callback(null);
-            });
-        });
+    Item.remove({ name: name }).execQ().then(function (result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    });
+};
+
+Storage.renderCart = function (cart, callback) {
+    Item.find({ name: { $in: cart }}).execQ().then(function (result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
     });
 };
 

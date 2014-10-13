@@ -9,7 +9,7 @@ function PaymentInitialize () {
 
 function PaymentListener () {
     $('#confirm').on('click', function () {
-        $.post('api/payment/confirm', {cart: Cart.all()});
+        $.post('api/cart/confirm', {cart: Cart.all()});
         Cart.clear();
         location.assign('list');
     })
