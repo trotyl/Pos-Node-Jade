@@ -35,8 +35,9 @@ function itemManageListener () {
     $('.item-delete').on('click', function () {
         var item_name = $(this).closest('tr').children().first().next().text();
         if(confirm('确定要删除商品 "' + item_name + '" 吗?')) {
-            $(this).closest('tr').remove();
-            $.post('/api/item/delete', {name: item_name});
+            $.post('/api/item/delete', {name: item_name}, function () {
+                location.reload();
+            });
         }
     });
 }
