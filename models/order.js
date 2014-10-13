@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var mongodb = require('./db');
+var mongoose = require('mongoose');
 var Item = require('./item');
 
 function Order () {

@@ -1,5 +1,10 @@
-var settings = require('../settings'),
-    Db = require('mongodb').Db,
-    Connection = require('mongodb').Connection,
-    Server = require('mongodb').Server;
-module.exports = new Db(settings.db, new Server(settings.host, Connection.DEFAULT_PORT), {safe: true});
+var mongoose = require('mongoose'),
+    mongooseQ = require('mongoose-q')(mongoose);
+
+mongoose.connect('mongodb://localhost/pos');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+    console.log('The mongodb connection is now open.')
+});
