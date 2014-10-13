@@ -3,7 +3,7 @@ var router = express.Router();
 var Storage = require('../../models/storage');
 
 router.all('/', function (req, res) {
-    Storage.allItems(function (err, result) {
+    Storage.allItems(1, function (err, result) {
         res.render('admin/list', { items: result || [] });
     });
 });

@@ -6,8 +6,8 @@ function Storage () {
 
 }
 
-Storage.allItems = function (callback) {
-    return Item.find().execQ().then(function(result) {
+Storage.allItems = function (page, callback) {
+    return Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
         callback(null, result);
     }).catch(function (err) {
         console.log(err);
@@ -21,7 +21,8 @@ Storage.addItem = function (params, callback) {
         amount: params.amount,
         price: params.price,
         unit: params.unit,
-        attrs: params.attrs
+        attrs: params.attrs,
+        birth: new Date
     });
     item.save(function (err) {
         if(err) {
