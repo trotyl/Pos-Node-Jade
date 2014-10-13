@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Item = require('../models/item');
-var Order = require('../models/order');
-var Storage = require('../models/storage');
-var fixtures = require('../models/fixtures');
+var Item = require('../../models/item');
+var Storage = require('../../models/storage');
 var _ = require('lodash');
+var cart = require('./cart');
+
+router.use('/cart', cart);
 
 /* GET users listing. */
-router.get('/', function(req, res) {
+router.all('/', function(req, res) {
     res.send('respond with a resource');
 });
 

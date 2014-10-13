@@ -1,33 +1,30 @@
-extends layout
-
-block content
-  .container.text-center
+.container.text-center
     .panel.panel-default
-      .panel-heading
-        h4.side-space.text-left 购物清单
-      .panel-body
-        table#bought-list-table.table.table-bordered
-          tr
-            th 分类
-            th 名称
-            th 单价(元)
-            th 单位
-            th 数量
-            th 小计
-          each item in items
-            tr
-              td= item.type
-              td= item.name
-              td= item.price
-              td= item.unit
-              td
-                .btn-group
-                  button.btn.btn-default -
-                  button.btn.btn-default.item-count(disabled="disabled")= item.count
-                  button.btn.btn-default +
-              td= item.sumDisplay()
-      .side-space.text-right
-        p
-          | 总计：
-          span= total.toFixed(2) + '元'
-        a.btn.btn-primary.vertical-space(href="payment") 付款
+        .panel-heading
+            h4.side-space.text-left 购物清单
+        .panel-body
+            table#bought-list-table.table.table-bordered
+                tr
+                    th 分类
+                    th 名称
+                    th 单价(元)
+                    th 单位
+                    th 数量
+                    th 小计
+                each item in items
+                    tr
+                        td= item.type
+                        td= item.name
+                        td= item.price
+                        td= item.unit
+                        td
+                            .btn-group
+                                button.btn.btn-default -
+                                button.btn.btn-default.item-count(disabled="disabled")= item.count
+                                button.btn.btn-default +
+                        td= item.sumDisplay()
+            .side-space.text-right
+                p
+                    | 总计：
+                    span= total.toFixed(2) + '元'
+                a.btn.btn-primary.vertical-space(href="payment") 付款
