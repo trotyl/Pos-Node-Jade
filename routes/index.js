@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var fixtures = require('../models/fixtures');
-var Order = require('../models/order');
 var _ = require('lodash');
+var Storage = require('../models/storage');
 var moment = require('moment');
 
 /* GET home page. */
@@ -12,7 +11,9 @@ router.get('/', function(req, res) {
 });
 
 router.get('/list', function(req, res) {
-    res.render('list', { title: '商品列表' , view: 'list', active: {list: true}, list: fixtures.loadAllItems()});
+    Storage.allItems(function (err, result) {
+        res.render('list', { title: '商品列表' , view: 'list', active: {list: true}, list: result});
+    });
 });
 
 router.get('/cart', function(req, res) {

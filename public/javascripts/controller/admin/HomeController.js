@@ -15,10 +15,10 @@ function HomeListener () {
         var item_name = $(this).closest('tr').find('.item-name').text();
         var operation = { '+': 'add', '-': 'minus'}[$(this).text()];
         var number = $(this).closest('td').find('.number');
-        var count = parseInt(number.val());
-        count = alterItemCount(count, operation);
-        number.val(count);
-        $.post('/api/alter_count', { name: item_name, count: count }, function () {});
+        var amount = parseInt(number.val());
+        amount = alterItemCount(amount, operation);
+        number.val(amount);
+        $.post('/api/item/amount', { name: item_name, amount: amount });
     });
 
     $('.item-count').on('change', function () {

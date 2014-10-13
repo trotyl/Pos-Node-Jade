@@ -23,9 +23,17 @@ router.all('/create', function (req, res) {
         unit: req.param('unit'),
         attrs: req.param('attributes')
     };
-    console.log(params);
     Storage.addItem(params, function () {
-        console.log('hehe');
+        res.send('');
+    });
+});
+
+router.all('/amount', function (req, res) {
+    var name = req.param('name');
+    var amount = req.param('amount');
+    Storage.getItem(name, function (err, result) {
+        result.amount = parseInt(amount);
+        result.save();
         res.send('');
     });
 });

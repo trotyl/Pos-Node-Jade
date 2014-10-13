@@ -26,7 +26,9 @@ Storage.addItem = function (params, callback) {
     item.save(function (err) {
         if(err) {
             console.log(err);
+            return callback(err);
         }
+        callback(null);
     });
 };
 
