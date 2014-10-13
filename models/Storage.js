@@ -23,7 +23,11 @@ Storage.addItem = function (params, callback) {
         unit: params.unit,
         attrs: params.attrs
     });
-    item.save();
+    item.save(function (err) {
+        if(err) {
+            console.log(err);
+        }
+    });
 };
 
 Storage.getItem = function (name, callback) {

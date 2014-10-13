@@ -2,7 +2,7 @@ function CreateController () {
     var item = readItemInfo();
     if (item) {
         $('#input-name').val(item.name);
-        $('#input-count').val(item.count);
+        $('#input-count').val(item.amount);
         $('#input-price').val(item.price);
         $('#input-unit').val(item.unit);
     }
@@ -34,7 +34,7 @@ function checkCreateForm () {
 
 function CreateListener () {
     $('.form-control').on('change', function () {
-        checkAddItemForm();
+        checkCreateForm();
     });
 
     $('#item-save').on('click', function () {

@@ -36,7 +36,7 @@ function removeItemInfo () {
 function getItemInfo (item) {
     item = item || {};
     item.name = $('#input-name').val();
-    item.count = $('#input-count').val();
+    item.amount = $('#input-count').val();
     item.price = $('#input-price').val();
     item.unit = $('#input-unit').val();
     return item;

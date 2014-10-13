@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var Storage = require('../../models/storage');
 
 router.all('/', function (req, res) {
-    Storage.allItems(function (result) {
-        res.render('admin/list', { items: result });
+    Storage.allItems(function (err, result) {
+        res.render('admin/list', { items: result || [] });
     });
 });
 
@@ -22,7 +23,9 @@ router.all('/create', function (req, res) {
         unit: req.param('unit'),
         attrs: req.param('attributes')
     };
+    console.log(params);
     Storage.addItem(params, function () {
+        console.log('hehe');
         res.send('');
     });
 });
