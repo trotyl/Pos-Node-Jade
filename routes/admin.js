@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Storage = require('../models/storage');
 
 router.get('/', function(req, res) {
     res.render('admin', { title:'商品信息管理', view: 'index', page: 1});
@@ -8,6 +9,13 @@ router.get('/', function(req, res) {
 router.get('/page/:id', function(req, res) {
     var page = req.param('id');
     res.render('admin', { title:'商品信息管理', view: 'index', page: page});
+});
+
+router.get('/detail/:name', function (req, res) {
+    var name = req.param('name');
+    Storage.getItem(name, function (err, result) {
+        res.render('admin/detail', { title: '商品详情', view: 'detail', item: result});
+    });
 });
 
 router.get('/create', function (req, res) {

@@ -4,7 +4,8 @@ $(document).ready(function () {
         index: HomeController,
         create: CreateController,
         add: NewAttributeController,
-        remove: RemoveAttributeController
+        remove: RemoveAttributeController,
+        detail: DetailController
     };
     var controller = viewControllerMap[view];
     controller();
