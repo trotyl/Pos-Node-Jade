@@ -20,7 +20,8 @@ table#item-manage-list.table
             td.item-unit= item.unit
             td.item-created-at= item.birth
             td.item-operation
-                a.item-detail 详情
+                - var link = '/admin/detail/' + item.name
+                a.item-detail(href= link) 详情
                 a.item-delete  删除
 #page.text-center
     ul.pagination
