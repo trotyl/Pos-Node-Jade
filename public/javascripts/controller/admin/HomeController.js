@@ -1,5 +1,7 @@
 function HomeController () {
-    $('#content').load('api/item', function () {
+    var content = $('#content');
+    var page = content.data('page');
+    content.load('/api/item/page/' + page, function () {
         HomeListener();
     });
 }

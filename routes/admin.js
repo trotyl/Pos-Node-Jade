@@ -2,7 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-    res.render('admin', { title:'商品信息管理', view: 'index'});
+    res.render('admin', { title:'商品信息管理', view: 'index', page: 1});
+});
+
+router.get('/page/:id', function(req, res) {
+    var page = req.param('id');
+    res.render('admin', { title:'商品信息管理', view: 'index', page: page});
 });
 
 router.get('/create', function (req, res) {

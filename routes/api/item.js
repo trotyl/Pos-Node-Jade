@@ -8,6 +8,16 @@ router.all('/', function (req, res) {
     });
 });
 
+router.all('/page/:id', function (req, res) {
+    var page = req.param('id');
+    Storage.allItems(page, function (err, result) {
+        Storage.itemCount(function (err, count) {
+            var total = Math.ceil(count / 10);
+            res.render('admin/list', { items: result || [], now: page, total: total});
+        })
+    });
+});
+
 router.all('/delete', function (req, res) {
     var name = req.body.name;
     Storage.removeItem(name, function () {

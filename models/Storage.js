@@ -7,12 +7,21 @@ function Storage () {
 }
 
 Storage.allItems = function (page, callback) {
-    return Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
+    Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
         callback(null, result);
     }).catch(function (err) {
         console.log(err);
         callback(err);
-    });
+    }).done();
+};
+
+Storage.itemCount = function (callback) {
+    Item.find().execQ().then(function(result) {
+        callback(null, result.length);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
 };
 
 Storage.addItem = function (params, callback) {
@@ -39,7 +48,7 @@ Storage.getItem = function (name, callback) {
     }).catch(function (err) {
         console.log(err);
         callback(err);
-    });
+    }).done();
 };
 
 Storage.removeItem = function (name, callback) {
@@ -48,7 +57,7 @@ Storage.removeItem = function (name, callback) {
     }).catch(function (err) {
         console.log(err);
         callback(err);
-    });
+    }).done();
 };
 
 Storage.renderItems = function (list, callback) {
@@ -57,7 +66,7 @@ Storage.renderItems = function (list, callback) {
     }).catch(function (err) {
         console.log(err);
         callback(err);
-    });
+    }).done();
 };
 
 module.exports = Storage;
