@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    .panel.panel-default
+        .panel-body
+            .btn-list
+                button#item-save.btn.btn-default.disabled 保存属性
+                button#attribute-add.btn.btn-default 添加属性
+                button#attribute-remove.btn.btn-default 删除属性
+                a.btn.btn-default(href="/admin") 取消
+            .container
+                form.form.form-horizontal(role="form")
+                    .form-group
+                        label.col-sm-2.control-label(for="input-name") 商品名称
+                        .col-sm-2
+                            input#input-name.form-control(type="text")= item.name
+                    .form-group
+                        label.col-sm-2.control-label(for="input-count") 商品数量
+                        .col-sm-2
+                            input#input-count.form-control(type="number")= item.amount
+                    .form-group
+                        label.col-sm-2.control-label(for="input-price") 单价（元）
+                        .col-sm-2
+                            input#input-price.form-control(type="number")= item.price
+                    .form-group
+                        label.col-sm-2.control-label(for="input-unit") 单位
+                        .col-sm-2
+                            input#input-unit.form-control(type="text")= item.unit
+                    each attr in item.attrs
+                        .form-group
+                            label.col-sm-2.control-label= attr.name
+                            .col-sm-2
+                                input.form-control(type="text")= attr.val
+
