@@ -19,10 +19,11 @@ block content
                     th 属性值
                     th 操作
 
-                each attr in item.attrs
-                    tr.list-item
-                        td.attr-name= attr.name
-                        td.attr-val= attr.val
-                        td.attr-operation
-                            a.attr-delete  删除
+                if item
+                    each attr in item.attrs
+                        tr.list-item
+                            td.attr-name= attr.name
+                            td.attr-val= attr.val
+                            td.attr-operation
+                                a.attr-delete  删除
 

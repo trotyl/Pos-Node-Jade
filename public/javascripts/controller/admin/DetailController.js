@@ -34,6 +34,7 @@ function DetailListener() {
     });
 
     $('#attribute-remove').on('click', function () {
-        location.assign('/admin/remove?from=detail');
+        var name = $('#name').data('name');
+        location.assign('/admin/remove/' + name + '?from=detail');
     })
 }

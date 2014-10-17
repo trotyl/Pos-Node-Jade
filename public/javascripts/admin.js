@@ -46,7 +46,7 @@ function getItemInfo () {
             item[$(element).data('name')] = $(element).val();
         }
         else if(type == 'attr-edit') {
-            item.attrs[$(element).data('name')] = $(element).val();
+            item.attrs[$(element).data('name')].val = $(element).val();
         }
         else if(type == 'attr-new') {
             var name = $(element).val();
