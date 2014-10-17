@@ -51,6 +51,14 @@ router.all('/update', function (req, res) {
     });
 });
 
+router.all('/remove', function (req, res) {
+    var name = req.param('name');
+    var attr = req.param('key');
+    Storage.removeAttribute(name, attr, function (err, result) {
+        res.send('');
+    })
+});
+
 router.all('/amount', function (req, res) {
     var name = req.param('name');
     var amount = req.param('amount');

@@ -16,6 +16,7 @@ function RemoveAttributeListener () {
     $('.attr-delete').on('click', function () {
         if(confirm('确定删除该属性？')) {
             var key = $(this).closest('tr').find('.attr-name').text();
+            $(this).closest('tr').remove();
             removeAttribute(key);
             RemoveAttributeController();
         }

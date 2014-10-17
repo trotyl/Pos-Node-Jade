@@ -33,8 +33,15 @@ function removeItemInfo () {
     localStorage.removeItem('new_item');
 }
 
-function removeAttribute (name) {
-
+function removeAttribute (key) {
+    var item = readItemInfo();
+    if(item) {
+        delete item[key];
+    }
+    else {
+        var name = $('name').data('name');
+        $.post('/api/item/remove', { name: name, key: key });
+    }
 }
 
 function getItemInfo () {

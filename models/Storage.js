@@ -84,4 +84,8 @@ Storage.renderItems = function (list, callback) {
     }).done();
 };
 
+Storage.removeAttribute = function (name, attr, callback) {
+    
+}
+
 module.exports = Storage;
