@@ -35,12 +35,16 @@ function removeItemInfo () {
 
 function getItemInfo () {
     var item = readItemInfo();
+    item.attrs = item.attrs || {};
     $('.form-control').each(function (index, element) {
         var type = $(element).data('type');
         if(type == 'fixed') {
             item[$(element).data('name')] = $(element).val();
         }
-        else if(type == 'attr') {
+        else if(type == 'attr-edit') {
+            item.attrs[$(element).data('name')] = $(element).val();
+        }
+        else if(type == 'attr-new') {
             var name = $(element).val();
             var val = $('#attr-val').val();
             item.attrs = item.attrs || {};

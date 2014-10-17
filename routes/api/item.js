@@ -31,9 +31,22 @@ router.all('/create', function (req, res) {
         amount: req.param('amount'),
         price: req.param('price'),
         unit: req.param('unit'),
-        attrs: req.param('attributes')
+        attrs: JSON.parse(req.param('attrs'))
     };
     Storage.addItem(params, function () {
+        res.send('');
+    });
+});
+
+router.all('/update', function (req, res) {
+    var params = {
+        name: req.param('name'),
+        amount: req.param('amount'),
+        price: req.param('price'),
+        unit: req.param('unit'),
+        attrs: JSON.parse(req.param('attrs'))
+    };
+    Storage.updateItem(params, function () {
         res.send('');
     });
 });

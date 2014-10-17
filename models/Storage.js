@@ -42,6 +42,21 @@ Storage.addItem = function (params, callback) {
     });
 };
 
+
+Storage.updateItem = function (params, callback) {
+    Item.update({ name: params.name }, {
+        amount: params.amount,
+        price: params.price,
+        unit: params.unit,
+        attrs: params.attrs
+    }).execQ().then(function (result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
+
 Storage.getItem = function (name, callback) {
     Item.findOne({ name: name }).execQ().then(function (result) {
         callback(null, result);

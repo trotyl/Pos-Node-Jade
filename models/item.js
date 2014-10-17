@@ -9,7 +9,7 @@ var itemSchema = mongoose.Schema({
     type: String,
     amount: Number,
     promotion: Boolean,
-    attrs: Array,
+    attrs: Object,
     birth: Date
 });
 

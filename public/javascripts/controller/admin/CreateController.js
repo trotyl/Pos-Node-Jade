@@ -33,7 +33,13 @@ function CreateListener () {
     $('#item-save').on('click', function () {
         var item = getItemInfo();
         removeItemInfo();
-        $.post('/api/item/create', item);
+        $.post('/api/item/create', {
+            name: item.name,
+            amount: item.amount,
+            price: item.price,
+            unit: item.unit,
+            attrs: JSON.stringify(item.attrs)
+        });
         location.assign('/admin')
     });
 

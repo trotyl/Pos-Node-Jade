@@ -11,24 +11,24 @@ block content
             .container
                 form.form.form-horizontal(role="form")
                     .form-group
-                        label.col-sm-2.control-label(for="input-name") 商品名称
+                        label.col-sm-2.control-label 商品名称
                         .col-sm-2
-                            input#input-name.form-control(type="text", value=item.name)
+                            input.form-control(type="text", value=item.name, data-type="fixed", data-name="name")
                     .form-group
                         label.col-sm-2.control-label(for="input-count") 商品数量
                         .col-sm-2
-                            input#input-count.form-control(type="number", value=item.amount)
+                            input.form-control(type="number", value=item.amount, data-type="fixed", data-name="amount")
                     .form-group
                         label.col-sm-2.control-label(for="input-price") 单价（元）
                         .col-sm-2
-                            input#input-price.form-control(type="number", value=item.price)
+                            input.form-control(type="number", value=item.price, data-type="fixed", data-name="price")
                     .form-group
                         label.col-sm-2.control-label(for="input-unit") 单位
                         .col-sm-2
-                            input#input-unit.form-control(type="text", value=item.unit)
+                            input#input-unit.form-control(type="text", value=item.unit, data-type="fixed", data-name="unit")
                     each attr in item.attrs
                         .form-group
                             label.col-sm-2.control-label= attr.name
                             .col-sm-2
-                                input.form-control(type="text")= attr.val
+                                input.form-control(type="text", value=attr.val, data-type="attr-edit", data-name=attr.name)
 
