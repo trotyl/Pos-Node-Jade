@@ -11,19 +11,19 @@ block content
             .container
                 form.form.form-horizontal(role="form")
                     .form-group
-                        label.col-sm-2.control-label(for="input-name") 商品名称
+                        label.col-sm-2.control-label 商品名称
                         .col-sm-2
-                            input#input-name.form-control(type="text", placeholder="请输入商品名称")
+                            input.form-control(type="text", placeholder="请输入商品名称", data-type="fixed", data-name="name")
                     .form-group
-                        label.col-sm-2.control-label(for="input-count") 商品数量
+                        label.col-sm-2.control-label 商品数量
                         .col-sm-2
-                            input#input-count.form-control(type="number", placeholder="请输入商品数量")
+                            input.form-control(type="number", placeholder="请输入商品数量", data-type="fixed", data-name="amount")
                     .form-group
-                        label.col-sm-2.control-label(for="input-price") 单价（元）
+                        label.col-sm-2.control-label 单价（元）
                         .col-sm-2
-                            input#input-price.form-control(type="number", placeholder="请输入单价")
+                            input.form-control(type="number", placeholder="请输入单价", data-type="fixed", data-name="price")
                     .form-group
-                        label.col-sm-2.control-label(for="input-unit") 单位
+                        label.col-sm-2.control-label 单位
                         .col-sm-2
-                            input#input-unit.form-control(type="text", placeholder="请输入单位")
+                            input.form-control(type="text", placeholder="请输入单位", data-type="fixed", data-name="unit")
 

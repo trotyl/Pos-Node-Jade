@@ -23,7 +23,7 @@ router.get('/create', function (req, res) {
 });
 
 router.get('/attribute', function (req, res) {
-    res.render('admin/attribute', { title: '添加属性', view: 'attribute'});
+    res.render('admin/attribute', { title: '添加属性', view: 'add'});
 });
 
 router.get('/remove/', function (req, res) {

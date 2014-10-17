@@ -16,49 +16,40 @@ function saveItemInfo () {
     localStorage.setItem('new_item', JSON.stringify(item));
 }
 
-function saveAttrInfo (attrs) {
-    attrs = attrs || getAttrInfo();
-    localStorage.setItem('new_attrs', JSON.stringify(attrs));
-}
-
 function readItemInfo () {
-    return JSON.parse(localStorage.getItem('new_item'));
+    return JSON.parse(localStorage.getItem('new_item')) || {};
 }
 
-function readAttrInfo () {
-    return JSON.parse(localStorage.getItem('new_attrs'));
+function loadItemInfo () {
+    var item = readItemInfo();
+    $('.form-control').each(function (index, element) {
+        if($(element).data('type') == 'fixed') {
+            $(element).val(item[$(element).data('name')]);
+        }
+    });
 }
 
 function removeItemInfo () {
     localStorage.removeItem('new_item');
-    localStorage.removeItem('new_attrs');
 }
 
-function getItemInfo (item) {
-    item = item || {};
-    item.name = $('#input-name').val();
-    item.amount = $('#input-count').val();
-    item.price = $('#input-price').val();
-    item.unit = $('#input-unit').val();
+function getItemInfo () {
+    var item = readItemInfo();
+    $('.form-control').each(function (index, element) {
+        var type = $(element).data('type');
+        if(type == 'fixed') {
+            item[$(element).data('name')] = $(element).val();
+        }
+        else if(type == 'attr') {
+            var name = $(element).val();
+            var val = $('#attr-val').val();
+            item.attrs = item.attrs || {};
+            item.attrs[name] = {
+                time: (new Date()).valueOf(),
+                name: name,
+                val: val
+            };
+        }
+    });
     return item;
 }
-
-function getAttrInfo () {
-    var attr = readAttrInfo() || {};
-    var name = $('#attr-name').val();
-    attr[name] = {time: (new Date()).valueOf(), name: name, val: $('#attr-val').val()};
-    return attr;
-}
-
-function getItemAttributes (item) {
-    item = item || {};
-    item.attrs = readAttrInfo() || {};
-    return item;
-}
-
-function removeAttribute (key) {
-    var attrs = readAttrInfo();
-    delete attrs[key];
-    saveAttrInfo(attrs);
-}
-

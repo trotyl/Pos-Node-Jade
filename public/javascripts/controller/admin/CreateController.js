@@ -1,15 +1,8 @@
 function CreateController () {
-    var item = readItemInfo();
-    if (item) {
-        $('#input-name').val(item.name);
-        $('#input-count').val(item.amount);
-        $('#input-price').val(item.price);
-        $('#input-unit').val(item.unit);
-    }
+    loadItemInfo();
     checkCreateForm();
     CreateListener();
 }
-
 
 function checkCreateForm () {
     var complete = true;
@@ -39,7 +32,6 @@ function CreateListener () {
 
     $('#item-save').on('click', function () {
         var item = getItemInfo();
-        getItemAttributes(item);
         removeItemInfo();
         $.post('/api/item/create', item);
         location.assign('/admin')

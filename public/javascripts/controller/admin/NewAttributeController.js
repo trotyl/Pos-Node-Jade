@@ -24,7 +24,7 @@ function NewAttributeListener () {
     });
 
     $('#attr-save').on('click', function () {
-        saveAttrInfo();
+        saveItemInfo();
         alert('保存成功！');
         location.assign('/admin/create');
     })
