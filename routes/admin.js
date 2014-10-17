@@ -26,8 +26,12 @@ router.get('/attribute', function (req, res) {
     res.render('admin/attribute', { title: '添加属性', view: 'add'});
 });
 
-router.get('/remove/', function (req, res) {
-    res.render('admin/remove', { title: '添加属性', view: 'remove'});
+router.get('/remove/:name', function (req, res) {
+    var name = req.param('name');
+    var from = req.param('from');
+    Storage.getItem(name, function (err, result) {
+        res.render('admin/remove', { title: '添加属性', view: 'remove', item: result, from: from});
+    });
 });
 
 module.exports = router;

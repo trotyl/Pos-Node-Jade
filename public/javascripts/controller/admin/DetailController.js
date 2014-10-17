@@ -22,7 +22,7 @@ function DetailListener() {
         checkDetailForm();
     });
 
-    $('#item-save').on('click', function () {
+    $('#attribute-save').on('click', function () {
         var item = getItemInfo();
         $.post('/api/item/update', {
             name: item.name,
@@ -32,4 +32,8 @@ function DetailListener() {
             attrs: JSON.stringify(item.attrs)
         });
     });
+
+    $('#attribute-remove').on('click', function () {
+        location.assign('/admin/remove?from=detail');
+    })
 }

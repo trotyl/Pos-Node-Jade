@@ -5,8 +5,12 @@ block content
             ol.breadcrumb
                 li
                     a(href="/admin") 商品信息管理
-                li
-                    a(href="/admin/create") 添加商品
+                if from == 'add'
+                    li
+                        a(href="/admin/create") 添加商品
+                else
+                    li
+                        a(href="/admin/detail") 商品详情
                 li.active 删除属性
 
             table#attrs-list.table
@@ -15,10 +19,10 @@ block content
                     th 属性值
                     th 操作
 
-                //each attr, index in item.attrs
-                //    tr.list-item
-                //        td.attr-name= index
-                //        td.attr-val= attr
-                //        td.attr-operation
-                //            a.attr-delete  删除
+                each attr in item.attrs
+                    tr.list-item
+                        td.attr-name= attr.name
+                        td.attr-val= attr.val
+                        td.attr-operation
+                            a.attr-delete  删除
 

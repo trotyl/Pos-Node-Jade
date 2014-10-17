@@ -33,6 +33,10 @@ function removeItemInfo () {
     localStorage.removeItem('new_item');
 }
 
+function removeAttribute (name) {
+
+}
+
 function getItemInfo () {
     var item = readItemInfo();
     item.attrs = item.attrs || {};

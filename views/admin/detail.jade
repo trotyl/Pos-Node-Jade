@@ -3,8 +3,8 @@ extends layout
 block content
     .panel.panel-default
         .panel-body
-            .btn-list
-                button#item-save.btn.btn-default.disabled 保存属性
+            #name.btn-list(data-name=item.name)
+                button#attribute-save.btn.btn-default.disabled 保存属性
                 button#attribute-add.btn.btn-default 添加属性
                 button#attribute-remove.btn.btn-default 删除属性
                 a.btn.btn-default(href="/admin") 取消

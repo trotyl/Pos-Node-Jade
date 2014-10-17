@@ -50,6 +50,6 @@ function CreateListener () {
 
     $('#attribute-remove').on('click', function () {
         saveItemInfo();
-        location.assign('remove');
+        location.assign('/admin/remove?from=create');
     });
 }
