@@ -26,9 +26,10 @@ block content
                         label.col-sm-2.control-label(for="input-unit") 单位
                         .col-sm-2
                             input#input-unit.form-control(type="text", value=item.unit, data-type="fixed", data-name="unit")
-                    each attr in item.attrs
-                        .form-group
-                            label.col-sm-2.control-label= attr.name
-                            .col-sm-2
-                                input.form-control(type="text", value=attr.val, data-type="attr-edit", data-name=attr.name)
+                    if item.attrs
+                        each attr in item.attrs
+                            .form-group
+                                label.col-sm-2.control-label= attr.name
+                                .col-sm-2
+                                    input.form-control(type="text", value=attr.val, data-type="attr-edit", data-name=attr.name)
 

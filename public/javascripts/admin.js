@@ -27,6 +27,9 @@ function loadItemInfo () {
             $(element).val(item[$(element).data('name')]);
         }
     });
+    _(item.attrs).each(function (attr) {
+        $('form').append(CreateFormHelper(attr));
+    })
 }
 
 function removeItemInfo () {

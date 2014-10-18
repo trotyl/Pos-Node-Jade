@@ -22,7 +22,7 @@ block content
                     th 属性值
                     th 操作
 
-                if item
+                if item && item.attrs
                     each attr in item.attrs
                         tr.list-item
                             td.attr-name= attr.name

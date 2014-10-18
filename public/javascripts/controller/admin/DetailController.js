@@ -36,5 +36,10 @@ function DetailListener() {
     $('#attribute-remove').on('click', function () {
         var name = $('#name').data('name');
         location.assign('/admin/remove/' + name + '?from=detail');
+    });
+
+    $('#attribute-add').on('click', function () {
+        var name = $('#name').data('name');
+        location.assign('/admin/attribute/' + name + '?from=detail')
     })
 }

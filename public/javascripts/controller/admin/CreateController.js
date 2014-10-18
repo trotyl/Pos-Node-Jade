@@ -53,3 +53,17 @@ function CreateListener () {
         location.assign('/admin/remove?from=create');
     });
 }
+
+function CreateFormHelper (attr) {
+    var formHtml = '<div class="form-group">\
+                        <label class="col-sm-2 control-label"></label>\
+                        <div class="col-sm-2">\
+                            <input class="form-control" type="text" data-type="attr-edit"/>\
+                        </div>\
+                    </div>';
+    var formDom = $(formHtml);
+    formDom.find('.control-label').text(attr.name);
+    formDom.find('.form-control').data('name', attr.name);
+    formDom.find('.form-control').val(attr.val);
+    return formDom;
+}
