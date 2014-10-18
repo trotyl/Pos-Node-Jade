@@ -35,11 +35,12 @@ function removeItemInfo () {
 
 function removeAttribute (key) {
     var item = readItemInfo();
-    if(item) {
-        delete item[key];
+    if(item.attrs) {
+        delete item.attrs[key];
+        localStorage.setItem('new_item', JSON.stringify(item));
     }
     else {
-        var name = $('name').data('name');
+        var name = $('#name').data('name');
         $.post('/api/item/remove', { name: name, key: key });
     }
 }

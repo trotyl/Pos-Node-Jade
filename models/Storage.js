@@ -85,7 +85,16 @@ Storage.renderItems = function (list, callback) {
 };
 
 Storage.removeAttribute = function (name, attr, callback) {
-    
-}
+    Item.findOne({ name: name }).execQ().then(function (result) {
+        delete result.attrs[attr];
+        console.log(result);
+        Item.update({ name: name }, { $set: { attrs: result.attrs } }, function (res) {
+            callback(null, res);
+        });
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
 
 module.exports = Storage;
