@@ -45,7 +45,7 @@ function CreateListener () {
 
     $('#attribute-add').on('click', function () {
         saveItemInfo();
-        location.assign('attribute');
+        location.assign('/admin/attribute?from=create');
     });
 
     $('#attribute-remove').on('click', function () {

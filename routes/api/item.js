@@ -69,4 +69,13 @@ router.all('/amount', function (req, res) {
     });
 });
 
+router.all('/attribute', function (req, res) {
+    var name = req.param('name');
+    var attr_name = req.param('attr_name');
+    var attr_val = req.param('attr_val');
+    Storage.addAttribute(name, attr_name, attr_val, function (err, result) {
+        res.send('');
+    })
+});
+
 module.exports = router;

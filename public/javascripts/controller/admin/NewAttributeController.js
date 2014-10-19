@@ -24,8 +24,21 @@ function NewAttributeListener () {
     });
 
     $('#attr-save').on('click', function () {
-        saveItemInfo();
-        alert('保存成功！');
-        location.assign('/admin/create');
+        var from = $('#from').data('from');
+        if(from == 'add') {
+            saveItemInfo();
+            alert('保存成功！');
+            location.assign('/admin/create');
+        }
+        else {
+            var name = $('#name').data('name');
+            var attr_name = $('#attr-name').val();
+            var attr_val = $('#attr-val').val();
+            $.post('/api/item/attribute', { name: name, attr_name: attr_name, attr_val: attr_val }, function (err, result) {
+                alert('保存成功！');
+                location.assign('/admin/detail/' + name);
+            });
+        }
+
     })
 }

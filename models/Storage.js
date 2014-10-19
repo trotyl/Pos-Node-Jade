@@ -84,10 +84,27 @@ Storage.renderItems = function (list, callback) {
     }).done();
 };
 
+Storage.addAttribute = function (name, attr_name, attr_val, callback) {
+    Item.findOne({ name: name }).execQ().then(function (result) {
+        console.log(result);
+        result.attrs = result.attrs || {};
+        result.attrs[attr_name] = {
+            name: attr_name,
+            val: attr_val,
+            time: (new Date).valueOf()
+        };
+        Item.update({ name: name }, { $set: { attrs: result.attrs } }, function (res) {
+            callback(null, res);
+        });
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
+
 Storage.removeAttribute = function (name, attr, callback) {
     Item.findOne({ name: name }).execQ().then(function (result) {
         delete result.attrs[attr];
-        console.log(result);
         Item.update({ name: name }, { $set: { attrs: result.attrs } }, function (res) {
             callback(null, res);
         });
