@@ -23,7 +23,8 @@ router.get('/create', function (req, res) {
 });
 
 router.get('/attribute', function (req, res) {
-    res.render('admin/attribute', { title: '添加属性', view: 'add'});
+    var from = req.param('from');
+    res.render('admin/attribute', { title: '添加属性', view: 'add', from: from});
 });
 
 router.get('/attribute/:name', function (req, res) {

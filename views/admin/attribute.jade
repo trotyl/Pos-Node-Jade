@@ -8,8 +8,13 @@ block content
             ol.breadcrumb
                 li
                     a(href="/admin") 商品信息管理
-                li
-                    a(href="/admin/create") 添加商品
+                if from == 'create'
+                    li
+                        a(href="/admin/create") 添加商品
+                else
+                    li
+                        - var link = "/admin/detail/" + name
+                        a(href=link) 商品详情
                 li.active 添加属性
             .container
                 form.form.form-horizontal(role="form")

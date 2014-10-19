@@ -25,7 +25,8 @@ function NewAttributeListener () {
 
     $('#attr-save').on('click', function () {
         var from = $('#from').data('from');
-        if(from == 'add') {
+        console.log(from);
+        if(from == 'create') {
             saveItemInfo();
             alert('保存成功！');
             location.assign('/admin/create');
