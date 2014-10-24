@@ -18,7 +18,8 @@ posManager.config(['$routeProvider',
 
 posManager.factory('Item', ['$resource',
     function($resource){
-        return $resource('/api/item/:itemId', { itemId: '@id'}, {
-            query: { method: 'GET', params: { itemId: 'ITEM0000' }, isArray: true }
+        return $resource('/api/item/:operation/:itemId', { itemId: '@id'}, {
+            query: { method: 'GET', params: { operation: 'page' }, isArray: true },
+            count: { method: 'GET', params: { operation: 'count' }}
         });
     }]);

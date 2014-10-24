@@ -6,9 +6,29 @@ router.all('/:id', function (req, res) {
     var id = req.param('id');
     if(id === 'ITEM0000'){
         var pageId = req.param('page');
-        Storage.page(pageId, function (err, result) {
-            res.json(result);
-        })
+//        Storage.page(pageId, function (err, result) {
+//            res.json(result);
+//        })
+        var items = [{
+            id: 'ITEM0001',
+            name: '可乐',
+            unit: '瓶',
+            price: 3,
+            type: '饮料',
+            amount: 100,
+            attrs: [],
+            birth: new Date
+        },{
+            id: 'ITEM0002',
+            name: '雪碧',
+            unit: '瓶',
+            price: 3,
+            type: '饮料',
+            amount: 100,
+            attrs: [],
+            birth: new Date
+        }];
+        res.json(items);
     }
 });
 

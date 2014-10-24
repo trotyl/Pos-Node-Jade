@@ -52,8 +52,10 @@ describe('PosManager HomeController', function() {
     beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
       $httpBackend = _$httpBackend_;
       $routeParams.page = 1;
-      $httpBackend.expectGET('/api/item/ITEM0000?page=1').respond(items);
+      $httpBackend.expectGET('/api/item/page?page=1').respond(items);
+        $httpBackend.expectGET('/api/item/count').respond(8);
       $httpBackend.expectGET('/backend/home/home.html').respond(null);
+
 
       scope = $rootScope.$new();
       ctrl = $controller('HomeController', {$scope: scope});
