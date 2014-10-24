@@ -86,15 +86,10 @@ Storage.renderItems = function (list, callback) {
 
 Storage.addAttribute = function (name, attr_name, attr_val, callback) {
     Item.findOne({ name: name }).execQ().then(function (result) {
-        console.log(result);
-        result.attrs = result.attrs || {};
-        result.attrs[attr_name] = {
+        result.attrs.push({
             name: attr_name,
             val: attr_val,
             time: (new Date).valueOf()
-        };
-        Item.update({ name: name }, { $set: { attrs: result.attrs } }, function (res) {
-            callback(null, res);
         });
     }).catch(function (err) {
         console.log(err);
@@ -103,11 +98,12 @@ Storage.addAttribute = function (name, attr_name, attr_val, callback) {
 };
 
 Storage.removeAttribute = function (name, attr, callback) {
-    Item.findOne({ name: name }).execQ().then(function (result) {
-        delete result.attrs[attr];
-        Item.update({ name: name }, { $set: { attrs: result.attrs } }, function (res) {
-            callback(null, res);
+    Item.findOne({ name: name }).execQ().then(function (result){
+        result.attrs = _(result.attrs).remove(function (attr) {
+            return attr.name == name;
         });
+        result.save();
+        callback(null);
     }).catch(function (err) {
         console.log(err);
         callback(err);

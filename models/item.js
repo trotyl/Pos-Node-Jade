@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var _ = require('lodash');
 
 var itemSchema = mongoose.Schema({
     barcode: String,
@@ -9,8 +8,15 @@ var itemSchema = mongoose.Schema({
     type: String,
     amount: Number,
     promotion: Boolean,
-    attrs: Object,
-    birth: Date
+    attrs: [{
+        time: Date,
+        name: String,
+        val: String
+    }],
+    birth: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 var Item = mongoose.model('item', itemSchema);

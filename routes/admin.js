@@ -34,7 +34,7 @@ router.get('/attribute/:name', function (req, res) {
 });
 
 router.get('/remove', function (req, res) {
-    res.render('admin/remove', { title: '添加属性', view: 'remove', from: 'add'});
+    res.render('admin/remove', { title: '添加属性', view: 'remove', from: 'create'});
 });
 
 router.get('/remove/:name', function (req, res) {
