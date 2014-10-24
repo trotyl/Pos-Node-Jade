@@ -1,0 +1,36 @@
+.panel.panel-default
+    .panel-heading
+        p 商品信息管理
+        a.btn.btn-primary(ng-click='goToCreate()') 添加商品
+    table#item-manage-list.table
+        tr
+            th 序号
+            th 商品名称
+            th 商品数量
+            th 单价(元)
+            th 单位
+            th 发布时间
+            th 操作
+
+        tr.list-item(ng-repeat='item in items')
+            td.item-index {{$index}}
+            td.item-name {{item.name}}
+            td.item-amount {{item.amount}}
+                .btn-group
+                    button.btn.btn-default(ng-click='alterAmount(item.id, -1)') -
+                    input.btn.btn-default.number(type='text', ng-value='item.amount')
+                    button.btn.btn-default(ng-click='alterAmount(item.id, 1)') +
+            td.item-price {{item.price}}
+            td.item-unit {{item.unit}}
+            td.item-birth {{item.birth}}
+            td.item-operation
+                a.item-detail(ng-click='goToDetail(item.id)') 详情
+                a.item-delete(ng-click='deleteIt(item.id)') 删除
+    .text-center
+        ul.pagination
+            li(ng-disable='currentPage.isFirst')
+                a(ng-click='goToPage(null, -1)') &laquo;
+            li(ng-repeat='attribute in item.attrs')
+                a(ng-click='goToPage($index)')
+            li(ng-disable='currentPage.isLast')
+                a(ng-click='goToPage(null, 1)') &raquo;
