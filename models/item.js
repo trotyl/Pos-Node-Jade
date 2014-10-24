@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var itemSchema = mongoose.Schema({
-    barcode: String,
+    id: String,
     name: String,
     unit: String,
     price: Number,

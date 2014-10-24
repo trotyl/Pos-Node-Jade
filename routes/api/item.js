@@ -2,6 +2,15 @@ var express = require('express');
 var router = express.Router();
 var Storage = require('../../models/storage');
 
+router.all('/:id', function (req, res) {
+    var id = req.param('id');
+    if(id === 'ITEM0000'){
+        Storage.allItems(1, function (err, result) {
+            res.json(result);
+        })
+    }
+});
+
 router.all('/', function (req, res) {
     Storage.allItems(1, function (err, result) {
         res.render('admin/list', { items: result || [] });
