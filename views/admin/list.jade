@@ -30,14 +30,14 @@ table#item-manage-list.table
 
         - var cprev = prev >= 1? '': 'disabled'
         li(class= cprev)
-            - var hprev = 'admin/page/' + prev
+            - var hprev = '/admin/page/' + prev
             a(href= hprev) &laquo;
         - var index = 1
         while index <= total
             li
-                - var link = 'admin/page/' + index
+                - var link = '/admin/page/' + index
                 a(href= link)= index++
         - var cnext = next <= total? '': 'disabled'
         li(class= cnext)
-            - var hnext = 'admin/page/' + next
+            - var hnext = '/admin/page/' + next
             a(href= hnext) &raquo;

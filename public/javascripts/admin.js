@@ -40,7 +40,7 @@ function removeAttribute (key) {
     var item = readItemInfo();
     if(item.attrs) {
         _(item.attrs).remove(function (attr) {
-            attr.name = key;
+            return attr.name == key;
         });
         localStorage.setItem('new_item', JSON.stringify(item));
     }

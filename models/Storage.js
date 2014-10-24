@@ -99,11 +99,13 @@ Storage.addAttribute = function (name, attr_name, attr_val, callback) {
     }).done();
 };
 
-Storage.removeAttribute = function (name, attr, callback) {
+Storage.removeAttribute = function (name, attr_name, callback) {
     Item.findOne({ name: name }).execQ().then(function (result){
-        result.attrs = _(result.attrs).remove(function (attr) {
-            return attr.name == name;
+        _(result.attrs).remove(function (attr) {
+            return attr.name == attr_name;
         });
+        console.log(result);
+        result.markModified('attrs');
         result.save();
         callback(null);
     }).catch(function (err) {
