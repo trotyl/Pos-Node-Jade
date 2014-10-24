@@ -91,6 +91,8 @@ Storage.addAttribute = function (name, attr_name, attr_val, callback) {
             val: attr_val,
             time: (new Date).valueOf()
         });
+        result.save();
+        callback(null, true);
     }).catch(function (err) {
         console.log(err);
         callback(err);
