@@ -24,6 +24,16 @@ Storage.page = function (page, callback) {
     }).done();
 };
 
+Storage.count = function (callback) {
+    Item.count().execQ().then(function (result) {
+        console.log(result);
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
+
 //Old interface
 
 Storage.allItems = function (page, callback) {

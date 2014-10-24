@@ -2,7 +2,8 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
     function($scope, $location, $route, $routeParams, Item) {
         var pageId = $routeParams.page;
         $scope.items = Item.query({ page: pageId });
-        $scope.pages = new Array(Item.count());
+        $scope.pages = Item.count();
+
         $scope.currentPage = {
             isFirst: pageId == 1,
             isLast: false

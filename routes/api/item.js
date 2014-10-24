@@ -2,34 +2,42 @@ var express = require('express');
 var router = express.Router();
 var Storage = require('../../models/storage');
 
-router.all('/:id', function (req, res) {
-    var id = req.param('id');
-    if(id === 'ITEM0000'){
-        var pageId = req.param('page');
-//        Storage.page(pageId, function (err, result) {
-//            res.json(result);
-//        })
-        var items = [{
-            id: 'ITEM0001',
-            name: '可乐',
-            unit: '瓶',
-            price: 3,
-            type: '饮料',
-            amount: 100,
-            attrs: [],
-            birth: new Date
-        },{
-            id: 'ITEM0002',
-            name: '雪碧',
-            unit: '瓶',
-            price: 3,
-            type: '饮料',
-            amount: 100,
-            attrs: [],
-            birth: new Date
-        }];
-        res.json(items);
-    }
+router.all('/page', function (req, res) {
+//    var pageId = req.param('page');
+//    Storage.page(pageId, function (err, result) {
+//        res.json(result);
+//    });
+    var items = [{
+        id: 'ITEM0001',
+        name: '可乐',
+        unit: '瓶',
+        price: 3,
+        type: '饮料',
+        amount: 100,
+        attrs: [],
+        birth: new Date
+    },{
+        id: 'ITEM0002',
+        name: '雪碧',
+        unit: '瓶',
+        price: 3,
+        type: '饮料',
+        amount: 100,
+        attrs: [],
+        birth: new Date
+    }];
+    res.json(items);
+});
+
+router.all('/count', function (req, res) {
+    Storage.count(function (err, result) {
+        var number = (result || 0) / 10 + 1;
+        var count = [];
+        for(var i = 0; i < number; i++){
+            count[i] = i;
+        }
+        res.json(count);
+    })
 });
 
 // Old Interface

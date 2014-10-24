@@ -14,7 +14,7 @@
       <th>操作</th>
     </tr>
     <tr ng-repeat="item in items" class="list-item">
-      <td class="item-index">{{$index}}</td>
+      <td class="item-index">{{$index + 1}}</td>
       <td class="item-name">{{item.name}}</td>
       <td class="item-amount">
         <div class="btn-group">
@@ -31,9 +31,9 @@
   </table>
   <div class="text-center">
     <ul class="pagination">
-      <li ng-disable="currentPage.isFirst"><a ng-click="loadPage(null, -1)">&laquo;</a></li>
-      <li ng-repeat="page in pages"><a ng-click="loadPage($index + 1)">NaN</a></li>
-      <li ng-disable="currentPage.isLast"><a ng-click="loadPage(null, 1)">&raquo;</a></li>
+      <li ng-disabled="currentPage.isFirst"><a ng-click="loadPage(null, -1)">&laquo;</a></li>
+      <li ng-repeat="page in pages"><a ng-click="loadPage($index + 1)">{{$index + 1}}</a></li>
+      <li ng-disabled="currentPage.isLast"><a ng-click="loadPage(null, 1)">&raquo;</a></li>
     </ul>
   </div>
 </div>
