@@ -24,9 +24,9 @@ function HomeListener () {
     });
 
     $('.item-count').on('change', function () {
-        var item_name = $(this).closest('tr').find('.item-name');
-        var count = parseInt($(this).val());
-        $.post('/api/alter_count', { name: item_name, count: count });
+        var item_name = $(this).closest('tr').find('.item-name').text();
+        var amount = parseInt($(this).find('input').val());
+        $.post('/api/item/amount', { name: item_name, amount: amount });
     });
 
     $('.item-delete').on('click', function () {
