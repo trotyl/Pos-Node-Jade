@@ -29,9 +29,8 @@
     .text-center
         ul.pagination
             li(ng-disable='currentPage.isFirst')
-                a(ng-click='goToPage(null, -1)') &laquo;
-            li(ng-repeat='attribute in item.attrs')
-                a(ng-click='goToPage($index)')
+                a(ng-click='loadPage(null, -1)') &laquo;
+            li(ng-repeat='page in pages')
+                a(ng-click='loadPage($index)')
             li(ng-disable='currentPage.isLast')
-                a(ng-click='goToPage(null, 1)') &raquo;
-table
+                a(ng-click='loadPage(null, 1)') &raquo;

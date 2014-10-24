@@ -1,7 +1,7 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
-describe('PhoneCat controllers', function() {
+describe('PosManager HomeController', function() {
 
   beforeEach(function(){
     this.addMatchers({
@@ -49,9 +49,11 @@ describe('PhoneCat controllers', function() {
         }
     ];
 
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('api/item/ITEM0000').respond(items);
+      $routeParams.page = 1;
+      $httpBackend.expectGET('/api/item/ITEM0000?page=1').respond(items);
+      $httpBackend.expectGET('/backend/home/home.html').respond(null);
 
       scope = $rootScope.$new();
       ctrl = $controller('HomeController', {$scope: scope});

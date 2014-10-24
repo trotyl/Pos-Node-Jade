@@ -6,6 +6,26 @@ function Storage () {
 
 }
 
+Storage.all = function (callback) {
+    Item.find().execQ().then(function (result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
+
+Storage.page = function (page, callback) {
+    Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
+
+//Old interface
+
 Storage.allItems = function (page, callback) {
     Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
         callback(null, result);

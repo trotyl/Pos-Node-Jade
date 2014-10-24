@@ -1,12 +1,33 @@
-posManager.controller('HomeController', ['$scope', '$location', '$routeParams', 'Item',
-    function($scope, $location, $routeParams, Item) {
-        $scope.items = Item.query();
-        var page = $routeParams.page;
+posManager.controller('HomeController', ['$scope', '$location', '$route', '$routeParams', 'Item',
+    function($scope, $location, $route, $routeParams, Item) {
+        var pageId = $routeParams.page;
+        $scope.items = Item.query({ page: pageId });
         $scope.currentPage = {
-            isFirst: page == 1,
+            isFirst: pageId == 1,
             isLast: false
         };
 
+        $scope.goToCreate = function () {
+            $location.path('/create');
+        };
+
+        $scope.goToDetail = function (itemId) {
+            $location.path(_.template('/detail/<%= itemId %>', { itemId: itemId }));
+        };
+
+        $scope.loadPage = function (absolute, relative) {
+            var newPageId = absolute || (pageId + relative);
+            $scope.items = Item.query({ page: newPageId });
+        };
+
+        $scope.deleteIt = function (itemId) {
+            Item.delete({ id: itemId });
+            $route.reload();
+        };
+
+        $scope.alterAmount = function (itemId, change) {
+
+        }
     }]);
 
 
