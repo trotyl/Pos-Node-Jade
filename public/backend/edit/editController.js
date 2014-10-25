@@ -3,7 +3,9 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         var isNew = ($location.path() == '/create');
 
         var initialize = function () {
-            $scope.item = isNew? new Item({ id: 'ITEM0000', attrs: [] }): Item.get({ itemId: $routeParams.itemId });
+            $scope.item = isNew? JSON.parse(localStorage.getItem('tmp')) ||
+                new Item({ id: 'ITEM0000', attrs: [] }):
+                Item.get({ itemId: $routeParams.itemId });
         };
         initialize();
 

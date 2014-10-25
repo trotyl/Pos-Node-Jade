@@ -20,7 +20,7 @@ posManager.config(['$routeProvider',
                 controller: 'EditController'
             }).
             when('/add_attribute/:itemId', {
-                templateUrl: '/backend/add_attribute/add_attribute.html',
+                templateUrl: '/backend/addAttribute/addAttribute.html',
                 controller: 'AddAttributeController'
             }).
             otherwise({
