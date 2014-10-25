@@ -38,13 +38,13 @@
         <tr ng-repeat="gift in gifts">
           <td>{{item.type}}</td>
           <td>{{item.name}}</td>
-          <td>{{item | freeDisplay}}</td>
+          <td>{{item | giftDisplay}}</td>
         </tr>
       </table>
     </div>
     <div class="side-space text-right">
-      <p>总计：{{total.toFixed(2)}} 元</p>
-      <p>节省：{{saving.toFixed(2)}} 元</p>
+      <p>总计：{{(total || 0).toFixed(2)}} 元</p>
+      <p>节省：{{(saving || 0).toFixed(2)}} 元</p>
       <button ng-click="pay()" class="btn btn-primary vertical-space">付款</button>
     </div>
   </div>

@@ -51,3 +51,16 @@ posApp.factory('Cart', function () {
     return cart;
 });
 
+posApp.filter('sumDisplay', function () {
+    return function (input) {
+        return input.toFixed(2);
+    };
+});
+
+posApp.filter('giftDisplay', function () {
+    return function (input) {
+        return input.toFixed(2);
+    };
+});
+
+

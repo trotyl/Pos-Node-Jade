@@ -30,7 +30,7 @@
         </tr>
       </table>
       <div class="side-space text-right">
-        <p>总计：{{total.toFixed(2)}} 元</p><a ng-click="goToPayment()" class="btn btn-primary vertical-space">付款</a>
+        <p>总计：{{(total || 0).toFixed(2)}} 元</p><a ng-click="goToPayment()" class="btn btn-primary vertical-space">付款</a>
       </div>
     </div>
   </div>

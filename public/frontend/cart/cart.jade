@@ -23,5 +23,5 @@
                             button.btn.btn-default(ng-click='alterAmount(item.id, null, 1)') +
                     td {{item | sumDisplay}}
             .side-space.text-right
-                p 总计：{{total.toFixed(2)}} 元
+                p 总计：{{(total || 0).toFixed(2)}} 元
                 a.btn.btn-primary.vertical-space(ng-click='goToPayment()') 付款
