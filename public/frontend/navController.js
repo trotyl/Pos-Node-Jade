@@ -29,6 +29,10 @@ posApp.controller('NavController', ['$scope', '$location', '$route', '$routePara
             $location.path('/payment');
         };
 
+        $scope.$on('$routeChangeSuccess', function () {
+            initialize();
+        });
+
     }]);
 
 

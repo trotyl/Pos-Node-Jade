@@ -2,7 +2,7 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('PhoneCat App', function() {
+describe('PosWeb App ', function() {
 
   it('should be able to open the angular page', function() {
     browser.get('/');
@@ -12,14 +12,14 @@ describe('PhoneCat App', function() {
   });
 
 
-  xdescribe('Phone list view', function() {
+  describe('in the frontend site ', function() {
 
     beforeEach(function() {
-      browser.get('#/phones');
+
     });
 
 
-    it('should filter the phone list as a user types into the search box', function() {
+    xit('should filter the phone list as a user types into the search box', function() {
 
       var phoneList = element.all(by.repeater('phone in phones'));
       var query = element(by.model('query'));

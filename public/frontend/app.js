@@ -30,14 +30,23 @@ posApp.config(['$routeProvider',
 
 posApp.factory('Cart', function () {
     var cart = {};
+    var getStorage = function () {
+        return JSON.parse(localStorage.getItem('cart')) || []
+    };
+    var setStorage = function (cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    };
+
     cart.save = function () {
-        localStorage.setItem('cart', JSON.stringify(this));
+        var cart = getStorage();
+        cart.push(this);
+        setStorage(cart);
     };
     cart.count = function () {
-        return (JSON.parse(localStorage.getItem('cart')) || []).length;
+        return getStorage().length;
     };
     cart.get = function () {
-        return JSON.parse(localStorage.getItem('cart')) || [];
+        return getStorage();
     };
     return cart;
 });
