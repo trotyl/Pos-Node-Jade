@@ -48,6 +48,13 @@ router.post('/:itemId', function (req, res) {
     })
 });
 
+router.delete('/:itemId', function (req, res) {
+    var itemId = req.param('itemId');
+    Storage.remove(itemId, function (err, result) {
+        res.send('');
+    })
+});
+
 // Old Interface
 
 router.all('/', function (req, res) {

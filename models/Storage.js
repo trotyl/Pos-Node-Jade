@@ -39,6 +39,10 @@ Storage.update = function (item, callback) {
     callback(null, true);
 };
 
+Storage.remove = function (itemId, callback) {
+    callback(null, true);
+};
+
 //Old interface
 
 Storage.allItems = function (page, callback) {
