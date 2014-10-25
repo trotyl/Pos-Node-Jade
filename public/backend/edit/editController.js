@@ -12,6 +12,7 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
 
         $scope.saveIt = function () {
             $scope.item.$save();
+            localStorage.removeItem('tmp');
             $scope.goBack();
         };
 
@@ -25,7 +26,7 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         };
 
         $scope.goBack = function () {
-            $location.path(isNew? '/create': _.template('/detail/<%= itemId %>', { itemId: $scope.item.id }));
+            $location.path('/');
         };
     }]);
 

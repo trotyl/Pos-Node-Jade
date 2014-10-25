@@ -26,7 +26,15 @@ Storage.page = function (page, callback) {
 
 Storage.count = function (callback) {
     Item.count().execQ().then(function (result) {
-        console.log(result);
+        callback(null, result);
+    }).catch(function (err) {
+        console.log(err);
+        callback(err);
+    }).done();
+};
+
+Storage.get = function (itemId, callback) {
+    Item.findOne({ id: itemId }).execQ().then(function (result) {
         callback(null, result);
     }).catch(function (err) {
         console.log(err);
@@ -35,118 +43,34 @@ Storage.count = function (callback) {
 };
 
 Storage.update = function (item, callback) {
-//    Item.update({id})
-    callback(null, true);
+    if(item.id === 'ITEM0000') {
+        Storage.count(function (err, count) {
+            count = (count + 1).toString();
+            while(count.length < 4) {
+                count = '0' + count;
+            }
+            item.id = 'ITEM' + count;
+            Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
+                callback(null, result);
+            }).catch(function (err) {
+                console.log(err);
+                callback(err);
+            }).done();
+        })
+    }
+    else {
+        Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
+            callback(null, result);
+        }).catch(function (err) {
+            console.log(err);
+            callback(err);
+        }).done();
+    }
 };
 
 Storage.remove = function (itemId, callback) {
-    callback(null, true);
-};
-
-//Old interface
-
-Storage.allItems = function (page, callback) {
-    Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
+    Item.remove({ id: itemId }).execQ().then(function(result) {
         callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.itemCount = function (callback) {
-    Item.find().execQ().then(function(result) {
-        callback(null, result.length);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.addItem = function (params, callback) {
-    var item = new Item({
-        name: params.name,
-        amount: params.amount,
-        price: params.price,
-        unit: params.unit,
-        attrs: params.attrs,
-        birth: new Date
-    });
-    item.save(function (err) {
-        if(err) {
-            console.log(err);
-            return callback(err);
-        }
-        callback(null);
-    });
-};
-
-
-Storage.updateItem = function (params, callback) {
-    Item.update({ name: params.name }, {
-        amount: params.amount,
-        price: params.price,
-        unit: params.unit,
-        attrs: params.attrs
-    }).execQ().then(function (result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.getItem = function (name, callback) {
-    Item.findOne({ name: name }).execQ().then(function (result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.removeItem = function (name, callback) {
-    Item.remove({ name: name }).execQ().then(function (result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.renderItems = function (list, callback) {
-    Item.find({ name: { $in: list }}).execQ().then(function (result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.addAttribute = function (name, attr_name, attr_val, callback) {
-    Item.findOne({ name: name }).execQ().then(function (result) {
-        result.attrs.push({
-            name: attr_name,
-            val: attr_val,
-            time: (new Date).valueOf()
-        });
-        result.save();
-        callback(null, true);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
-Storage.removeAttribute = function (name, attr_name, callback) {
-    Item.findOne({ name: name }).execQ().then(function (result){
-        _(result.attrs).remove(function (attr) {
-            return attr.name == attr_name;
-        });
-        console.log(result);
-        result.markModified('attrs');
-        result.save();
-        callback(null);
     }).catch(function (err) {
         console.log(err);
         callback(err);
