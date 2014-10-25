@@ -1,0 +1,28 @@
+
+<div class="container text-center">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>商品列表</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <tr>
+          <th>分类</th>
+          <th>名称</th>
+          <th>单价(元)</th>
+          <th>单位</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="item in items">
+          <td>{{item.type}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.unit}}</td>
+          <td>
+            <button class="btn btn-primary btm-sm">加入购物车</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
