@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Storage = require('../../models/storage');
 
-router.all('/page', function (req, res) {
+router.get('/page', function (req, res) {
 //    var pageId = req.param('page');
 //    Storage.page(pageId, function (err, result) {
 //        res.json(result);
@@ -13,7 +13,7 @@ router.all('/page', function (req, res) {
         unit: '瓶',
         price: 3,
         type: '饮料',
-        amount: 100,
+        amount: 99,
         attrs: [],
         birth: new Date
     },{
@@ -29,7 +29,7 @@ router.all('/page', function (req, res) {
     res.json(items);
 });
 
-router.all('/count', function (req, res) {
+router.get('/count', function (req, res) {
     Storage.count(function (err, result) {
         var number = (result || 0) / 10 + 1;
         var count = [];
@@ -37,6 +37,14 @@ router.all('/count', function (req, res) {
             count[i] = i;
         }
         res.json(count);
+    })
+});
+
+router.post('/:itemId', function (req, res) {
+    var itemId = req.param('itemId');
+    var item = req.body;
+    Storage.update(item, function (err, result) {
+        res.send('');
     })
 });
 

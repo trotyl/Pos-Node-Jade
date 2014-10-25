@@ -34,6 +34,11 @@ Storage.count = function (callback) {
     }).done();
 };
 
+Storage.update = function (item, callback) {
+//    Item.update({id})
+    callback(null, true);
+};
+
 //Old interface
 
 Storage.allItems = function (page, callback) {
