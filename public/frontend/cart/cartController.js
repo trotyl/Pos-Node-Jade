@@ -5,7 +5,10 @@ posApp.controller('CartController', ['$scope', '$location', '$route', '$routePar
         };
         initialize();
 
-
+        $scope.alterAmount = function (item, theAmount, change) {
+            Cart.alterAmount(item, theAmount, change);
+            initialize();
+        }
     }]);
 
 
