@@ -27,7 +27,7 @@ describe('PosManager ', function() {
 
             scope = $rootScope.$new();
             location = $location;
-            location.path('/add_attribute/ITEM0000');
+            location.path('/remove_attribute/ITEM0000');
             ctrl = $controller('RemoveAttributeController', {$scope: scope, $routeParams: { itemId: 'ITEM0000'}});
         }));
 
@@ -52,7 +52,7 @@ describe('PosManager ', function() {
 
     });
 
-    xdescribe('AddAttributeController of Editing', function(){
+    describe('AddAttributeController of Editing', function(){
         var scope, ctrl, $httpBackend, location;
 
 
@@ -60,16 +60,14 @@ describe('PosManager ', function() {
 
             $httpBackend = _$httpBackend_;
 
-            $httpBackend.whenGET('/api/item/ITEM0001').respond({
-                id: 'ITEM0001',
-                attrs: []
-            });
+            $httpBackend.whenGET('/api/item/ITEM0001').respond({ id: 'ITEM0001', attrs: [{ name: 'Trotyl', val: 'HeHe' }]});
             $httpBackend.whenGET('/backend/addAttribute/addAttribute.html').respond('');
+            $httpBackend.whenGET('/backend/home/home.html').respond('');
 
             scope = $rootScope.$new();
             location = $location;
-            location.path('/add_attribute/ITEM0001');
-            ctrl = $controller('AddAttributeController', {$scope: scope, $routeParams: { itemId: 'ITEM0001'}});
+            location.path('/remove_attribute/ITEM0001');
+            ctrl = $controller('RemoveAttributeController', {$scope: scope, $routeParams: { itemId: 'ITEM0001'}});
         }));
 
         it('should know is now in creating mode', function() {
@@ -87,14 +85,10 @@ describe('PosManager ', function() {
             expect(location.path()).toBe('/detail/ITEM0001');
         });
 
-        it('should be able to save attribute', function () {
+        it('should be able to remove attribute', function () {
             $httpBackend.flush();
             $httpBackend.expectPOST('/api/item/ITEM0001');
-            scope.attr = {
-                name: 'Trotyl',
-                val: 'HeHe'
-            };
-            scope.saveIt();
+            scope.removeAttr();
         });
 
     });
