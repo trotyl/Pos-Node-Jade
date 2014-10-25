@@ -1,0 +1,22 @@
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ol class="breadcrumb">
+      <li><a ng-click="goHome()">商品信息管理</a></li>
+      <li><a ng-click="goBack()">{{isNew? '添加商品': '商品详情'}}</a></li>
+      <li class="active">删除属性</li>
+    </ol>
+    <table class="table">
+      <tr>
+        <th>属性名称</th>
+        <th>属性值</th>
+        <th>操作</th>
+      </tr>
+      <tr ng-repeat="attr in item.attrs | orderBy: &quot;birth&quot;: reverse" class="list-item">
+        <td>{{attr.name}}</td>
+        <td>{{attr.val}}</td>
+        <td><a ng-click="removeAttr(attr.name)"> 删除</a></td>
+      </tr>
+    </table>
+  </div>
+</div>

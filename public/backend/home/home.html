@@ -13,13 +13,13 @@
       <th>发布时间</th>
       <th>操作</th>
     </tr>
-    <tr ng-repeat="item in items" class="list-item">
+    <tr ng-repeat="item in items | orderBy: &quot;birth&quot;: reverse" class="list-item">
       <td class="item-index">{{$index + 1}}</td>
       <td class="item-name">{{item.name}}</td>
       <td class="item-amount">
         <div class="btn-group">
           <button ng-click="alterAmount(item.id, null, -1)" class="btn btn-default">-</button>
-          <input type="text" ng-model="item.amount" ng-change="alterAmount(item.id, item.amount)" class="btn btn-default number"/>
+          <input type="text" ng-model="item.amount" ng-keyup="alterAmount(item.id, item.amount)" class="btn btn-default number"/>
           <button ng-click="alterAmount(item.id, null, 1)" class="btn btn-default">+</button>
         </div>
       </td>

@@ -12,7 +12,7 @@
             th 发布时间
             th 操作
 
-        tr.list-item(ng-repeat='item in items')
+        tr.list-item(ng-repeat='item in items | orderBy: "birth": reverse')
             td.item-index {{$index + 1}}
             td.item-name {{item.name}}
             td.item-amount

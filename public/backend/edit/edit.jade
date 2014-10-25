@@ -23,7 +23,7 @@
                     label.col-sm-2.control-label 单位
                     .col-sm-2
                         input.form-control(type='text', placeholder='请输入单位', ng-model='item.unit')
-                .form-group(ng-repeat='attr in item.attrs | orderBy: "birth"')
+                .form-group(ng-repeat='attr in item.attrs | orderBy: "birth": reverse')
                     label.col-sm-2.control-label {{attr.name}}
                     .col-sm-2
                         input.form-control(type='text', placeholder='请输入单位', ng-model='attr.val')

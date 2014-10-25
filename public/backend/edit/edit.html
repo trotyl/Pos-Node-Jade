@@ -33,7 +33,7 @@
             <input type="text" placeholder="请输入单位" ng-model="item.unit" class="form-control"/>
           </div>
         </div>
-        <div ng-repeat="attr in item.attrs | orderBy: &quot;birth&quot;" class="form-group">
+        <div ng-repeat="attr in item.attrs | orderBy: &quot;birth&quot;: reverse" class="form-group">
           <label class="col-sm-2 control-label">{{attr.name}}</label>
           <div class="col-sm-2">
             <input type="text" placeholder="请输入单位" ng-model="attr.val" class="form-control"/>

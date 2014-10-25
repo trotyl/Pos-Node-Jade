@@ -1,0 +1,20 @@
+.panel.panel-default
+    .panel-body
+        ol.breadcrumb
+            li
+                a(ng-click='goHome()') 商品信息管理
+            li
+                a(ng-click='goBack()') {{isNew? '添加商品': '商品详情'}}
+            li.active 删除属性
+
+        table.table
+            tr
+                th 属性名称
+                th 属性值
+                th 操作
+            tr.list-item(ng-repeat='attr in item.attrs | orderBy: "birth": reverse')
+                td {{attr.name}}
+                td {{attr.val}}
+                td
+                    a(ng-click='removeAttr(attr.name)')  删除
+
