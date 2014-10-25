@@ -4,18 +4,18 @@
 
 describe('PhoneCat App', function() {
 
-  it('should redirect index.html to index.html#/phones', function() {
-    browser.get('app/index.html');
+  it('should be able to open the angular page', function() {
+    browser.get('/');
     browser.getLocationAbsUrl().then(function(url) {
-        expect(url.split('#')[1]).toBe('/phones');
+        expect(url.split('#')[1]).toBe('/');
       });
   });
 
 
-  describe('Phone list view', function() {
+  xdescribe('Phone list view', function() {
 
     beforeEach(function() {
-      browser.get('app/index.html#/phones');
+      browser.get('#/phones');
     });
 
 
@@ -73,7 +73,7 @@ describe('PhoneCat App', function() {
   });
 
 
-  describe('Phone detail view', function() {
+  xdescribe('Phone detail view', function() {
 
     beforeEach(function() {
       browser.get('app/index.html#/phones/nexus-s');

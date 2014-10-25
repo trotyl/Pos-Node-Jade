@@ -11,7 +11,7 @@ exports.config = {
 
   chromeOnly: true,
 
-  baseUrl: 'http://localhost:3003/',
+  baseUrl: 'http://localhost:2333/',
 
   framework: 'jasmine',
 
