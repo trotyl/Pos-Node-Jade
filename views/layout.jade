@@ -7,8 +7,8 @@ html
         link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
-    body
-        nav.navbar.navbar-inverse(role="navigation", ng-controller='NavController')
+    body(ng-controller='NavController')
+        nav.navbar.navbar-inverse(role="navigation")
             .container.container-fluid
                 .navbar-header
                     a.navbar-brand(href="..") Let's Go

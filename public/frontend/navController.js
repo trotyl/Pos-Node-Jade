@@ -1,5 +1,5 @@
-posManager.controller('NavController', ['$scope', '$location', '$route', '$routeParams', 'Item',
-    function($scope, $location, $route, $routeParams, Item) {
+posManager.controller('NavController', ['$scope', '$location', '$route', '$routeParams', 'Cart',
+    function($scope, $location, $route, $routeParams, Cart) {
 
         var initialize = function () {
             var path = $location.path();
@@ -9,6 +9,7 @@ posManager.controller('NavController', ['$scope', '$location', '$route', '$route
                 cart: path === '/cart',
                 payment: path === '/payment'
             };
+            $scope.counter = Cart.counter();
         };
         initialize();
 
@@ -23,7 +24,7 @@ posManager.controller('NavController', ['$scope', '$location', '$route', '$route
         $scope.goToCart = function () {
             $location.path('/cart');
         };
-        
+
     }]);
 
 
