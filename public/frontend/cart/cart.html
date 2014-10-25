@@ -1,0 +1,37 @@
+
+<div class="container text-center">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="side-space text-left">购物清单</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <tr>
+          <th>分类</th>
+          <th>名称</th>
+          <th>单价(元)</th>
+          <th>单位</th>
+          <th>数量</th>
+          <th>小计</th>
+        </tr>
+        <tr ng-repeat="item in items">
+          <td>{{item.type}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.unit}}</td>
+          <td>
+            <div class="btn-group">
+              <button ng-click="alterAmount(item.id, null, -1)" class="btn btn-default">-</button>
+              <button class="btn btn-default">{{item.count}}</button>
+              <button ng-click="alterAmount(item.id, null, 1)" class="btn btn-default">+</button>
+            </div>
+          </td>
+          <td>{{item | sumDisplay}}</td>
+        </tr>
+      </table>
+      <div class="side-space text-right">
+        <p>总计：{{total.toFixed(2)}} 元</p><a ng-click="goToPayment()" class="btn btn-primary vertical-space">付款</a>
+      </div>
+    </div>
+  </div>
+</div>

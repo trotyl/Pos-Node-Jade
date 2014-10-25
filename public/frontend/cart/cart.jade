@@ -1,0 +1,27 @@
+.container.text-center
+    .panel.panel-default
+        .panel-heading
+            h4.side-space.text-left 购物清单
+        .panel-body
+            table.table.table-bordered
+                tr
+                    th 分类
+                    th 名称
+                    th 单价(元)
+                    th 单位
+                    th 数量
+                    th 小计
+                tr(ng-repeat='item in items')
+                    td {{item.type}}
+                    td {{item.name}}
+                    td {{item.price}}
+                    td {{item.unit}}
+                    td
+                        .btn-group
+                            button.btn.btn-default(ng-click='alterAmount(item.id, null, -1)') -
+                            button.btn.btn-default {{item.count}}
+                            button.btn.btn-default(ng-click='alterAmount(item.id, null, 1)') +
+                    td {{item | sumDisplay}}
+            .side-space.text-right
+                p 总计：{{total.toFixed(2)}} 元
+                a.btn.btn-primary.vertical-space(ng-click='goToPayment()') 付款
