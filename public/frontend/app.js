@@ -42,5 +42,3 @@ posApp.factory('Cart', function () {
     return cart;
 });
 
-
-

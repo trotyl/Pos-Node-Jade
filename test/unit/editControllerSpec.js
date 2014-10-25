@@ -53,7 +53,7 @@ describe('PosManager ', function() {
 
         it('should be able to go back', function () {
             scope.goBack();
-            expect(location.path()).toBe('/create');
+            expect(location.path()).toBe('/');
         });
 
     });
@@ -123,7 +123,7 @@ describe('PosManager ', function() {
         it('should be able to go back', function () {
             $httpBackend.flush();
             scope.goBack();
-            expect(location.path()).toBe('/detail/ITEM0001');
+            expect(location.path()).toBe('/');
         });
 
     });
