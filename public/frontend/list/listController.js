@@ -6,7 +6,6 @@ posApp.controller('ListController', ['$scope', '$location', '$route', '$routePar
             });
         };
         initialize();
-        console.log($scope.items);
     }]);
 
 

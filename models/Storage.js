@@ -7,7 +7,7 @@ function Storage () {
 }
 
 Storage.all = function (callback) {
-    Item.find().execQ().then(function (result) {
+    Item.find({ amount: { $gt: 0 }}).execQ().then(function (result) {
         callback(null, result);
     }).catch(function (err) {
         console.log(err);
