@@ -35,3 +35,4 @@ posManager.factory('Item', ['$resource',
             count: { method: 'GET', params: { operation: 'count' }, isArray: true }
         });
     }]);
+

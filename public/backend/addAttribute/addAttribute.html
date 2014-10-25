@@ -3,7 +3,7 @@
   <div class="panel-body">
     <ol class="breadcrumb">
       <li><a ng-click="goHome()">商品信息管理</a></li>
-      <li><a ng-click="goBack()">{{ isNew? '添加商品': '商品详情' }}</a></li>
+      <li><a ng-click="goBack()">{{isNew? '添加商品': '商品详情'}}</a></li>
       <li class="active">添加属性</li>
     </ol>
     <div class="container">
@@ -24,7 +24,7 @@
     </div>
     <div class="btn-list">
       <button ng-disabled="" ng-click="saveIt()" class="btn btn-default">保存</button>
-      <button ng-click="cancel()" class="btn btn-default">取消</button>
+      <button ng-click="goBack()" class="btn btn-default">取消</button>
     </div>
   </div>
 </div>

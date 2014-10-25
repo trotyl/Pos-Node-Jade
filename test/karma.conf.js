@@ -10,8 +10,8 @@ module.exports = function(config){
       'public/bower_components/angular-resource/angular-resource.js',
       'public/bower_components/angular-animate/angular-animate.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
-      'public/backend/**/*.js',
       'public/backend/*.js',
+      'public/backend/**/*.js',
       'test/unit/**/*.js'
     ],
 

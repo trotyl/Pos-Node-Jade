@@ -14,6 +14,7 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         };
 
         $scope.addAttr = function () {
+            isNew && localStorage.setItem('tmp', JSON.stringify($scope.item));
             $location.path(_.template('/add_attribute/<%= itemId %>', { itemId: $scope.item.id }));
         };
 

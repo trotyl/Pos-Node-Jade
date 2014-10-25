@@ -4,7 +4,7 @@
             li
                 a(ng-click='goHome()') 商品信息管理
             li
-                a(ng-click='goBack()') {{ isNew? '添加商品': '商品详情' }}
+                a(ng-click='goBack()') {{isNew? '添加商品': '商品详情'}}
             li.active 添加属性
 
         .container
@@ -20,5 +20,5 @@
 
         .btn-list
             button.btn.btn-default(ng-disabled='', ng-click='saveIt()') 保存
-            button.btn.btn-default(ng-click='cancel()') 取消
+            button.btn.btn-default(ng-click='goBack()') 取消
 
