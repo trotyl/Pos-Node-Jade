@@ -13,44 +13,45 @@ describe('PosManager ', function() {
 
     beforeEach(module('posManager'));
 
-    xdescribe('EditController of Create', function(){
+    describe('AddAttributeController of Creating', function(){
         var scope, ctrl, $httpBackend, location;
 
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $location, $route, $routeParams, $controller) {
+
+            localStorage.tmp = JSON.stringify({ id: 'ITEM0000', attrs: []});
+
             $httpBackend = _$httpBackend_;
 
 //            $httpBackend.whenPOST('/api/item/ITEM0002').respond('');
 
             scope = $rootScope.$new();
             location = $location;
-            location.path('/create');
-            ctrl = $controller('AddAttributeController', {$scope: scope});
+            location.path('/add_attribute/ITEM0000');
+            ctrl = $controller('AddAttributeController', {$scope: scope, $routeParams: { itemId: 'ITEM0000'}});
         }));
 
-
         it('should know is now in creating mode', function() {
-            expect(scope.item.id).toBe('ITEM0000');
+            expect(scope.isNew).toBe(true);
         });
 
-        it('should be able to save item', function () {
-            $httpBackend.expectPOST('/api/item/ITEM0000');
-            scope.saveIt();
-        });
-
-        it('should be able to add attribute', function () {
-            scope.addAttr();
-            expect(location.path()).toBe('/add_attribute/ITEM0000');
-        });
-
-        it('should be able to remove attribute', function () {
-            scope.removeAttr();
-            expect(location.path()).toBe('/remove_attribute/ITEM0000');
+        it('should be able to go home', function () {
+            scope.goHome();
+            expect(location.path()).toBe('/');
         });
 
         it('should be able to go back', function () {
-            scope.cancel();
+            scope.goBack();
             expect(location.path()).toBe('/create');
+        });
+
+        it('should be able to save attribute', function () {
+            scope.attr = {
+                name: 'Trotyl',
+                val: 'HeHe'
+            };
+            scope.saveIt();
+            expect(JSON.parse(localStorage.tmp).attrs.length).toBe(1);
         });
 
     });

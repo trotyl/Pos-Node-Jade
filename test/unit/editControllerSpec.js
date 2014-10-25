@@ -18,6 +18,9 @@ describe('PosManager ', function() {
 
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $location, $route, $routeParams, $controller) {
+
+            localStorage.clear();
+
             $httpBackend = _$httpBackend_;
 
 //            $httpBackend.whenPOST('/api/item/ITEM0002').respond('');
@@ -49,7 +52,7 @@ describe('PosManager ', function() {
         });
 
         it('should be able to go back', function () {
-            scope.cancel();
+            scope.goBack();
             expect(location.path()).toBe('/create');
         });
 
@@ -80,6 +83,9 @@ describe('PosManager ', function() {
         }
 
         beforeEach(inject(function(_$httpBackend_, $rootScope, $location, $route, $routeParams, $controller) {
+
+            localStorage.clear();
+
             $httpBackend = _$httpBackend_;
 
             $httpBackend.whenGET('/backend/edit/edit.html').respond('');
@@ -116,7 +122,7 @@ describe('PosManager ', function() {
 
         it('should be able to go back', function () {
             $httpBackend.flush();
-            scope.cancel();
+            scope.goBack();
             expect(location.path()).toBe('/detail/ITEM0001');
         });
 

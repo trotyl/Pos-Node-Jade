@@ -1,7 +1,7 @@
 posManager.controller('AddAttributeController', ['$scope', '$location', '$route', '$routeParams', 'Item',
     function($scope, $location, $route, $routeParams, Item) {
         var itemId = $routeParams.itemId;
-        $scope.isNew = (itemId == 'ITEM0000');
+        $scope.isNew = (itemId === 'ITEM0000');
 
         var initialize = function () {
             $scope.attr = {};
@@ -21,7 +21,13 @@ posManager.controller('AddAttributeController', ['$scope', '$location', '$route'
         $scope.saveIt = function () {
             $scope.attr.birth = new Date();
             $scope.item.attrs.push($scope.attr);
-            $scope.item.$save();
+            if($scope.isNew) {
+                localStorage.setItem('tmp', JSON.stringify($scope.item));
+            }
+            else {
+                $scope.item.$save();
+            }
+            $scope.goBack();
         };
 
     }]);

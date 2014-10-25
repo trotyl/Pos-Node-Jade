@@ -3,14 +3,16 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         var isNew = ($location.path() == '/create');
 
         var initialize = function () {
-            $scope.item = isNew? JSON.parse(localStorage.getItem('tmp')) ||
-                new Item({ id: 'ITEM0000', attrs: [] }):
+            var tmp = JSON.parse(localStorage.getItem('tmp'));
+            $scope.item = isNew? (tmp? new Item(tmp) :
+                new Item({ id: 'ITEM0000', attrs: [] })):
                 Item.get({ itemId: $routeParams.itemId });
         };
         initialize();
 
         $scope.saveIt = function () {
             $scope.item.$save();
+            $scope.goBack();
         };
 
         $scope.addAttr = function () {
@@ -22,7 +24,7 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
             $location.path(_.template('/remove_attribute/<%= itemId %>', { itemId: $scope.item.id }));
         };
 
-        $scope.cancel = function () {
+        $scope.goBack = function () {
             $location.path(isNew? '/create': _.template('/detail/<%= itemId %>', { itemId: $scope.item.id }));
         };
     }]);
