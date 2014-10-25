@@ -1,0 +1,51 @@
+
+<div class="container text-center">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="side-space text-left">购物清单</h4>
+    </div>
+    <div class="panel-body">
+      <p class="text-left">{{time}}</p>
+      <table class="table table-bordered">
+        <tr>
+          <th>分类</th>
+          <th>名称</th>
+          <th>单价(元)</th>
+          <th>单位</th>
+          <th>数量</th>
+          <th>小计</th>
+        </tr>
+        <tr ng-repeat="item in items">
+          <td>{{item.type}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.unit}}</td>
+          <td>{{item.count}}</td>
+          <td>{{item | sumDisplay}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="panel-heading">
+      <h4 class="side-space text-left">赠送商品</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <tr>
+          <th>分类</th>
+          <th>名称</th>
+          <th>数量</th>
+        </tr>
+        <tr ng-repeat="gift in gifts">
+          <td>{{item.type}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item | freeDisplay}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="side-space text-right">
+      <p>总计：{{total.toFixed(2)}} 元</p>
+      <p>节省：{{saving.toFixed(2)}} 元</p>
+      <button ng-click="pay()" class="btn btn-primary vertical-space">付款</button>
+    </div>
+  </div>
+</div>
