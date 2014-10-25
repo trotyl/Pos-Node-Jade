@@ -21,7 +21,7 @@ html(ng-app='posApp')
                     ul.nav.navbar-nav.pull-right
                         li(ng-class='{ active: active.cart }')
                             a(ng-click='goToCart()')
-                                span.glyphicon.glyphicon-shopping-cart 购物车({{counter}})
+                                span.glyphicon.glyphicon-shopping-cart 购物车({{counter.count}})
 
         div(ng-view)
 
