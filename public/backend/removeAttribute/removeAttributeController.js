@@ -18,7 +18,7 @@ posManager.controller('RemoveAttributeController', ['$scope', '$location', '$rou
         };
 
         $scope.removeAttr = function (attrName) {
-            _(item.attrs).remove({ name: attrName });
+            _($scope.item.attrs).remove({ name: attrName });
             if($scope.isNew) {
                 localStorage.setItem('tmp', JSON.stringify($scope.item));
             }
