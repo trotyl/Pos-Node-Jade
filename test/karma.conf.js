@@ -4,6 +4,7 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
+      'public/bower_components/lodash/dist/lodash.js',
       'public/bower_components/angular/angular.js',
       'public/bower_components/angular-route/angular-route.js',
       'public/bower_components/angular-resource/angular-resource.js',

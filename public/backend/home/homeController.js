@@ -1,12 +1,15 @@
 posManager.controller('HomeController', ['$scope', '$location', '$route', '$routeParams', 'Item',
     function($scope, $location, $route, $routeParams, Item) {
         var pageId = $routeParams.page;
-        $scope.items = Item.query({ page: pageId });
-        $scope.pages = Item.count();
+        var initialize = function () {
+            $scope.items = Item.query({ page: pageId });
+            $scope.pages = Item.count();
+        };
+        initialize();
 
         $scope.currentPage = {
             isFirst: pageId == 1,
-            isLast: false
+            isLast: pageId == $scope.pages.length
         };
 
         $scope.goToCreate = function () {
@@ -23,8 +26,9 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
         };
 
         $scope.deleteIt = function (itemId) {
-            Item.delete({ id: itemId });
-            $route.reload();
+            var item = _($scope.items).find({ id: itemId });
+            _($scope.items).remove({ id: itemId });
+            item.$delete(initialize);
         };
 
         $scope.alterAmount = function (itemId, change) {
