@@ -12,21 +12,35 @@ posApp.config(['$routeProvider',
                 controller: 'HomeController'
             }).
             when('/list', {
-                templateUrl: '/backend/list/list.html',
+                templateUrl: '/frontend/list/list.html',
                 controller: 'ListController'
             }).
             when('/cart', {
-                templateUrl: '/backend/cart/cart.html',
+                templateUrl: '/frontend/cart/cart.html',
                 controller: 'CartController'
             }).
             when('/payment', {
-                templateUrl: '/backend/payment/payment.html',
+                templateUrl: '/frontend/payment/payment.html',
                 controller: 'PaymentController'
             }).
             otherwise({
                 redirectTo: '/'
             });
     }]);
+
+posApp.factory('Cart', function () {
+    var cart = {};
+    cart.save = function () {
+        localStorage.setItem('cart', JSON.stringify(this));
+    };
+    cart.count = function () {
+        return (JSON.parse(localStorage.getItem('cart')) || []).length;
+    };
+    cart.get = function () {
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    };
+    return cart;
+});
 
 
 

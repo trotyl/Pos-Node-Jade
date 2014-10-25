@@ -9,7 +9,7 @@ posApp.controller('NavController', ['$scope', '$location', '$route', '$routePara
                 cart: path === '/cart',
                 payment: path === '/payment'
             };
-            $scope.counter = Cart.counter();
+            $scope.counter = Cart.count();
         };
         initialize();
 
@@ -23,6 +23,10 @@ posApp.controller('NavController', ['$scope', '$location', '$route', '$routePara
 
         $scope.goToCart = function () {
             $location.path('/cart');
+        };
+
+        $scope.goToPayment = function () {
+            $location.path('/payment');
         };
 
     }]);
