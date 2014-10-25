@@ -193,8 +193,14 @@ describe('PosManager HomeController', function() {
             expect(scope.items.length).toBe(9);
         });
 
-        xit('should set the default value of orderProp model', function() {
-          expect(scope.orderProp).toBe('age');
+        it('should be able to alter amount', function () {
+            $httpBackend.flush();
+
+            var item = _(items).find({ id: 'ITEM0002' });
+            item.amount -= 1;
+
+            scope.alterAmount('ITEM0002', null, -1);
+            expect(scope.items[0].amount).toBe(99);
         });
     });
 

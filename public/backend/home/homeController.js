@@ -20,9 +20,9 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
             $location.path(_.template('/detail/<%= itemId %>', { itemId: itemId }));
         };
 
-        $scope.loadPage = function (absolute, relative) {
-            var newPageId = absolute || (pageId + relative);
-            $scope.items = Item.query({ page: newPageId });
+        $scope.loadPage = function (thePageId, change) {
+            var newPageId = thePageId || (pageId + change);
+            $location.path(_.template('/list/<%= pageId %>', { pageId: newPageId }));
         };
 
         $scope.deleteIt = function (itemId) {
@@ -31,9 +31,11 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
             item.$delete(initialize);
         };
 
-        $scope.alterAmount = function (itemId, change) {
-
-        }
+        $scope.alterAmount = function (itemId, theAmount, change) {
+            var item = _($scope.items).find({ id: itemId });
+            item.amount = theAmount || (item.amount + change);
+            item.$save();
+        };
     }]);
 
 

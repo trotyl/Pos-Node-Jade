@@ -17,9 +17,9 @@
             td.item-name {{item.name}}
             td.item-amount
                 .btn-group
-                    button.btn.btn-default(ng-click='alterAmount(item.id, -1)') -
-                    input.btn.btn-default.number(type='text', ng-value='item.amount')
-                    button.btn.btn-default(ng-click='alterAmount(item.id, 1)') +
+                    button.btn.btn-default(ng-click='alterAmount(item.id, null, -1)') -
+                    input.btn.btn-default.number(type='text', ng-value='item.amount', ng-change='alterAmount(item.id, item.amount)')
+                    button.btn.btn-default(ng-click='alterAmount(item.id, null, 1)') +
             td.item-price {{item.price}}
             td.item-unit {{item.unit}}
             td.item-birth {{item.birth}}
