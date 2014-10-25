@@ -13,7 +13,7 @@ posApp.config(['$routeProvider',
             }).
             when('/list', {
                 templateUrl: '/frontend/list/list.html',
-                controller: 'ListController'
+                controller: 'ListController',
             }).
             when('/cart', {
                 templateUrl: '/frontend/cart/cart.html',
@@ -28,7 +28,7 @@ posApp.config(['$routeProvider',
             });
     }]);
 
-posApp.factory('Cart', function () {
+posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     var cart = {};
     var getStorage = function () {
         return JSON.parse(localStorage.getItem('cart')) || []
@@ -48,8 +48,19 @@ posApp.factory('Cart', function () {
     cart.get = function () {
         return getStorage();
     };
+    cart.available = function () {
+        var delay = $q.defer();
+        $http.get('/api/item/all').
+            success(function (data) {
+                delay.resolve(data);
+            }).
+            error(function () {
+                delay.reject();
+            });
+        return delay.promise;
+    };
     return cart;
-});
+}]);
 
 posApp.filter('sumDisplay', function () {
     return function (input) {

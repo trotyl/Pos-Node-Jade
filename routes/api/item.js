@@ -20,6 +20,12 @@ router.get('/count', function (req, res) {
     })
 });
 
+router.get('/all', function (req, res) {
+    Storage.all(function (err, result) {
+        res.json(result);
+    });
+});
+
 router.get('/:itemId', function (req, res) {
     var itemId = req.param('itemId');
     Storage.get(itemId, function (err, result) {
