@@ -12,31 +12,31 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">商品名称</label>
           <div class="col-sm-2">
-            <input type="text" placeholder="请输入商品名称" ng-value="item.name" class="form-control"/>
+            <input type="text" placeholder="请输入商品名称" ng-model="item.name" class="form-control"/>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">商品数量</label>
           <div class="col-sm-2">
-            <input type="number" placeholder="请输入商品数量" ng-value="item.amount" class="form-control"/>
+            <input type="number" placeholder="请输入商品数量" ng-model="item.amount" class="form-control"/>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">单价（元）</label>
           <div class="col-sm-2">
-            <input type="number" placeholder="请输入单价" ng-value="item.price" class="form-control"/>
+            <input type="number" placeholder="请输入单价" ng-model="item.price" class="form-control"/>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">单位</label>
           <div class="col-sm-2">
-            <input type="text" placeholder="请输入单位" ng-value="item.unit" class="form-control"/>
+            <input type="text" placeholder="请输入单位" ng-model="item.unit" class="form-control"/>
           </div>
         </div>
         <div ng-repeat="attr in item.attrs | orderBy: &quot;birth&quot;" class="form-group">
           <label class="col-sm-2 control-label">{{attr.name}}</label>
           <div class="col-sm-2">
-            <input type="text" placeholder="请输入单位" ng-value="attr.val" class="form-control"/>
+            <input type="text" placeholder="请输入单位" ng-model="attr.val" class="form-control"/>
           </div>
         </div>
       </form>

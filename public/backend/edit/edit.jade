@@ -10,20 +10,20 @@
                 .form-group
                     label.col-sm-2.control-label 商品名称
                     .col-sm-2
-                        input.form-control(type='text', placeholder='请输入商品名称', ng-value='item.name')
+                        input.form-control(type='text', placeholder='请输入商品名称', ng-model='item.name')
                 .form-group
                     label.col-sm-2.control-label 商品数量
                     .col-sm-2
-                        input.form-control(type='number', placeholder='请输入商品数量', ng-value='item.amount')
+                        input.form-control(type='number', placeholder='请输入商品数量', ng-model='item.amount')
                 .form-group
                     label.col-sm-2.control-label 单价（元）
                     .col-sm-2
-                        input.form-control(type='number', placeholder='请输入单价', ng-value='item.price')
+                        input.form-control(type='number', placeholder='请输入单价', ng-model='item.price')
                 .form-group
                     label.col-sm-2.control-label 单位
                     .col-sm-2
-                        input.form-control(type='text', placeholder='请输入单位', ng-value='item.unit')
+                        input.form-control(type='text', placeholder='请输入单位', ng-model='item.unit')
                 .form-group(ng-repeat='attr in item.attrs | orderBy: "birth"')
                     label.col-sm-2.control-label {{attr.name}}
                     .col-sm-2
-                        input.form-control(type='text', placeholder='请输入单位', ng-value='attr.val')
+                        input.form-control(type='text', placeholder='请输入单位', ng-model='attr.val')
