@@ -1,6 +1,6 @@
 posManager.controller('HomeController', ['$scope', '$location', '$route', '$routeParams', 'Item',
     function($scope, $location, $route, $routeParams, Item) {
-        var pageId = $routeParams.page;
+        var pageId = +$routeParams.page;
 
         var initialize = function () {
             $scope.items = Item.query({ page: pageId });
@@ -21,7 +21,7 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
         };
 
         $scope.loadPage = function (thePageId, change) {
-            var newPageId = thePageId || (pageId + change);
+            var newPageId = thePageId || (pageId + +change);
             $location.path(_.template('/list/<%= pageId %>', { pageId: newPageId }));
         };
 
@@ -33,7 +33,7 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
 
         $scope.alterAmount = function (itemId, theAmount, change) {
             var item = _($scope.items).find({ id: itemId });
-            item.amount = theAmount || (item.amount + change);
+            item.amount = theAmount || (item.amount + +change);
             item.$save();
         };
     }]);
