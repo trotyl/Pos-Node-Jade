@@ -7,8 +7,8 @@ posApp.controller('ListController', ['$scope', '$location', '$route', '$routePar
         };
         initialize();
 
-        $scope.buy = function (itemId) {
-            Cart.alterAmount(itemId, null, 1);
+        $scope.buy = function (item) {
+            Cart.alterAmount(item, null, 1);
         };
     }]);
 

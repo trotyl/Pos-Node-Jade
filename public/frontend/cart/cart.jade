@@ -12,16 +12,16 @@
                     th 数量
                     th 小计
                 tr(ng-repeat='item in items')
-                    td {{item.type}}
+                    td {{item.attrs | getType}}
                     td {{item.name}}
                     td {{item.price}}
                     td {{item.unit}}
                     td
                         .btn-group
-                            button.btn.btn-default(ng-click='alterAmount(item.id, null, -1)') -
-                            button.btn.btn-default {{item.count}}
-                            button.btn.btn-default(ng-click='alterAmount(item.id, null, 1)') +
-                    td {{item | sumDisplay}}
+                            button.btn.btn-default(ng-click='alterAmount(item, null, -1)') -
+                            button.btn.btn-default {{item.amount}}
+                            button.btn.btn-default(ng-click='alterAmount(item, null, 1)') +
+                    td {{item.price * item.amount | sumDisplay}}
             .side-space.text-right
                 p 总计：{{(total || 0).toFixed(2)}} 元
                 a.btn.btn-primary.vertical-space(ng-click='goToPayment()') 付款

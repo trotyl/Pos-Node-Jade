@@ -15,18 +15,18 @@
           <th>小计</th>
         </tr>
         <tr ng-repeat="item in items">
-          <td>{{item.type}}</td>
+          <td>{{item.attrs | getType}}</td>
           <td>{{item.name}}</td>
           <td>{{item.price}}</td>
           <td>{{item.unit}}</td>
           <td>
             <div class="btn-group">
-              <button ng-click="alterAmount(item.id, null, -1)" class="btn btn-default">-</button>
-              <button class="btn btn-default">{{item.count}}</button>
-              <button ng-click="alterAmount(item.id, null, 1)" class="btn btn-default">+</button>
+              <button ng-click="alterAmount(item, null, -1)" class="btn btn-default">-</button>
+              <button class="btn btn-default">{{item.amount}}</button>
+              <button ng-click="alterAmount(item, null, 1)" class="btn btn-default">+</button>
             </div>
           </td>
-          <td>{{item | sumDisplay}}</td>
+          <td>{{item.price * item.amount | sumDisplay}}</td>
         </tr>
       </table>
       <div class="side-space text-right">

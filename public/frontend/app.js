@@ -13,7 +13,7 @@ posApp.config(['$routeProvider',
             }).
             when('/list', {
                 templateUrl: '/frontend/list/list.html',
-                controller: 'ListController',
+                controller: 'ListController'
             }).
             when('/cart', {
                 templateUrl: '/frontend/cart/cart.html',
@@ -52,18 +52,19 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
         return getStorage();
     };
 
-    cart.alterAmount = function (itemId, theAmount, change) {
+    cart.alterAmount = function (remoteItem, theAmount, change) {
         var cart = getStorage();
-        var item = _(cart).find({ id: itemId });
+        var item = _(cart).find({ id: remoteItem.id });
         if(item) {
             item.amount = theAmount || (item.amount + change);
         }
         else {
-            item = { id: itemId, amount: theAmount || change };
+            item = remoteItem;
+            item.amount = change;
             cart.push(item);
         }
         if(item.amount <= 0) {
-            _(cart).remove({ id: itemId });
+            _(cart).remove({ id: item.id });
         }
         setStorage(cart);
     };
@@ -79,7 +80,7 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
             });
         return delay.promise;
     };
-    
+
     return cart;
 }]);
 
