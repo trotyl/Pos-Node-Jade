@@ -1,0 +1,29 @@
+.panel.panel-default
+    .panel-body
+        .btn-list
+            button.btn.btn-default(ng-click='saveIt()') 保存商品
+            button.btn.btn-default(ng-click='addAttr()') 添加属性
+            button.btn.btn-default(ng-click='removeAttr()') 删除属性
+            button.btn.btn-default(ng-click='cancel()') 取消
+        .container
+            form.form.form-horizontal(role='form')
+                .form-group
+                    label.col-sm-2.control-label 商品名称
+                    .col-sm-2
+                        input.form-control(type='text', placeholder='请输入商品名称', ng-value='item.name')
+                .form-group
+                    label.col-sm-2.control-label 商品数量
+                    .col-sm-2
+                        input.form-control(type='number', placeholder='请输入商品数量', ng-value='item.amount')
+                .form-group
+                    label.col-sm-2.control-label 单价（元）
+                    .col-sm-2
+                        input.form-control(type='number', placeholder='请输入单价', ng-value='item.price')
+                .form-group
+                    label.col-sm-2.control-label 单位
+                    .col-sm-2
+                        input.form-control(type='text', placeholder='请输入单位', ng-value='item.unit')
+                .form-group(ng-repeat='attr in item.attrs | orderBy: "birth"')
+                    label.col-sm-2.control-label {{attr.name}}
+                    .col-sm-2
+                        input.form-control(type='text', placeholder='请输入单位', ng-value='attr.val')
