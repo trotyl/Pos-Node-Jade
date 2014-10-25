@@ -6,6 +6,10 @@ posApp.controller('ListController', ['$scope', '$location', '$route', '$routePar
             });
         };
         initialize();
+
+        $scope.buy = function (itemId) {
+            Cart.alterAmount(itemId, null, 1);
+        };
     }]);
 
 

@@ -30,6 +30,7 @@ posApp.config(['$routeProvider',
 
 posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     var cart = {};
+
     var getStorage = function () {
         return JSON.parse(localStorage.getItem('cart')) || []
     };
@@ -42,12 +43,31 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
         cart.push(this);
         setStorage(cart);
     };
+
     cart.count = function () {
         return getStorage().length;
     };
+
     cart.get = function () {
         return getStorage();
     };
+
+    cart.alterAmount = function (itemId, theAmount, change) {
+        var cart = getStorage();
+        var item = _(cart).find({ id: itemId });
+        if(item) {
+            item.amount = theAmount || (item.amount + change);
+        }
+        else {
+            item = { id: itemId, amount: theAmount || change };
+            cart.push(item);
+        }
+        if(item.amount <= 0) {
+            _(cart).remove({ id: itemId });
+        }
+        setStorage(cart);
+    };
+
     cart.available = function () {
         var delay = $q.defer();
         $http.get('/api/item/all').
@@ -59,6 +79,7 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
             });
         return delay.promise;
     };
+    
     return cart;
 }]);
 
