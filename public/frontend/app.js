@@ -74,4 +74,11 @@ posApp.filter('giftDisplay', function () {
     };
 });
 
+posApp.filter('getType', function () {
+    return function (input) {
+        return _(input).find({ name: '类型' }) || '无';
+    };
+});
+
+
 

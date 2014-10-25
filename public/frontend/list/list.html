@@ -14,7 +14,7 @@
           <th></th>
         </tr>
         <tr ng-repeat="item in items">
-          <td>{{item.type}}</td>
+          <td>{{item.attrs | getType}}</td>
           <td>{{item.name}}</td>
           <td>{{item.price}}</td>
           <td>{{item.unit}}</td>
