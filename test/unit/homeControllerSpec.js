@@ -167,17 +167,17 @@ describe('PosManager HomeController', function() {
 
         it('should be able to go to the creating page', function () {
             scope.goToCreate();
-            expect(location.path() === '/create');
+            expect(location.path()).toBe('/create');
         });
 
         it('should be able to go to the detail page', function () {
             scope.goToDetail('ITEM0001');
-            expect(location.path() === '/detail/ITEM0001');
+            expect(location.path()).toBe('/detail/ITEM0001');
         });
 
         it('should be able to load different page', function () {
             scope.loadPage(2);
-            expect(location.path() === '/list/2');
+            expect(location.path()).toBe('/list/2');
         });
 
         it('should be able to delete item', function () {

@@ -1,9 +1,9 @@
 posManager.controller('EditController', ['$scope', '$location', '$route', '$routeParams', 'Item',
     function($scope, $location, $route, $routeParams, Item) {
         var isNew = ($location.path() == '/create');
-        var itemId = isNew? 'ITEM0000': $routeParams.itemId;
+
         var initialize = function () {
-            $scope.item = _(Item.query()).find({ id: itemId }) || { attrs: [] };
+            $scope.item = isNew? new Item({ id: 'ITEM0000', attrs: [] }): Item.get({ id: $routeParams.itemId });
         };
         initialize();
 
@@ -12,15 +12,15 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         };
 
         $scope.addAttr = function () {
-            $location.path(_.template('/add_attribute/<%= itemId %>', { itemId: itemId }));
+            $location.path(_.template('/add_attribute/<%= itemId %>', { itemId: $scope.item.id }));
         };
 
         $scope.removeAttr = function () {
-            $location.path(_.template('/remove_attribute/<%= itemId %>', { itemId: itemId }));
+            $location.path(_.template('/remove_attribute/<%= itemId %>', { itemId: $scope.item.id }));
         };
 
         $scope.cancel = function () {
-            $location.path(isNew? '/create': _.template('/edit/<%= itemId %>', { itemId: itemId }));
+            $location.path(isNew? '/create': _.template('/edit/<%= itemId %>', { itemId: $scope.item.id }));
         };
     }]);
 

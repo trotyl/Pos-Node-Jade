@@ -1,6 +1,7 @@
 posManager.controller('HomeController', ['$scope', '$location', '$route', '$routeParams', 'Item',
     function($scope, $location, $route, $routeParams, Item) {
         var pageId = $routeParams.page;
+
         var initialize = function () {
             $scope.items = Item.query({ page: pageId });
             $scope.pages = Item.count();
