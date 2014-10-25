@@ -15,6 +15,10 @@ posManager.config(['$routeProvider',
                 templateUrl: '/backend/edit/edit.html',
                 controller: 'EditController'
             }).
+            when('/edit/:itemId', {
+                templateUrl: '/backend/edit/edit.html',
+                controller: 'EditController'
+            }).
             otherwise({
                 redirectTo: '/list/1'
             });
