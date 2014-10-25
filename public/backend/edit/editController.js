@@ -20,7 +20,7 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         };
 
         $scope.cancel = function () {
-            $location.path(isNew? '/create': _.template('/edit/<%= itemId %>', { itemId: $scope.item.id }));
+            $location.path(isNew? '/create': _.template('/detail/<%= itemId %>', { itemId: $scope.item.id }));
         };
     }]);
 

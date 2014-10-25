@@ -15,7 +15,7 @@ posManager.config(['$routeProvider',
                 templateUrl: '/backend/edit/edit.html',
                 controller: 'EditController'
             }).
-            when('/edit/:itemId', {
+            when('/detail/:itemId', {
                 templateUrl: '/backend/edit/edit.html',
                 controller: 'EditController'
             }).

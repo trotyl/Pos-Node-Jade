@@ -117,7 +117,7 @@ describe('PosManager ', function() {
         it('should be able to go back', function () {
             $httpBackend.flush();
             scope.cancel();
-            expect(location.path()).toBe('/edit/ITEM0001');
+            expect(location.path()).toBe('/detail/ITEM0001');
         });
 
     });
