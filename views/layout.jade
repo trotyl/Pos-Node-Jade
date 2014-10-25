@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='posApp')
     head
         if title
             title= title
@@ -11,26 +11,32 @@ html
         nav.navbar.navbar-inverse(role="navigation")
             .container.container-fluid
                 .navbar-header
-                    a.navbar-brand(href="..") Let's Go
-            .collapse.navbar-collapse
-                ul.nav.navbar-nav
-                    li(ng-class='{ active: active.home }')
-                        a(ng-click='goHome()') 主页
-                    li(ng-class='{ active: active.list }')
-                        a(ng-click='goToList()') 商品列表
-                ul.nav.navbar-nav.pull-right
-                    li(ng-class='{ active: active.cart }')
-                        a(ng-click='goToCart()')
-                            span.glyphicon.glyphicon-shopping-cart 购物车({{counter}})
+                    a.navbar-brand(ng-click='goToList()') Let's Go
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li(ng-class='{ active: active.home }')
+                            a(ng-click='goHome()') 主页
+                        li(ng-class='{ active: active.list }')
+                            a(ng-click='goToList()') 商品列表
+                    ul.nav.navbar-nav.pull-right
+                        li(ng-class='{ active: active.cart }')
+                            a(ng-click='goToCart()')
+                                span.glyphicon.glyphicon-shopping-cart 购物车({{counter}})
 
         div(ng-view)
 
         script(type='text/javascript', src='/bower_components/jquery/jquery.min.js')
         script(type='text/javascript', src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
         script(type='text/javascript', src='/bower_components/lodash/dist/lodash.min.js')
+        script(type='text/javascript', src='/bower_components/angular/angular.js')
+        script(type='text/javascript', src='/bower_components/angular-animate/angular-animate.js')
+        script(type='text/javascript', src='/bower_components/angular-route/angular-route.js')
+        script(type='text/javascript', src='/bower_components/angular-resource/angular-resource.js')
+
+        script(type='text/javascript', src='/frontend/app.js')
 
         script(type='text/javascript', src='/frontend/navController.js')
-        script(type='text/javascript', src='/frontend/home/homeController.js')
-        script(type='text/javascript', src='/frontend/list/listController.js')
-        script(type='text/javascript', src='/frontend/cart/cartController.js')
-        script(type='text/javascript', src='/frontend/payment/paymentController.js')
+        //script(type='text/javascript', src='/frontend/home/homeController.js')
+        //script(type='text/javascript', src='/frontend/list/listController.js')
+        //script(type='text/javascript', src='/frontend/cart/cartController.js')
+        //script(type='text/javascript', src='/frontend/payment/paymentController.js')

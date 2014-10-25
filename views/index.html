@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="posApp">
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
@@ -9,26 +9,31 @@
   <body ng-controller="NavController">
     <nav role="navigation" class="navbar navbar-inverse">
       <div class="container container-fluid">
-        <div class="navbar-header"><a href=".." class="navbar-brand">Let's Go</a></div>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li ng-class="{ active: active.home }"><a ng-click="goHome()">主页</a></li>
-          <li ng-class="{ active: active.list }"><a ng-click="goToList()">商品列表</a></li>
-        </ul>
-        <ul class="nav navbar-nav pull-right">
-          <li ng-class="{ active: active.cart }"><a ng-click="goToCart()"><span class="glyphicon glyphicon-shopping-cart">购物车({{counter}})</span></a></li>
-        </ul>
+        <div class="navbar-header"><a ng-click="goToList()" class="navbar-brand">Let's Go</a></div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{ active: active.home }"><a ng-click="goHome()">主页</a></li>
+            <li ng-class="{ active: active.list }"><a ng-click="goToList()">商品列表</a></li>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li ng-class="{ active: active.cart }"><a ng-click="goToCart()"><span class="glyphicon glyphicon-shopping-cart">购物车({{counter}})</span></a></li>
+          </ul>
+        </div>
       </div>
     </nav>
     <div ng-view></div>
     <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="/frontend/app.js"></script>
     <script type="text/javascript" src="/frontend/navController.js"></script>
-    <script type="text/javascript" src="/frontend/home/homeController.js"></script>
-    <script type="text/javascript" src="/frontend/list/listController.js"></script>
-    <script type="text/javascript" src="/frontend/cart/cartController.js"></script>
-    <script type="text/javascript" src="/frontend/payment/paymentController.js"></script>
+    <!--script(type='text/javascript', src='/frontend/home/homeController.js')-->
+    <!--script(type='text/javascript', src='/frontend/list/listController.js')-->
+    <!--script(type='text/javascript', src='/frontend/cart/cartController.js')-->
+    <!--script(type='text/javascript', src='/frontend/payment/paymentController.js')-->
   </body>
 </html>

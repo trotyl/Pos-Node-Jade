@@ -1,4 +1,4 @@
-posManager.controller('NavController', ['$scope', '$location', '$route', '$routeParams', 'Cart',
+posApp.controller('NavController', ['$scope', '$location', '$route', '$routeParams', 'Cart',
     function($scope, $location, $route, $routeParams, Cart) {
 
         var initialize = function () {
