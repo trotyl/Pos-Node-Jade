@@ -5,13 +5,12 @@ posManager.controller('HomeController', ['$scope', '$location', '$route', '$rout
         var initialize = function () {
             $scope.items = Item.query({ page: pageId });
             $scope.pages = Item.count();
+            $scope.currentPage = {
+                isFirst: pageId == 1,
+                isLast: pageId == $scope.pages.length
+            };
         };
         initialize();
-
-        $scope.currentPage = {
-            isFirst: pageId == 1,
-            isLast: pageId == $scope.pages.length
-        };
 
         $scope.goToCreate = function () {
             $location.path('/create');

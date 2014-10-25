@@ -1,0 +1,30 @@
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ol class="breadcrumb">
+      <li><a ng-click="goHome()">商品信息管理</a></li>
+      <li><a ng-click="goBack()">{{ isNew? '添加商品': '商品详情' }}</a></li>
+      <li class="active">添加属性</li>
+    </ol>
+    <div class="container">
+      <form role="form" class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">属性名</label>
+          <div class="col-sm-2">
+            <input type="text" placeholder="请输入属性名" ng-model="attr.name" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">属性值</label>
+          <div class="col-sm-2">
+            <input type="text" placeholder="请输入该属性的值" ng-model="attr.val" class="form-control"/>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="btn-list">
+      <button ng-disabled="" ng-click="saveIt()" class="btn btn-default">保存</button>
+      <button ng-click="cancel()" class="btn btn-default">取消</button>
+    </div>
+  </div>
+</div>

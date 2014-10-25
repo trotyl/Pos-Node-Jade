@@ -1,0 +1,24 @@
+.panel.panel-default
+    .panel-body
+        ol.breadcrumb
+            li
+                a(ng-click='goHome()') 商品信息管理
+            li
+                a(ng-click='goBack()') {{ isNew? '添加商品': '商品详情' }}
+            li.active 添加属性
+
+        .container
+            form.form.form-horizontal(role="form")
+                .form-group
+                    label.col-sm-2.control-label 属性名
+                    .col-sm-2
+                        input.form-control(type='text', placeholder='请输入属性名', ng-model='attr.name')
+                .form-group
+                    label.col-sm-2.control-label 属性值
+                    .col-sm-2
+                        input.form-control(type='text', placeholder='请输入该属性的值', ng-model='attr.val')
+
+        .btn-list
+            button.btn.btn-default(ng-disabled='', ng-click='saveIt()') 保存
+            button.btn.btn-default(ng-click='cancel()') 取消
+
