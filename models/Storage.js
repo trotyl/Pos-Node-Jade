@@ -87,8 +87,8 @@ Storage.bought = function (list, callback) {
     Item.find({ id: { $in: ids }}).execQ().then(function (result) {
         _(result).each(function (item) {
             if(item.amount < amounts[item.id]) {
-                results = results || {};
-                results[item.name] = item.amount;
+                results = results || [];
+                results.push(item);
             }
             else {
                 item.amount -= amounts[item.id];

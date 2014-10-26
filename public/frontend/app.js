@@ -43,7 +43,7 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
         localStorage.setItem('cart', JSON.stringify(cart));
     };
 
-    var removeStorage = function () {
+    cart.clear = function () {
         localStorage.removeItem('cart');
     };
 
@@ -95,7 +95,6 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     cart.pay = function (callback) {
         $http.post('/api/pos/pay', getStorage()).
             success(function (data) {
-                removeStorage();
                 callback(null, data);
             }).
             error(function (data) {

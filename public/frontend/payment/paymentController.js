@@ -15,9 +15,15 @@ posApp.controller('PaymentController', ['$scope', '$location', '$route', '$route
         $scope.pay = function () {
             Cart.pay(function (err, result) {
                 if(result.message) {
-                    alert(result.message);
+                    var message = _(result.message).reduce(function (sum, item) {
+                        return sum + item.name + '剩余' + item.amount + item.unit + '；';
+                    }, '');
+                    message += '商品余额不足，交易失败。';
+                    //console.log(message);
+                    alert(message);
                 }
                 else {
+                    Cart.clear();
                     $scope.goHome();
                 }
             });
