@@ -45,7 +45,9 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     };
 
     cart.count = function () {
-        return getStorage().length;
+        return _(getStorage()).reduce(function (sum, item) {
+            return sum + item.amount;
+        }, 0);
     };
 
     cart.get = function () {

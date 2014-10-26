@@ -5,12 +5,13 @@ posApp.controller('CartController', ['$scope', '$location', '$route', '$routePar
             $scope.total = _($scope.items).reduce(function (sum, item) {
                 return item.price * item.amount + sum;
             }, 0);
-            console.log($scope.total);
         };
         initialize();
 
         $scope.alterAmount = function (item, theAmount, change) {
             Cart.alterAmount(item, theAmount, change);
+            $scope.$emit('$routeChangeSuccess');
+            //$scope.counter.count = Cart.count();
             initialize();
         }
     }]);
