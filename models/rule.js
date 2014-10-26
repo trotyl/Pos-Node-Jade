@@ -33,7 +33,7 @@ ruleSchema.methods.render = function () {
             '>': function () { result[things[0]] = { '$gt': things[1] }; }
         };
         map[operator]();
-        return result;
+        return [result];
     };
 
     var _delimit = function (exp) {
@@ -63,7 +63,6 @@ ruleSchema.methods.render = function () {
     };
 
     var _render = function (expression) {
-        var position_operator, position_remain;
         var first = _choice(expression);
         if(first.position === 0) { return first.result; }
         var second = _choice(expression.substr(first.position + 2));
