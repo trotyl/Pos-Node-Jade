@@ -43,6 +43,10 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
         localStorage.setItem('cart', JSON.stringify(cart));
     };
 
+    var removeStorage = function () {
+        localStorage.removeItem('cart');
+    };
+
     cart.save = function () {
         var cart = getStorage();
         cart.push(this);
@@ -78,7 +82,7 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
 
     cart.available = function () {
         var delay = $q.defer();
-        $http.get('/api/item/all').
+        $http.get('/api/pos/available').
             success(function (data) {
                 delay.resolve(data);
             }).
@@ -86,6 +90,17 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
                 delay.reject('');
             });
         return delay.promise;
+    };
+
+    cart.pay = function (callback) {
+        $http.post('/api/pos/buy', getStorage()).
+            success(function (data) {
+                removeStorage();
+                callback(null, data);
+            }).
+            error(function (data) {
+                callback(err, data);
+            });
     };
 
     return cart;

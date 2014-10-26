@@ -10,9 +10,9 @@ posApp.controller('PaymentController', ['$scope', '$location', '$route', '$route
         initialize();
 
         $scope.pay = function () {
-            Cart.pay(function (err) {
-                if(err) {
-                    alert(err);
+            Cart.pay(function (err, result) {
+                if(result.message) {
+                    alert(result.message);
                 }
                 else {
                     $scope.goHome();
