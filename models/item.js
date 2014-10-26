@@ -9,7 +9,7 @@ var itemSchema = mongoose.Schema({
     amount: Number,
     promotion: Boolean,
     attrs: [{
-        time: Date,
+        birth: Date,
         name: String,
         val: String
     }],
