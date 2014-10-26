@@ -48,6 +48,13 @@ posManager.factory('Item', ['$resource',
         });
     }]);
 
+posManager.factory('Rule', ['$resource',
+    function($resource){
+        return $resource('/api/rule/:operation/:ruleId', { ruleId: '@id'}, {
+
+        });
+    }]);
+
 posManager.filter('getName', function () {
     return function (input) {
         return input;

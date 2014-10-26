@@ -6,23 +6,23 @@
                 .form-group
                     label.col-sm-2.control-label 打折规则
                     .col-sm-2
-                        input.form-control(type='text', ng-model='promotion.rule', required)
+                        input.form-control(type='text', ng-model='rule.description', required)
                 .form-group
                     label.col-sm-2.control-label 打折期限
                     .col-sm-2
-                        input.form-control(type='text', ng-model='promotion.from')
+                        input.form-control(type='text', ng-model='rule.from')
                 .form-group
                     label.col-sm-2.control-label -
                     .col-sm-2
-                        input.form-control(type='text', ng-model='promotion.to')
+                        input.form-control(type='text', ng-model='rule.to')
                 .form-group
                     label.col-sm-2.control-label 买
                     .col-sm-2
-                        input.form-control(type='text', ng-model='promotion.bought', required)
+                        input.form-control(type='text', ng-model='rule.bought', required)
                 .form-group
                     label.col-sm-2.control-label 赠
                     .col-sm-2
-                        input.form-control(type='text', ng-model='promotion.gift', required)
+                        input.form-control(type='text', ng-model='rule.gift', required)
 
         .btn-list
             button.btn.btn-default(ng-disabled='ruleForm.$invalid', ng-click='saveIt()') 添加

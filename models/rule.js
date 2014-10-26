@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var ruleSchema = mongoose.Schema({
     id: String,
-    rule: String,
+    description: String,
     from: Date,
     to: Date,
     bought: Number,
