@@ -1,0 +1,30 @@
+.panel.panel-default
+    .panel-body
+
+        .container
+            form.form.form-horizontal(role="form", name='ruleForm')
+                .form-group
+                    label.col-sm-2.control-label 打折规则
+                    .col-sm-2
+                        input.form-control(type='text', ng-model='promotion.rule', required)
+                .form-group
+                    label.col-sm-2.control-label 打折期限
+                    .col-sm-2
+                        input.form-control(type='text', ng-model='promotion.from', required)
+                .form-group
+                    label.col-sm-2.control-label -
+                    .col-sm-2
+                        input.form-control(type='text', ng-model='promotion.to', required)
+                .form-group
+                    label.col-sm-2.control-label 买
+                    .col-sm-2
+                        input.form-control(type='text', ng-model='promotion.bought', required)
+                .form-group
+                    label.col-sm-2.control-label 赠
+                    .col-sm-2
+                        input.form-control(type='text', ng-model='promotion.gift', required)
+
+        .btn-list
+            button.btn.btn-default(ng-disabled='ruleForm.$invalid', ng-click='saveIt()') 添加
+            button.btn.btn-default(ng-click='goBack()') 取消
+
