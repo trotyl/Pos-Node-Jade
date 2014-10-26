@@ -23,6 +23,14 @@ posManager.config(['$routeProvider',
                 templateUrl: '/backend/addAttribute/addAttribute.html',
                 controller: 'AddAttributeController'
             }).
+            when('/promotion', {
+                templateUrl: '/backend/promotion/promotion.html',
+                controller: 'PromotionController'
+            }).
+            when('/rule', {
+                templateUrl: '/backend/rule/rule.html',
+                controller: 'RuleController'
+            }).
             otherwise({
                 redirectTo: '/list/1'
             });

@@ -7,11 +7,11 @@ var moment = require('moment');
 /* GET home page. */
 
 router.get('/', function(req, res) {
-    res.render('index', { title: '首页' });
+    res.render('index', { title: 'Pos Web' });
 });
 
 router.get('/admin', function(req, res) {
-    res.render('admin', { title:'商品信息管理' });
+    res.render('admin', { title: '商品信息管理' });
 });
 
 module.exports = router;
