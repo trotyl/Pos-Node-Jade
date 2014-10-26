@@ -70,15 +70,7 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     };
 
     cart.available = function () {
-        var delay = $q.defer();
-        $http.get('/api/item/all').
-            success(function (data) {
-                delay.resolve(data);
-            }).
-            error(function () {
-                delay.reject();
-            });
-        return delay.promise;
+        return $http.get('/api/item/all');
     };
 
     return cart;
