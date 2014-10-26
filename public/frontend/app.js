@@ -13,7 +13,12 @@ posApp.config(['$routeProvider',
             }).
             when('/list', {
                 templateUrl: '/frontend/list/list.html',
-                controller: 'ListController'
+                controller: 'ListController',
+                resolve: {
+                    items: function (Cart) {
+                        return Cart.available();
+                    }
+                }
             }).
             when('/cart', {
                 templateUrl: '/frontend/cart/cart.html',
@@ -72,7 +77,15 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     };
 
     cart.available = function () {
-        return $http.get('/api/item/all');
+        var delay = $q.defer();
+        $http.get('/api/item/all').
+            success(function (data) {
+                delay.resolve(data);
+            }).
+            error(function () {
+                delay.reject('');
+            });
+        return delay.promise;
     };
 
     return cart;

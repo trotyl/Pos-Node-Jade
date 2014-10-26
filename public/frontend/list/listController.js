@@ -1,9 +1,7 @@
-posApp.controller('ListController', ['$scope', '$location', '$route', '$routeParams', 'Cart',
-    function($scope, $location, $route, $routeParams, Cart) {
+posApp.controller('ListController', ['$scope', '$location', '$route', '$routeParams', 'Cart', 'items',
+    function($scope, $location, $route, $routeParams, Cart, items) {
         var initialize = function () {
-            Cart.available().success(function (data) {
-                $scope.items = data;
-            });
+            $scope.items = items;
         };
         initialize();
 
