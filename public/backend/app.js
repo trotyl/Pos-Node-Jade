@@ -27,7 +27,11 @@ posManager.config(['$routeProvider',
                 templateUrl: '/backend/promotion/promotion.html',
                 controller: 'PromotionController'
             }).
-            when('/rule', {
+            when('/new_rule/', {
+                templateUrl: '/backend/rule/rule.html',
+                controller: 'RuleController'
+            }).
+            when('/rule/:ruleId', {
                 templateUrl: '/backend/rule/rule.html',
                 controller: 'RuleController'
             }).
@@ -43,4 +47,16 @@ posManager.factory('Item', ['$resource',
             count: { method: 'GET', params: { operation: 'count' }, isArray: true }
         });
     }]);
+
+posManager.filter('getName', function () {
+    return function (input) {
+        return input;
+    };
+});
+
+posManager.filter('getPrice', function () {
+    return function (input) {
+        return input;
+    };
+});
 

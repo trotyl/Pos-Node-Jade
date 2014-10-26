@@ -6,6 +6,9 @@ posManager.controller('PromotionController', ['$scope', '$location', '$route', '
         };
         initialize();
 
+        $scope.goToCreate = function () {
+            $location.path('/new_rule');
+        }
     }]);
 
 
