@@ -7,6 +7,7 @@ posApp.controller('ListController', ['$scope', '$location', '$route', '$routePar
 
         $scope.buy = function (item) {
             Cart.alterAmount(item, null, 1);
+            $scope.$emit('$routeChangeSuccess');
         };
     }]);
 

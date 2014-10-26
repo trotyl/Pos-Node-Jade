@@ -93,7 +93,7 @@ posApp.factory('Cart', ['$http', '$q', function ($http, $q) {
     };
 
     cart.pay = function (callback) {
-        $http.post('/api/pos/buy', getStorage()).
+        $http.post('/api/pos/pay', getStorage()).
             success(function (data) {
                 removeStorage();
                 callback(null, data);

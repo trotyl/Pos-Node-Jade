@@ -8,9 +8,11 @@ router.get('/available', function (req, res) {
     });
 });
 
-router.get('/pay', function (req, res) {
-    console.log(req.body);
-    res.send('');
+router.post('/pay', function (req, res) {
+    var list = req.body;
+    Storage.bought(list, function (err, result) {
+        res.json({ message: result });
+    })
 });
 
 module.exports = router;
