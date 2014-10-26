@@ -1,0 +1,22 @@
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <p>商品信息管理</p><a ng-click="goToCreate()" class="btn btn-primary">添加规则</a>
+  </div>
+  <table class="table">
+    <tr>
+      <th>商品</th>
+      <th>价格</th>
+      <th>时间</th>
+      <th>打折方式</th>
+      <th>操作</th>
+    </tr>
+    <tr ng-repeat="promotion in promotions | orderBy: &quot;itemName&quot;: reverse" class="list-item">
+      <td>{{promotion.itemName}}</td>
+      <td>{{promotion.itemPrice}}</td>
+      <td>{{promotion.span}}</td>
+      <td>{{promotion.pattern}}</td>
+      <td><a ng-click="deleteIt(promotion.id)" class="item-delete"> 删除</a></td>
+    </tr>
+  </table>
+</div>

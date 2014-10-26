@@ -3,7 +3,7 @@
   <div class="panel-heading">
     <p>商品信息管理</p><a ng-click="goToCreate()" class="btn btn-primary">添加商品</a>
   </div>
-  <table id="item-manage-list" class="table">
+  <table class="table">
     <tr>
       <th>序号</th>
       <th>商品名称</th>
@@ -14,19 +14,19 @@
       <th>操作</th>
     </tr>
     <tr ng-repeat="item in items | orderBy: &quot;birth&quot;: reverse" class="list-item">
-      <td class="item-index">{{$index + 1}}</td>
-      <td class="item-name">{{item.name}}</td>
-      <td class="item-amount">
+      <td>{{$index + 1}}</td>
+      <td>{{item.name}}</td>
+      <td>
         <div class="btn-group">
           <button ng-click="alterAmount(item.id, null, -1)" class="btn btn-default">-</button>
           <input type="text" ng-model="item.amount" ng-keyup="alterAmount(item.id, item.amount)" class="btn btn-default number"/>
           <button ng-click="alterAmount(item.id, null, 1)" class="btn btn-default">+</button>
         </div>
       </td>
-      <td class="item-price">{{item.price}}</td>
-      <td class="item-unit">{{item.unit}}</td>
-      <td class="item-birth">{{item.birth}}</td>
-      <td class="item-operation"><a ng-click="goToDetail(item.id)" class="item-detail">详情</a><a ng-click="deleteIt(item.id)" class="item-delete"> 删除</a></td>
+      <td>{{item.price}}</td>
+      <td>{{item.unit}}</td>
+      <td>{{item.birth}}</td>
+      <td><a ng-click="goToDetail(item.id)" class="item-detail">详情</a><a ng-click="deleteIt(item.id)" class="item-delete"> 删除</a></td>
     </tr>
   </table>
   <div class="text-center">

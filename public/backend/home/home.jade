@@ -2,7 +2,7 @@
     .panel-heading
         p 商品信息管理
         a.btn.btn-primary(ng-click='goToCreate()') 添加商品
-    table#item-manage-list.table
+    table.table
         tr
             th 序号
             th 商品名称
@@ -13,17 +13,17 @@
             th 操作
 
         tr.list-item(ng-repeat='item in items | orderBy: "birth": reverse')
-            td.item-index {{$index + 1}}
-            td.item-name {{item.name}}
-            td.item-amount
+            td {{$index + 1}}
+            td {{item.name}}
+            td
                 .btn-group
                     button.btn.btn-default(ng-click='alterAmount(item.id, null, -1)') -
                     input.btn.btn-default.number(type='text', ng-model='item.amount', ng-keyup='alterAmount(item.id, item.amount)')
                     button.btn.btn-default(ng-click='alterAmount(item.id, null, 1)') +
-            td.item-price {{item.price}}
-            td.item-unit {{item.unit}}
-            td.item-birth {{item.birth}}
-            td.item-operation
+            td {{item.price}}
+            td {{item.unit}}
+            td {{item.birth}}
+            td
                 a.item-detail(ng-click='goToDetail(item.id)') 详情
                 a.item-delete(ng-click='deleteIt(item.id)')  删除
     .text-center

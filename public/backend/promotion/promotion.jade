@@ -1,0 +1,20 @@
+.panel.panel-default
+    .panel-heading
+        p 商品信息管理
+        a.btn.btn-primary(ng-click='goToCreate()') 添加规则
+    table.table
+        tr
+            th 商品
+            th 价格
+            th 时间
+            th 打折方式
+            th 操作
+
+        tr.list-item(ng-repeat='promotion in promotions | orderBy: "itemName": reverse')
+            td {{promotion.itemName}}
+            td {{promotion.itemPrice}}
+            td {{promotion.span}}
+            td {{promotion.pattern}}
+            td
+                a.item-delete(ng-click='deleteIt(promotion.id)')  删除
+
