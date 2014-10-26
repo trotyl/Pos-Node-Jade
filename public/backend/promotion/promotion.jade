@@ -10,7 +10,7 @@
             th 打折方式
             th 操作
 
-        tr.list-item(ng-repeat='promotion in promotions | orderBy: "itemName": reverse')
+        tr.list-item(ng-repeat='promotion in promotions | orderBy: "birth": reverse')
             td {{promotion.itemName}}
             td {{promotion.itemPrice}}
             td {{promotion.span}}
