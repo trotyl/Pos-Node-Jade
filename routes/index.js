@@ -10,4 +10,8 @@ router.get('/', function(req, res) {
     res.render('index', { title: '首页' });
 });
 
+router.get('/admin', function(req, res) {
+    res.render('admin', { title:'商品信息管理' });
+});
+
 module.exports = router;
