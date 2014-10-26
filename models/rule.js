@@ -46,20 +46,26 @@ ruleSchema.methods.render = function () {
 
     var _choice = function (exp) {
         var result, position;
-        if(expression[0] === '(') {
-            var child = _peel(expression);
-            position = _delimit(expression.substr(child.length));
+        if(exp[0] === '(') {
+            var child = _peel(exp);
+            position = _delimit(exp.substr(child.length));
             result = _render(child);
         }
         else {
-            position = _delimit(expression);
-            result =_cope(expression.substr(0, position));
+            position = _delimit(exp);
+            result =_cope(exp.substr(0, position));
         }
         return { result: result, position: position };
     };
 
     var _product = function (first, second) {
-
+        var result = [];
+        _(first).each(function (a) {
+            _(second).each(function (b) {
+                result.push(_.assign(a, b));
+            });
+        });
+        return result;
     };
 
     var _render = function (expression) {
