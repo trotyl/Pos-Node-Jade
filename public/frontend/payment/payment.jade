@@ -13,12 +13,12 @@
                     th 数量
                     th 小计
                 tr(ng-repeat='item in items')
-                    td {{item.type}}
+                    td {{item.attrs | getType}}
                     td {{item.name}}
                     td {{item.price}}
                     td {{item.unit}}
-                    td {{item.count}}
-                    td {{item | sumDisplay}}
+                    td {{item.amount}}
+                    td {{item.price * item.amount | sumDisplay}}
         .panel-heading
             h4.side-space.text-left 赠送商品
         .panel-body
@@ -28,9 +28,9 @@
                     th 名称
                     th 数量
                 tr(ng-repeat='gift in gifts')
-                    td {{item.type}}
+                    td {{item.attrs | getType}}
                     td {{item.name}}
-                    td {{item | giftDisplay}}
+                    td {{0 | sumDisplay}}
         .side-space.text-right
             p 总计：{{(total || 0).toFixed(2)}} 元
             p 节省：{{(saving || 0).toFixed(2)}} 元
