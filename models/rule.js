@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var promotionSchema = mongoose.Schema({
+var ruleSchema = mongoose.Schema({
     id: String,
     rule: String,
     from: Date,
@@ -13,9 +13,9 @@ var promotionSchema = mongoose.Schema({
     }
 });
 
-var Promotion = mongoose.model('promotion', promotionSchema);
+var Rule = mongoose.model('rule', ruleSchema);
 
-module.exports = Promotion;
+module.exports = Rule;
 
 
 
