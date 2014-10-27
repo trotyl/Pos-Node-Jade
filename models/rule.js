@@ -17,7 +17,7 @@ ruleSchema.methods.render = function () {
     // 找到最左边括号对应的右括号并去掉这两个括号
     var _peel = function (exp) {
         var left = 1, right = 0, i;
-        for(i = 1; left != right; i++) {
+        for(i = 1; (left != right) && (i < exp.length); i++) {
             if(exp[i] === '(') { left++ }
             else if(exp[i] === ')') { right++ }
         }
