@@ -55,7 +55,7 @@ ruleSchema.methods.render = function () {
             position = _delimit(exp.substr(child.length));
             result = _render(child);
         }
-        else if(exp.indexOf(/[<=>]/) >= 0){
+        else if(exp.indexOf(/[(&&)(||)]/) >= 0){
             position = _delimit(exp);
             result = _render(exp);
         }
