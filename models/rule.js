@@ -63,7 +63,7 @@ ruleSchema.methods.render = function () {
     };
 
     // 计算两个表达式的笛卡尔积
-    var _product = function (first, second) {
+    var _and = function (first, second) {
         var result = [];
         _(first).each(function (a) {
             _(second).each(function (b) {
@@ -74,7 +74,7 @@ ruleSchema.methods.render = function () {
     };
 
     // 计算两个表达式的并
-    var _add = function (first, second) {
+    var _or = function (first, second) {
         return _.union(first, second);
     };
 
@@ -84,8 +84,8 @@ ruleSchema.methods.render = function () {
         if(first.position <= 0) { return first.result; }
         var second = _choice(expression.substr(first.position + 2));
         var operation = {
-            '&': _product,
-            '|': _add
+            '&': _and,
+            '|': _or
         }[expression[first.position]];
         return operation(first.result, second.result);
     };
