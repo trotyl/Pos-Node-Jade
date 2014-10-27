@@ -40,11 +40,7 @@ ruleSchema.methods.render = function () {
 
     // 找到下一个逻辑运算符的位置
     var _delimit = function (exp) {
-        var and = exp.indexOf('&&');
-        var or = exp.indexOf('||');
-        and = and >= 0? and: 0;
-        or = or >= 0? or: 0;
-        return Math.min(and, or);
+        return exp.match(/[(&&)(||)]/);
     };
 
     // 确定一个表达式是 组合表达式 或 原子表达式 并继续处理
@@ -85,7 +81,7 @@ ruleSchema.methods.render = function () {
     // 将任何非原子表达式渲染成 前表达式 逻辑运算符 后表达式
     var _render = function (expression) {
         var first = _choice(expression);
-        if(first.position === 0) { return first.result; }
+        if(first.position <= 0) { return first.result; }
         var second = _choice(expression.substr(first.position + 2));
         var operation = {
             '&': _product,
