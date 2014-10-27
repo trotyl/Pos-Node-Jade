@@ -66,7 +66,7 @@ ruleSchema.methods.render = function () {
         return { result: result, position: position };
     };
 
-    // 计算两个表达式的迪卡尔积
+    // 计算两个表达式的笛卡尔积
     var _product = function (first, second) {
         var result = [];
         _(first).each(function (a) {
@@ -77,12 +77,21 @@ ruleSchema.methods.render = function () {
         return result;
     };
 
+    // 计算两个表达式的并
+    var _add = function (first, second) {
+        return _.union(first, second);
+    };
+
     // 将任何非原子表达式渲染成 前表达式 逻辑运算符 后表达式
     var _render = function (expression) {
         var first = _choice(expression);
         if(first.position === 0) { return first.result; }
         var second = _choice(expression.substr(first.position + 2));
-        return _product(first.result, second.result);
+        var operation = {
+            '&': _product,
+            '|': _add
+        }[expression[first.position]];
+        return operation(first.result, second.result);
     };
 
     return _render(this.description.replace(/\s/g, ''));
