@@ -51,9 +51,13 @@ ruleSchema.methods.render = function () {
             position = _delimit(exp.substr(child.length));
             result = _render(child);
         }
-        else {
+        else if(exp.indexOf(/[<=>]/) >= 0){
             position = _delimit(exp);
-            result =_cope(exp.substr(0, position));
+            result = _render(exp.substr(0, position));
+        }
+        else {
+            position = 0;
+            result = _cope(exp);
         }
         return { result: result, position: position };
     };
