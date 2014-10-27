@@ -26,12 +26,12 @@ ruleSchema.methods.render = function () {
 
     // 将原子表达式转换为 mongodb 查询所需的对象数组
     var _cope = function (meta) {
-        var operator = meta.match(/[<=>]/);
+        var operator = meta.match(/[<(==)>]/);
         var things = meta.split(operator);
         var result = {};
         var map = {
             '<': function () { result[things[0]] = { '$lt': things[1] }; },
-            '=': function () { result[things[0]] = things[1]; },
+            '==': function () { result[things[0]] = things[1]; },
             '>': function () { result[things[0]] = { '$gt': things[1] }; }
         };
         map[operator]();
