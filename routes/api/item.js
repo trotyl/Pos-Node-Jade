@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Storage = require('../../models/storage');
 var Item = require('../../models/item');
 
 router.get('/page', function (req, res) {

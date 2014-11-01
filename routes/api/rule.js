@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Storage = require('../../models/storage');
+//var Storage = require('../../models/storage');
 
 router.get('/', function (req, res) {
     res.json('');

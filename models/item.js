@@ -1,3 +1,4 @@
+var mongodb = require('./db');
 var mongoose = require('mongoose');
 var _ = require('lodash');
 
