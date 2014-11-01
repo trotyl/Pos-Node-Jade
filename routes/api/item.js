@@ -11,7 +11,7 @@ router.get('/page', function (req, res) {
 });
 
 router.get('/count', function (req, res) {
-    Storage.count(function (err, result) {
+    Item.paginate(function (result) {
         var number = parseInt((result || 0) / 10) + 1;
         var count = [];
         for(var i = 0; i < number; i++){

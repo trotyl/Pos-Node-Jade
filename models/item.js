@@ -46,9 +46,19 @@ itemSchema.statics.page = function (page, callback) {
     this.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).exec()
         .then(callback, function (err) {
             console.log(err);
-            callback(err);
+            callback(null);
         });
 };
+
+itemSchema.statics.paginate = function (callback) {
+    this.count({ amount: { $gt: 0 }}).exec()
+        .then(callback, function (err) {
+            console.log(err);
+            callback(null);
+        });
+};
+
+
 
 var Item = mongoose.model('item', itemSchema);
 
