@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var Storage = require('../../models/storage');
+var Item = require('../../models/item');
 
 router.get('/page', function (req, res) {
     var pageId = req.param('page');
-    Storage.page(pageId, function (err, result) {
+    Item.page(pageId, function (result) {
         res.json(result);
     });
 });

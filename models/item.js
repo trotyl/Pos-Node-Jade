@@ -35,11 +35,18 @@ itemSchema.methods.prepare = function () {
 
 //静态方法
 itemSchema.statics.all = function (callback) {
-    console.log('flag1');
     this.find({ amount: { $gt: 0 }}).exec()
         .then(callback, function (err) {
             console.log(err);
             callback(null);
+        });
+};
+
+itemSchema.statics.page = function (page, callback) {
+    this.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).exec()
+        .then(callback, function (err) {
+            console.log(err);
+            callback(err);
         });
 };
 
