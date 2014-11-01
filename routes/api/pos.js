@@ -10,7 +10,7 @@ router.get('/available', function (req, res) {
 
 router.post('/pay', function (req, res) {
     var list = req.body;
-    Storage.bought(list, function (err, result) {
+    Item.bought(list, function (result) {
         res.json({ message: result });
     })
 });

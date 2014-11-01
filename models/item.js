@@ -111,6 +111,41 @@ itemSchema.statics.removeById = function (itemId, callback) {
         });
 };
 
+itemSchema.statics.bought = function (list, callback) {
+    var amounts = {};
+    var ids = _(list).map(function (item) {
+        amounts[item.id] = item.amount;
+        return item.id;
+    }).value();
+
+    var results;
+    Item.find({ id: { $in: ids }}).exec()
+        .then(function (result) {
+            _(result).each(function (item) {
+                if(item.amount < amounts[item.id]) {
+                    results = results || [];
+                    results.push(item);
+                }
+                else {
+                    item.amount -= amounts[item.id];
+                }
+            });
+
+            if(results) {
+                callback(results);
+            }
+            else {
+                _(result).each(function (item) {
+                    item.save();
+                });
+                callback(null);
+            }
+        }, function (err) {
+            console.log(err);
+            callback(null);
+        });
+};
+
 var Item = mongoose.model('item', itemSchema);
 
 module.exports = Item;
