@@ -6,15 +6,6 @@ function Storage () {
 
 }
 
-Storage.remove = function (itemId, callback) {
-    Item.remove({ id: itemId }).execQ().then(function(result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
 Storage.bought = function (list, callback) {
     var amounts = {};
     var ids = _(list).map(function (item) {

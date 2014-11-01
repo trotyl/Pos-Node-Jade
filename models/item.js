@@ -103,7 +103,13 @@ itemSchema.statics.updateById = function (item, callback) {
         });
 };
 
-
+itemSchema.statics.removeById = function (itemId, callback) {
+    this.remove({ id: itemId }).exec()
+        .then(callback, function (err) {
+            console.log(err);
+            callback(null);
+        });
+};
 
 var Item = mongoose.model('item', itemSchema);
 

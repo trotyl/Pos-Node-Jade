@@ -44,9 +44,9 @@ router.post('/:itemId', function (req, res) {
 
 router.delete('/:itemId', function (req, res) {
     var itemId = req.param('itemId');
-    Storage.remove(itemId, function (err, result) {
+    Item.removeById(itemId, function (result) {
         res.send('');
-    })
+    });
 });
 
 module.exports = router;
