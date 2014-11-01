@@ -58,6 +58,14 @@ itemSchema.statics.paginate = function (callback) {
         });
 };
 
+itemSchema.statics.getById = function (itemId, callback) {
+    this.findOne({ id: itemId }).exec()
+        .then(callback, function (err) {
+            console.log(err);
+            callback(null);
+        });
+};
+
 
 
 var Item = mongoose.model('item', itemSchema);

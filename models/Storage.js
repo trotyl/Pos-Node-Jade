@@ -6,15 +6,6 @@ function Storage () {
 
 }
 
-Storage.get = function (itemId, callback) {
-    Item.findOne({ id: itemId }).execQ().then(function (result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
 Storage.update = function (item, callback) {
     if(item.id === 'ITEM0000') {
         Storage.count(function (err, count) {

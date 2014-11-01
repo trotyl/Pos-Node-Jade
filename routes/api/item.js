@@ -23,7 +23,7 @@ router.get('/count', function (req, res) {
 
 router.get('/:itemId', function (req, res) {
     var itemId = req.param('itemId');
-    Storage.get(itemId, function (err, result) {
+    Item.getById(itemId, function (result) {
         res.json(result);
     })
 });
