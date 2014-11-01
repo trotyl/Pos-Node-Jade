@@ -109,6 +109,14 @@ ruleSchema.statics.createNew = function (rule, callback) {
     });
 };
 
+ruleSchema.statics.all = function (callback) {
+    this.find({}).exec()
+        .then(callback, function (err) {
+            console.log(err);
+            callback(null);
+        });
+};
+
 var Rule = mongoose.model('rule', ruleSchema);
 
 module.exports = Rule;

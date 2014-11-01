@@ -1,8 +1,8 @@
-posManager.controller('PromotionController', ['$scope', '$location', '$route', '$routeParams', 'Item',
-    function($scope, $location, $route, $routeParams, Item) {
+posManager.controller('PromotionController', ['$scope', '$location', '$route', '$routeParams', 'Rule',
+    function($scope, $location, $route, $routeParams, Rule) {
 
         var initialize = function () {
-
+            $scope.rules = Rule.query();
         };
         initialize();
 

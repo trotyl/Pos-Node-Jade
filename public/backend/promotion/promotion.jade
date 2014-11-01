@@ -10,11 +10,11 @@
             th 打折方式
             th 操作
 
-        tr.list-item(ng-repeat='promotion in promotions | orderBy: "birth": reverse')
-            td {{promotion.rule | getName}}
-            td {{promotion.rule | getPrice}}
-            td {{promotion.from + '\n' + promoiton.to}}
-            td {{promotion.pattern}}
+        tr.list-item(ng-repeat='rule in rules | orderBy: "birth": reverse')
+            td {{rule.description | getName}}
+            td {{rule.description | getPrice}}
+            td {{rule.from + '\n' + rule.to}}
+            td {{'买' + rule.bought + '送' + rule.gift}}
             td
                 a.item-delete(ng-click='deleteIt(promotion.id)')  删除
 
