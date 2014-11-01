@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var _ = require('lodash');
 
 var itemSchema = mongoose.Schema({
     id: String,
@@ -64,6 +65,42 @@ itemSchema.statics.getById = function (itemId, callback) {
             console.log(err);
             callback(null);
         });
+};
+
+itemSchema.statics.createNew = function (item, callback) {
+    var nameGenerator = function (count) {
+        var result = (count + 1).toString();
+        while(result.length < 4) {
+          result = '0' + result;
+        }
+        return 'ITEM' + result;
+    };
+    var self = this;
+    this.count().exec()
+        .then(function (count) {
+            item.id = nameGenerator(count);
+            self.create(item, function (err, item) {
+                item.prepare();
+                item.markModified('filter');
+                item.save();
+                callback(item.id);
+            });
+        }, function (err) {
+            console.log(err);
+            callback(null);
+        });
+};
+
+itemSchema.statics.updateById = function (item, callback) {
+    Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
+      result.prepare();
+      result.markModified('filter');
+      result.save();
+      callback(null, result);
+    }).catch(function (err) {
+      console.log(err);
+      callback(err);
+    }).done();
 };
 
 

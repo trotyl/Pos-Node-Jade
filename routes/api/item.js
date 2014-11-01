@@ -31,9 +31,16 @@ router.get('/:itemId', function (req, res) {
 router.post('/:itemId', function (req, res) {
     var itemId = req.param('itemId');
     var item = req.body;
-    Storage.update(item, function (err, result) {
+    var over = function (result) {
         res.send('');
-    })
+    };
+    console.log(itemId);
+    if(itemId == 'ITEM0000') {
+        Item.createNew(item, over);
+    }
+    else {
+        Item.updateById(item, over);
+    }
 });
 
 router.delete('/:itemId', function (req, res) {
