@@ -26,7 +26,6 @@ itemSchema.methods.prepare = function () {
         name: this.name,
         unit: this.unit,
         price: this.price,
-        type: this.type,
         amount: this.amount
     };
     _(this.attrs).each(function (attr) {
@@ -92,15 +91,16 @@ itemSchema.statics.createNew = function (item, callback) {
 };
 
 itemSchema.statics.updateById = function (item, callback) {
-    Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
-      result.prepare();
-      result.markModified('filter');
-      result.save();
-      callback(null, result);
-    }).catch(function (err) {
-      console.log(err);
-      callback(err);
-    }).done();
+    this.update({ id: item.id }, item, { upsert: true }).exec()
+        .then(function (result) {
+            result.prepare();
+            result.markModified('filter');
+            result.save();
+            callback(result.id);
+        }, function (err) {
+            console.log(err);
+            callback(null);
+        });
 };
 
 

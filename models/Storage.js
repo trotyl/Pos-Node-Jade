@@ -6,38 +6,6 @@ function Storage () {
 
 }
 
-Storage.update = function (item, callback) {
-    if(item.id === 'ITEM0000') {
-        Storage.count(function (err, count) {
-            count = (count + 1).toString();
-            while(count.length < 4) {
-                count = '0' + count;
-            }
-            item.id = 'ITEM' + count;
-            Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
-                result.prepare();
-                result.markModified('filter');
-                result.save();
-                callback(null, result);
-            }).catch(function (err) {
-                console.log(err);
-                callback(err);
-            }).done();
-        })
-    }
-    else {
-        Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
-            result.prepare();
-            result.markModified('filter');
-            result.save();
-            callback(null, result);
-        }).catch(function (err) {
-            console.log(err);
-            callback(err);
-        }).done();
-    }
-};
-
 Storage.remove = function (itemId, callback) {
     Item.remove({ id: itemId }).execQ().then(function(result) {
         callback(null, result);

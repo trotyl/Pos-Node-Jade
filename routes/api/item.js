@@ -34,7 +34,6 @@ router.post('/:itemId', function (req, res) {
     var over = function (result) {
         res.send('');
     };
-    console.log(itemId);
     if(itemId == 'ITEM0000') {
         Item.createNew(item, over);
     }
