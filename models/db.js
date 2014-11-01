@@ -1,5 +1,4 @@
-var mongoose = require('mongoose'),
-    mongooseQ = require('mongoose-q')(mongoose);
+var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/pos');
 
