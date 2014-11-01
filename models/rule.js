@@ -103,6 +103,12 @@ ruleSchema.methods.render = function () {
     return _render(this.description.replace(/\s/g, ''));
 };
 
+ruleSchema.statics.createNew = function (rule, callback) {
+    this.create(rule, function (err, result) {
+        callback(result);
+    });
+};
+
 var Rule = mongoose.model('rule', ruleSchema);
 
 module.exports = Rule;

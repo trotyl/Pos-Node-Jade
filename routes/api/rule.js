@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var Storage = require('../../models/storage');
+var Rule = require('../../models/rule');
 
 router.get('/', function (req, res) {
     res.json('');
@@ -8,7 +8,9 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     var rule = req.body;
-    res.json('');
+    Rule.createNew(rule, function (result) {
+        res.json(result);
+    });
 });
 
 module.exports = router;
