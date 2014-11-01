@@ -5,9 +5,7 @@ var itemSchema = mongoose.Schema({
     name: String,
     unit: String,
     price: Number,
-    type: String,
     amount: Number,
-    promotion: Boolean,
     attrs: [{
         birth: Date,
         name: String,
@@ -16,8 +14,23 @@ var itemSchema = mongoose.Schema({
     birth: {
         type: Date,
         default: Date.now
-    }
+    },
+    filter: {}
 });
+
+itemSchema.methods.prepare = function () {
+    this.filter = {
+        id: this.id,
+        name: this.name,
+        unit: this.unit,
+        price: this.price,
+        type: this.type,
+        amount: this.amount
+    };
+    _(this.attrs).each(function (attr) {
+        this.filter[attr.name] = attr.val;
+    }, this);
+};
 
 var Item = mongoose.model('item', itemSchema);
 
