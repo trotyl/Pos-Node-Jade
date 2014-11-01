@@ -6,15 +6,6 @@ function Storage () {
 
 }
 
-Storage.all = function (callback) {
-    Item.find({ amount: { $gt: 0 }}).execQ().then(function (result) {
-        callback(null, result);
-    }).catch(function (err) {
-        console.log(err);
-        callback(err);
-    }).done();
-};
-
 Storage.page = function (page, callback) {
     Item.find().sort({ birth: 'desc' }).skip(10 * (page - 1)).limit(10).execQ().then(function(result) {
         callback(null, result);
@@ -51,6 +42,9 @@ Storage.update = function (item, callback) {
             }
             item.id = 'ITEM' + count;
             Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
+                result.prepare();
+                result.markModified('filter');
+                result.save();
                 callback(null, result);
             }).catch(function (err) {
                 console.log(err);
@@ -60,6 +54,9 @@ Storage.update = function (item, callback) {
     }
     else {
         Item.update({ id: item.id }, item, { upsert: true }).execQ().then(function (result) {
+            result.prepare();
+            result.markModified('filter');
+            result.save();
             callback(null, result);
         }).catch(function (err) {
             console.log(err);

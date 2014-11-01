@@ -18,6 +18,7 @@ var itemSchema = mongoose.Schema({
     filter: {}
 });
 
+//实例方法
 itemSchema.methods.prepare = function () {
     this.filter = {
         id: this.id,
@@ -30,6 +31,16 @@ itemSchema.methods.prepare = function () {
     _(this.attrs).each(function (attr) {
         this.filter[attr.name] = attr.val;
     }, this);
+};
+
+//静态方法
+itemSchema.statics.all = function (callback) {
+    console.log('flag1');
+    this.find({ amount: { $gt: 0 }}).exec()
+        .then(callback, function (err) {
+            console.log(err);
+            callback(null);
+        });
 };
 
 var Item = mongoose.model('item', itemSchema);
