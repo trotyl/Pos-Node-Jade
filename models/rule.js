@@ -14,19 +14,30 @@ var ruleSchema = mongoose.Schema({
 });
 
 ruleSchema.methods.render = function () {
-    // 找到最左边括号对应的右括号并去掉这两个括号
+    // 去掉从右至左最后一个括号
     var _peel = function (exp) {
-        var left = 1, right = 0, i;
-        for(i = 1; (left != right) && (i < exp.length); i++) {
+        var left = 0, right = 1, i;
+        for(i = exp.length - 2; (left != right) && (i >= 0); i--) {
             if(exp[i] === '(') { left++ }
             else if(exp[i] === ')') { right++ }
         }
-        return exp.substr(1, i - 2);
+        return exp.substring(i + 2, exp.length - 1);
+    };
+
+    // 找到上一个逻辑运算符的位置
+    var _delimit = function (exp) {
+        return Math.max(exp.lastIndexOf('&&'), exp.lastIndexOf('||'));
+    };
+
+    // 找到最末端的表达式
+    var _tail = function (exp) {
+        var position = _delimit(exp);
+        return position > 0? exp.substr(position + 2): exp;
     };
 
     // 将原子表达式转换为 mongodb 查询所需的对象数组
     var _cope = function (meta) {
-        var operator = meta.match(/[<(==)>]/);
+        var operator = meta.match(/[<>]|(==)/)[0];
         var things = meta.split(operator);
         var result = {};
         var map = {
@@ -38,28 +49,18 @@ ruleSchema.methods.render = function () {
         return [result];
     };
 
-    // 找到下一个逻辑运算符的位置
-    var _delimit = function (exp) {
-        return exp.match(/[(&&)(||)]/);
-    };
-
     // 确定一个表达式是 组合表达式 或 原子表达式 并继续处理
-    var _choice = function (exp) {
-        var result, position;
-        if(exp[0] === '(') {
-            var child = _peel(exp);
-            position = _delimit(exp.substr(child.length));
-            result = _render(child);
-        }
-        else if(exp.indexOf(/[(&&)(||)]/) >= 0){
-            position = _delimit(exp);
+    var _choice = function (exp, closed) {
+        var result;
+        var position = _delimit(exp);
+        var length = closed? exp.length + 2: exp.length;
+        if(position >= 0){
             result = _render(exp);
         }
         else {
-            position = 0;
             result = _cope(exp);
         }
-        return { result: result, position: position };
+        return { result: result, length: length };
     };
 
     // 计算两个表达式的笛卡尔积
@@ -67,7 +68,8 @@ ruleSchema.methods.render = function () {
         var result = [];
         _(first).each(function (a) {
             _(second).each(function (b) {
-                result.push(_.assign(a, b));
+                var c = _.cloneDeep(a);
+                result.push(_.assign(c, b));
             });
         });
         return result;
@@ -78,16 +80,24 @@ ruleSchema.methods.render = function () {
         return _.union(first, second);
     };
 
+    // 判断一个表达式当前处是否有括号
+    var closed = function (exp) {
+        return exp[exp.length - 1] == ')';
+    };
+
     // 将任何非原子表达式渲染成 前表达式 逻辑运算符 后表达式
-    var _render = function (expression) {
-        var first = _choice(expression);
-        if(first.position <= 0) { return first.result; }
-        var second = _choice(expression.substr(first.position + 2));
+    var _render = function (exp) {
+        var last = closed(exp)? _choice(_peel(exp), true): _choice(_tail(exp), false);
+        if(exp.length <= last.length) {
+            return last.result;
+        }
+        var remain = exp.substr(0, exp.length - last.length - 2);
+        var second = _choice(remain, false);
         var operation = {
             '&': _and,
             '|': _or
-        }[expression[first.position]];
-        return operation(first.result, second.result);
+        }[exp[exp.length - last.length - 2]];
+        return operation(last.result, second.result);
     };
 
     return _render(this.description.replace(/\s/g, ''));
