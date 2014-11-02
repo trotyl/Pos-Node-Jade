@@ -100,12 +100,12 @@ ruleSchema.methods.render = function () {
             return last.result;
         }
         var remain = exp.substr(0, exp.length - last.length - 2);
-        var second = _choice(remain, false);
+        var first = _choice(remain, false);
         var operation = {
             '&': _and,
             '|': _or
         }[exp[exp.length - last.length - 2]];
-        return operation(last.result, second.result);
+        return operation(last.result, first.result);
     };
 
     return _render(this.description.replace(/\s/g, ''));
