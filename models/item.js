@@ -148,7 +148,7 @@ itemSchema.statics.bought = function (list, callback) {
 };
 
 itemSchema.statics.render = function (rule, callback) {
-  this.find({ filter: { $or: rule }}).exec()
+  this.find({ $or: rule }).exec()
       .then(callback, function (err) {
           console.log(err);
           callback(null);
