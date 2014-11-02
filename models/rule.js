@@ -41,6 +41,12 @@ ruleSchema.methods.render = function () {
         var operator = meta.match(/[<>]|(==)/)[0];
         var things = meta.split(operator);
         things[0] = 'filter.' + things[0];
+        if(things[1][0] == '\'' || things[1][0] == '\"') {
+            things[1] = things[1].substr(1, things[1].length - 2);
+        }
+        else {
+            things[1] = parseFloat(things[1]) || things[1];
+        }
         var result = {};
         var map = {
             '<': function () { result[things[0]] = { '$lt': things[1] }; },
