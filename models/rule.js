@@ -89,13 +89,13 @@ ruleSchema.methods.render = function () {
     };
 
     // 判断一个表达式当前处是否有括号
-    var closed = function (exp) {
+    var _closed = function (exp) {
         return exp[exp.length - 1] == ')';
     };
 
     // 将任何非原子表达式渲染成 前表达式 逻辑运算符 后表达式
     var _render = function (exp) {
-        var last = closed(exp)? _choice(_peel(exp), true): _choice(_tail(exp), false);
+        var last = _closed(exp)? _choice(_peel(exp), true): _choice(_tail(exp), false);
         if(exp.length <= last.length) {
             return last.result;
         }
