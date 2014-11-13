@@ -12,8 +12,8 @@
       <th>操作</th>
     </tr>
     <tr ng-repeat="rule in rules | orderBy: &quot;birth&quot;: reverse" class="list-item">
-      <td>{{rule.description | getName}}</td>
-      <td>{{rule.description | getPrice}}</td>
+      <td>{{rule.items.map(function (item) { return item.name })}}</td>
+      <td>{{rule.items.map(function (item) { return item.price })}}</td>
       <td>{{rule.from + '\n' + rule.to}}</td>
       <td>{{'买' + rule.bought + '送' + rule.gift}}</td>
       <td><a ng-click="deleteIt(promotion.id)" class="item-delete"> 删除</a></td>

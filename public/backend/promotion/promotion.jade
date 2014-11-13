@@ -11,8 +11,8 @@
             th 操作
 
         tr.list-item(ng-repeat='rule in rules | orderBy: "birth": reverse')
-            td {{rule.description | getName}}
-            td {{rule.description | getPrice}}
+            td {{rule.items.map(function (item) { return item.name })}}
+            td {{rule.items.map(function (item) { return item.price })}}
             td {{rule.from + '\n' + rule.to}}
             td {{'买' + rule.bought + '送' + rule.gift}}
             td

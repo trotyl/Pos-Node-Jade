@@ -4,8 +4,8 @@ var Rule = require('../../models/rule');
 var Item = require('../../models/item');
 
 router.get('/', function (req, res) {
-    Rule.all(function (result) {
-        res.json(result);
+    Rule.all(function (rules) {
+
     });
 });
 
@@ -15,11 +15,5 @@ router.post('/', function (req, res) {
         res.json(result);
     });
 });
-
-router.get('/render', function (req, res) {
-    Item.render(function (result) {
-
-    })
-})
 
 module.exports = router;
