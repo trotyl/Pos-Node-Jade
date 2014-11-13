@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var _ = require('lodash');
+var Item = require('./item');
 
 var ruleSchema = mongoose.Schema({
     id: String,
@@ -8,6 +9,7 @@ var ruleSchema = mongoose.Schema({
     to: Date,
     bought: Number,
     gift: Number,
+    items: Array,
     filter: String,
     birth: {
         type: Date,
@@ -121,7 +123,15 @@ ruleSchema.statics.createNew = function (rule, callback) {
 };
 
 ruleSchema.statics.all = function (callback) {
+    var result;
     this.find({}).exec()
+        .then(function (rules) {
+            result = rules;
+            _(result).each(function (rule) {
+                Item.findByRule(JSON.parse(rule.filter));
+            });
+            return result;
+        })
         .then(callback, function (err) {
             console.log(err);
             callback(null);
