@@ -8,6 +8,7 @@ var ruleSchema = mongoose.Schema({
     to: Date,
     bought: Number,
     gift: Number,
+    filter: String,
     birth: {
         type: Date,
         default: Date.now
@@ -113,6 +114,8 @@ ruleSchema.methods.render = function () {
 
 ruleSchema.statics.createNew = function (rule, callback) {
     this.create(rule, function (err, result) {
+        result.filter = JSON.stringify(result.render());
+        result.save();
         callback(result);
     });
 };
