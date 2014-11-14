@@ -11,9 +11,12 @@ posManager.controller('EditController', ['$scope', '$location', '$route', '$rout
         initialize();
 
         $scope.saveIt = function () {
-            $scope.item.$save();
-            localStorage.removeItem('tmp');
-            $scope.goBack();
+            $scope.item.$save(
+                function () {
+                    localStorage.removeItem('tmp');
+                    $scope.goBack();
+                }
+            );
         };
 
         $scope.addAttr = function () {
